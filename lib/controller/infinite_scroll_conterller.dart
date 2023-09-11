@@ -30,15 +30,15 @@ class InfiniteScrollController extends GetxController {
     await Future.delayed(Duration(seconds: 2));
 
     int offset = data.length;
-    var appendData = List<int>.generate(10, (i) => i + 1 + offset); //한페이지의 물건갯수 api에서 받기
+    var appendData = List<int>.generate(10, (i) => i+1+offset);
     data.addAll(appendData);
 
-    isLoading.value = false;
-    hasMore.value = data.length < 30; //나중에 api에서 게시글 갯수 받아오기
+    isLoading.value=false;
+    hasMore.value = data.length < 30;
   }
 
-  reload() async {
-    isLoading.value = true;
+  reload() async { 
+    isLoading.value=true;
     data.clear();
 
     await Future.delayed(Duration(seconds: 2));

@@ -10,15 +10,15 @@ class InfiniteScrollController extends GetxController {
   var hasMore = false.obs;
 
   @override
-  void onInit(){
+  void onInit() {
     _getData();
-    
+
     this.scrollController.value.addListener(() {
-      if(this.scrollController.value.position.pixels ==
-            this.scrollController.value.position.maxScrollExtent &&
-          this.hasMore.value){
-            _getData();
-          }
+      if (this.scrollController.value.position.pixels ==
+              this.scrollController.value.position.maxScrollExtent &&
+          this.hasMore.value) {
+        _getData();
+      }
     });
 
     super.onInit();

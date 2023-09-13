@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/views/%08widget/join_page_button.dart';
+
 import 'package:mobile/views/%08widget/join_page_textfield.dart';
 
-class PhonePage extends StatelessWidget {
-  const PhonePage({super.key});
+class JoinPage extends StatelessWidget {
+  const JoinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +17,12 @@ class PhonePage extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: const Color.fromARGB(255, 250, 250, 250),
-            title: const Row(
+            leading: const Row(
               children: [
                 Icon(
                   Icons.keyboard_arrow_left,
-                  size: 45,
+                  size: 54,
                   color: Colors.grey,
-                ),
-                Text(
-                  "                회원가입",
-                  style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
               ],
             ),
@@ -35,62 +32,39 @@ class PhonePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 30,
-                ),
-                const Text(
-                  "     휴대폰 번호 입력",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
-                TextFieldWidget(
-                  hintText: "휴대폰 번호를 입력해 주세요",
-                  width: 400,
-                  height: 40,
-                  padding: 20,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const JoinPageButton(
-                  height: 40,
-                  width: 400,
-                  padding: 20,
-                  text: "인증번호 받기",
-                ),
-                const Text(
-                  " \n\n    인증번호 입력",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
-                TextFieldWidget(
-                  hintText: "인증번호를 입력해 주세요",
-                  width: 400,
-                  height: 40,
-                  padding: 20,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const JoinPageButton(
-                  height: 40,
-                  width: 400,
-                  padding: 20,
-                  text: "인증번호 받기",
-                ),
-                const SizedBox(
                   height: 50,
                 ),
+                const Text(
+                  "    나의 첫 경매\n    시작해볼까요?",
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 70,
+                ),
+                const Text(
+                  '     휴대폰 번호가 바뀌었을때 필요해요!\n\n', // 원하는 제목 텍스트
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Color.fromARGB(255, 99, 99, 99),
+                  ),
+                ),
+                TextFieldWidget(
+                  hintText: "이메일 입력하세요!",
+                  width: 400,
+                  height: 40,
+                  padding: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 const JoinPageButton(
-                  height: 100,
-                  width: 320,
-                  padding: 120,
-                  text: "최고의 경매 시작하기!",
+                  height: 40,
+                  width: 400,
+                  padding: 20,
+                  text: "계속하기",
                 ),
               ],
             ),

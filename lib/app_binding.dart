@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:mobile/controller/homeController.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/custom_smooth_indicator.dart';
 import 'package:mobile/views/widget/main_appbar.dart';
 import 'package:mobile/views/widget/main_bottom_bar.dart';
 import 'package:mobile/views/widget/custom_page_view.dart';
@@ -180,7 +179,7 @@ class PostDetailPage extends StatelessWidget {
                 width: (MediaQuery.of(context).size.width) / 3.5,
                 child: TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFF46FF6F),
+                        backgroundColor: Color(0xFF95FC93),
                         foregroundColor: Colors.white,
                         textStyle: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold)),

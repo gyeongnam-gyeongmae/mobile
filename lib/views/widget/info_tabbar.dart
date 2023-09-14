@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
+import 'package:mobile/views/widget/buy_product_view.dart';
 import 'package:mobile/views/widget/sell_product_view.dart';
 
 class InfoTabbar extends GetView<TabbarController> {
@@ -9,7 +10,7 @@ class InfoTabbar extends GetView<TabbarController> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 10),
+          margin: EdgeInsets.only(top: 10,left: 10),
           alignment: Alignment.centerLeft,
           child: TabBar(
             isScrollable: true,
@@ -30,18 +31,8 @@ class InfoTabbar extends GetView<TabbarController> {
                   controller: controller.tabController,
                   children: [
                     SellProductView(),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.greenAccent,
-                      ),
-                    ),
+                    BuyProductView(),
+                    BuyProductView(),
                   ],
                 ),
               ),

@@ -7,7 +7,7 @@ class TabbarController extends GetxController with GetSingleTickerProviderStateM
       child: Text('판매 상품',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
     ),
     Tab(
-      child: Text('상점 후기',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
+      child: Text('구매 상품',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
     ),
     Tab(
       child: Text('찜 목록',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))

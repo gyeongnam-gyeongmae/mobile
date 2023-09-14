@@ -16,7 +16,7 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
               if (index < controller.data.length) {
                 var datum = controller.data[index];
                 return Material(
-                  elevation: 1,
+                  elevation: 2,
                   child: Container(
                     child: MainPost(
                       title: "$datum번째 리트",

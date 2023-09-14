@@ -1,74 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/sell_product_controller.dart';
 import 'package:mobile/views/widget/infinite_scroll_view.dart';
 
-class SellProductView extends StatefulWidget {
-  const SellProductView({super.key});
-
-  @override
-  State<SellProductView> createState() => _SellProductViewState();
-}
-
-class _SellProductViewState extends State<SellProductView> {
-  int selectedId = 1;
+class SellProductView extends GetView<SellProductController> {
   final List<Widget> myContainers = [
     Container(child: InfiniteScrollView()),
-    Container(child: Text('판매중')),
-    Container(child: Text('예약중')),
-    Container(child: Text('판매 완료'))
+    Container(child: InfiniteScrollView()),
+    Container(child: InfiniteScrollView()),
   ];
 
   //내정보 페이지에서 버튼 클릭시 아래에 표시할 컨테이너, 위젯list로 관리하면 될듯
-  Widget _buildContainer(){ 
+  Widget _buildContainer() {
     return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.white,
-                ),
-                child: myContainers[selectedId],
-
-          );
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.white,
+      ),
+      child: myContainers[controller.selectedId.value],
+    );
   }
+
   //판매 상품에 만들어진 버튼 디자인
-  Widget _containerSelectorButton(int id, String text){ 
+  Widget _containerSelectorButton(int id, String text) {
     return OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: id == selectedId ? Colors.black : Colors.white,
-          foregroundColor: id == selectedId ? Colors.white : Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))
-          )
-        ),
+            backgroundColor:
+                id == controller.selectedId.value ? Colors.black : Colors.white,
+            foregroundColor:
+                id == controller.selectedId.value ? Colors.white : Colors.black,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {
-          setState(() {
-            selectedId = id;
-          });
+          controller.setSelectedId(id);
         },
-        child: Text(text)
-      );
+        child: Text(text));
   }
-  
+
   //버튼 생성
-  Widget _containerSelector(){
+  Widget _containerSelector(BuildContext context,int cnt) {
     return Container(
-      padding: EdgeInsets.only(top: 10,bottom: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _containerSelectorButton(0, '전체'),
-          _containerSelectorButton(1, '판매중'),
-          _containerSelectorButton(2, '예약중'),
-          _containerSelectorButton(3, '판매 완료')
-        ]
-      ),
-    );
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width*0.6,
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              _containerSelectorButton(0, '전체'),
+              _containerSelectorButton(1, '판매중'),
+              _containerSelectorButton(2, '예약중'),
+            ]),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(top: 10, left: 25),
+              child: Text('상품 $cnt건',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20, right: 20),
+              child: Divider(color: Colors.grey, thickness: 1),
+            )
+          ],
+        ));
   }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _containerSelector(),
-        Expanded(child: _buildContainer())
-      ],
-    );
+    return Obx(() => Column(
+          children: [
+          _containerSelector(context, 0),
+          Expanded(child: _buildContainer())],
+        ));
   }
 }

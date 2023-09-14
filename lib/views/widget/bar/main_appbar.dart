@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/location_dropdown.dart';
+import 'package:mobile/views/widget/dropdown/location_dropdown.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
   MainAppbar({super.key});

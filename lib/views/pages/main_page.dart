@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/infinite_scroll_view.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 

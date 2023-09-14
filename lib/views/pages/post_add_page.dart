@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/category_dropdown.dart';
-import 'package:mobile/views/widget/custom_datepicker.dart';
-import 'package:mobile/views/widget/custom_timepicker.dart';
-import 'package:mobile/views/widget/image_picker_container.dart';
-import 'package:mobile/views/widget/custom_bottom_bar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/dropdown/category_dropdown.dart';
+import 'package:mobile/views/widget/picker/custom_datepicker.dart';
+import 'package:mobile/views/widget/picker/custom_timepicker.dart';
+import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
 class PostAddPage extends StatelessWidget {
   const PostAddPage({super.key});
@@ -169,7 +169,7 @@ class PostAddPage extends StatelessWidget {
               )
             ],
           )),
-      bottomNavigationBar: CustomBottomBar(),
+      bottomNavigationBar: MainBottomBar(),
 
     );
   }

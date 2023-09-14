@@ -118,7 +118,7 @@ class PostAddPage extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(left: 13),
                             width: (MediaQuery.of(context).size.width) / 3.5,
-                            child: CategoryDropdown(),
+                            child: CategoryDropdown(categories: ['의류', '디지털','가구','기타']),
                           ),
                           Container(
                             decoration: BoxDecoration(

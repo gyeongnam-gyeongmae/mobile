@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/views/pages/loading_page.dart';
 
 import 'package:mobile/views/pages/phone_page.dart';
 
 void main() {
-  runApp(const PhonePage());
+  runApp(const LoadingPage());
 }

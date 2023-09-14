@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/%08widget/join_page_button.dart';
-
-import 'package:mobile/views/%08widget/join_page_textfield.dart';
+import 'package:mobile/views/widget/join_page_button.dart';
+import 'package:mobile/views/widget/join_page_textfield.dart';
 
 class JoinPage extends StatelessWidget {
   const JoinPage({super.key});

@@ -14,7 +14,7 @@ class MainPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -23,40 +23,37 @@ class MainPage extends StatelessWidget {
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.white,
                             foregroundColor: Colors.black,
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
-                        child: Text('의류')),
+                        child: const Text('의류')),
                   ),
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            foregroundColor: Colors.black,
-                            textStyle: TextStyle(
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
-                        child: Text('디지털')),
+                        child: const Text('디지털')),
                   ),
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            foregroundColor: Colors.black,
-                            textStyle: TextStyle(
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
-                        child: Text('가구')),
+                        child: const Text('가구')),
                   ),
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            foregroundColor: Colors.black,
-                            textStyle: TextStyle(
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
-                        child: Text('기타')),
+                        child: const Text('기타')),
                   )
                 ]),
           ),

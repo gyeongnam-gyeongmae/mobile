@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/infinite_scroll_view.dart';
+import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class BuyProductView extends StatelessWidget {
   const BuyProductView({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
-import 'package:mobile/views/widget/custom_page_view.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
 class PostDetailPage extends StatelessWidget {
   const PostDetailPage({super.key});

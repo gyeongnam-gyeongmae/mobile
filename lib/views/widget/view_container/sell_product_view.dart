@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
-import 'package:mobile/views/widget/infinite_scroll_view.dart';
+import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SellProductView extends GetView<SellProductController> {
   final List<Widget> myContainers = [

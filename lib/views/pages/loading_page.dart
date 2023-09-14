@@ -4,7 +4,7 @@ import 'package:mobile/app_binding.dart';
 import 'package:mobile/views/pages/info_page.dart';
 import 'package:mobile/views/pages/search_page.dart';
 import 'package:mobile/views/pages/search_result_page.dart';
-import 'package:mobile/views/widget/image_picker_container.dart';
+import 'package:mobile/views/widget/picker/image_picker_container.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/post_add_page.dart';
 import 'package:mobile/views/pages/post_detail_page.dart';
@@ -19,12 +19,12 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage> {
   @override
-  void initState() {
+  void initState() { 
     super.initState();
 
     // 화면이 빌드된 후 3초 후에 LoginPage로 이동
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(() => SearchResultPage());
+      Get.to(() => MainPage());
     });
   }
 

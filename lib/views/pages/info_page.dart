@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/info_tabbar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
+import 'package:mobile/views/widget/bar/info_tabbar.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});

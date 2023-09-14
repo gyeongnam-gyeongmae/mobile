@@ -51,7 +51,7 @@ class JoinPage extends StatelessWidget {
                   ),
                 ),
                 TextFieldWidget(
-                  hintText: "이메일 입력하세요!",
+                  hintText: "휴대폰 번호를 입력하세요!!",
                   width: 400,
                   height: 40,
                   padding: 20,

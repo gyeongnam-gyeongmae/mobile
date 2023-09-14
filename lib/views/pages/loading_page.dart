@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Get 패키지의 모든 기능을 사용하기 위해 Get 패키지를 import 합니다.
+
 import 'package:mobile/app_binding.dart';
 import 'package:mobile/views/pages/info_page.dart';
 import 'package:mobile/views/pages/search_page.dart';
@@ -7,6 +8,7 @@ import 'package:mobile/views/pages/search_result_page.dart';
 import 'package:mobile/views/widget/picker/image_picker_container.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/post_add_page.dart';
+
 import 'package:mobile/views/pages/post_detail_page.dart';
 // LoginPage 클래스가 있는 파일을 import 합니다.
 

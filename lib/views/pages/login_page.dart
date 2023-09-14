@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/views/pages/kakao_oauth.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -16,7 +17,7 @@ class LoginPage extends StatelessWidget {
 
             child: Column(
               children: [
-                const SizedBox(height: 50), // 16 픽셀의 공백 추가
+                const SizedBox(height: 100), // 16 픽셀의 공백 추가
                 const Text(
                   "Best Deal",
                   style: TextStyle(
@@ -47,91 +48,14 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 120,
                 ),
+
                 ElevatedButton(
                   onPressed: () {
-                    // 버튼이 클릭될 때 실행할 동작
-                  },
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor:
-                          const Color.fromARGB(255, 10, 118, 207), // 버튼의 텍스트 색상
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(7), // 버튼의 모서리를 라운드 처리
-                      ),
-                      fixedSize: const Size(290, 50)),
-                  child: const Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Icon(
-                        Icons.call_outlined,
-                        size: 37,
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Text(
-                        "휴대폰 번호로 시작하기",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ), // 버튼에 표시할 텍스트
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "or",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // 버튼이 클릭될 때 실행할 동작
-                  },
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor:
-                          const Color.fromRGBO(6, 190, 52, 1.0), // 버튼의 텍스트 색상
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(7), // 버튼의 모서리를 라운드 처리
-                      ),
-                      fixedSize: const Size(290, 50)),
-                  child: const Row(
-                    children: [
-                      Image(
-                        image: AssetImage("assets/images/naver.png"),
-                        width: 100.0,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "네이버로 로그인",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ), // 버튼에 표시할 텍스트
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // 버튼이 클릭될 때 실행할 동작
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const KakaoOauth()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       foregroundColor: const Color.fromARGB(255, 0, 0, 0),

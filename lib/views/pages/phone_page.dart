@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/views/widget/join_page_button.dart';
 import 'package:mobile/views/widget/join_page_textfield.dart';
+
 class PhonePage extends StatelessWidget {
   const PhonePage({super.key});
 
@@ -33,34 +34,15 @@ class PhonePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
                 const Text(
-                  "     휴대폰 번호 입력",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
-                TextFieldWidget(
-                  hintText: "휴대폰 번호를 입력해 주세요",
-                  width: 400,
-                  height: 40,
-                  padding: 20,
+                  "      \n   마지막 단계예요!",
+                  style: TextStyle(fontSize: 40, color: Colors.black),
                 ),
                 const SizedBox(
-                  height: 15,
-                ),
-                const JoinPageButton(
-                  height: 40,
-                  width: 400,
-                  padding: 20,
-                  text: "인증번호 받기",
+                  height: 10,
                 ),
                 const Text(
-                  " \n\n    인증번호 입력",
+                  " \n    인증번호 입력",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -80,7 +62,7 @@ class PhonePage extends StatelessWidget {
                   height: 40,
                   width: 400,
                   padding: 20,
-                  text: "인증번호 받기",
+                  text: "인증번호 확인",
                 ),
                 const SizedBox(
                   height: 50,
@@ -88,8 +70,8 @@ class PhonePage extends StatelessWidget {
                 const JoinPageButton(
                   height: 100,
                   width: 320,
-                  padding: 120,
-                  text: "최고의 경매 시작하기!",
+                  padding: 100,
+                  text: "Best Deal 시작하기!",
                 ),
               ],
             ),

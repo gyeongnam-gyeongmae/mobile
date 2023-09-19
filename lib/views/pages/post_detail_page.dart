@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
 class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({super.key});
-
+  PostDetailPage({super.key});
+  var datum = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +16,7 @@ class PostDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: Text("음 어쨋든 머라도 팝니다",
+              child: Text("$datum",
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
             ),
             Padding(

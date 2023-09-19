@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class BuyProductView extends StatelessWidget {
-  const BuyProductView({super.key});
 
+  BuyProductView({super.key});
+  final InfiniteScrollController controller = Get.put(InfiniteScrollController());
   Widget _containerSelector(BuildContext context,int cnt) {
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -29,7 +32,7 @@ class BuyProductView extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: Container(child: InfiniteScrollView()),
+      child: Container(child: InfiniteScrollView(controller: controller,)),
     );
   }
 

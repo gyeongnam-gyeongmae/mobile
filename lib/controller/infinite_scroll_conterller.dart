@@ -4,7 +4,6 @@ import 'package:get/state_manager.dart';
 
 class InfiniteScrollController extends GetxController {
   var scrollController = ScrollController().obs;
-
   var data = <int>[].obs;
   var isLoading = false.obs;
   var hasMore = false.obs;
@@ -12,7 +11,6 @@ class InfiniteScrollController extends GetxController {
   @override
   void onInit() {
     _getData();
-
     this.scrollController.value.addListener(() {
       if (this.scrollController.value.position.pixels ==
               this.scrollController.value.position.maxScrollExtent &&
@@ -24,21 +22,31 @@ class InfiniteScrollController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    scrollController.value.dispose();
+    Future.delayed(Duration(milliseconds: 2), () {
+      scrollController = ScrollController().obs;
+      // 필요한 초기화 작업 수행
+    });
+    super.onClose();
+  }
+
   _getData() async {
     isLoading.value = true;
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(milliseconds: 200));
 
     int offset = data.length;
-    var appendData = List<int>.generate(10, (i) => i+1+offset);
+    var appendData = List<int>.generate(10, (i) => i + 1 + offset);
     data.addAll(appendData);
 
-    isLoading.value=false;
+    isLoading.value = false;
     hasMore.value = data.length < 30;
   }
 
-  reload() async { 
-    isLoading.value=true;
+  reload() async {
+    isLoading.value = true;
     data.clear();
 
     await Future.delayed(Duration(seconds: 2));

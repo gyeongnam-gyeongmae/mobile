@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/views/pages/post_detail_page.dart';
 import 'package:mobile/views/widget/view_container/main_post.dart';
 
 class InfiniteScrollView extends GetView<InfiniteScrollController> {
+  final InfiniteScrollController controller; // 수정: 컨트롤러를 받도록 함
+
+  InfiniteScrollView({required this.controller, super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => Padding(
@@ -17,7 +22,10 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                 var datum = controller.data[index];
                 return Material(
                   elevation: 2,
-                  child: Container(
+                  child: InkWell(
+                    onTap: ((){
+                      Get.to(()=>PostDetailPage(),arguments: datum);
+                    }),
                     child: MainPost(
                       title: "$datum번째 리트",
                       name: "문준호",

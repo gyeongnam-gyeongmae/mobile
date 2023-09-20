@@ -14,7 +14,7 @@ class SearchResultPage extends StatelessWidget {
   InfiniteScrollController controller = Get.put(InfiniteScrollController());
   @override
   Widget build(BuildContext context) {
-
+    //바텀바의 get.to를 쓰기위한 방법
     Get.delete<InfiniteScrollController>();
     controller = Get.put(InfiniteScrollController());
     return Scaffold(

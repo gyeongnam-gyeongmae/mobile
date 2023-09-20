@@ -6,7 +6,7 @@ import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SellProductView extends GetView<SellProductController> {
   late List<Widget> myContainers;
-  final InfiniteScrollController scrollController = Get.put(InfiniteScrollController());
+  InfiniteScrollController scrollController = Get.put(InfiniteScrollController());
   SellProductView({super.key}) {
     myContainers = [
       Container(child: InfiniteScrollView(controller: scrollController,)),
@@ -17,6 +17,8 @@ class SellProductView extends GetView<SellProductController> {
 
   //내정보 페이지에서 버튼 클릭시 아래에 표시할 컨테이너, 위젯list로 관리하면 될듯
   Widget _buildContainer() {
+    Get.delete<InfiniteScrollController>();
+    scrollController = Get.put(InfiniteScrollController());
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),

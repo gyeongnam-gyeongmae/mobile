@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/views/pages/search_page.dart';
 import 'package:mobile/views/widget/dropdown/location_dropdown.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,7 +15,9 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: LocationDropdown(),
       actions: [
         IconButton(
-            onPressed: null,
+            onPressed: (){
+              Get.to(SearchPage());
+            },
             icon: Icon(Icons.search),
             padding: EdgeInsets.fromLTRB(0, 8, 0, 0)),
         IconButton(

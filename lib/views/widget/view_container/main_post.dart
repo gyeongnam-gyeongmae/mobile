@@ -6,7 +6,7 @@ class MainPost extends StatelessWidget {
   final String name;
   final int price;
   final String post_created;
-  final String start_price;
+  final int start_price;
   final int comment_cnt;
   final int like_cnt;
   const MainPost({
@@ -41,7 +41,7 @@ class MainPost extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   SizedBox(height: 4),
-                  Text("문준호",
+                  Text(name,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class MainPost extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                               padding: EdgeInsets.only(bottom: 10),
-                              child: Text("1,000,000원",
+                              child: Text(price.toString(),
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)))))
@@ -61,13 +61,13 @@ class MainPost extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text("내외동 5분전",
+                    Text(post_created,
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey)),
                     SizedBox(height: 4),
-                    Text("시작가 80,000",
+                    Text(price.toString(),
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class MainPost extends StatelessWidget {
                                   Icon(Icons.chat, color: Colors.black),
                                   SizedBox(width: 5),
                                   Text(
-                                    "5",
+                                    comment_cnt.toString(),
                                     style: TextStyle(color: Colors.black),
                                   )
                                 ],
@@ -98,7 +98,7 @@ class MainPost extends StatelessWidget {
                                   Icon(Icons.favorite, color: Colors.black),
                                   SizedBox(width: 5),
                                   Text(
-                                    "5",
+                                    like_cnt.toString(),
                                     style: TextStyle(color: Colors.black),
                                   )
                                 ],

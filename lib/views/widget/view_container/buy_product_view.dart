@@ -6,8 +6,10 @@ import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 class BuyProductView extends StatelessWidget {
 
   BuyProductView({super.key});
-  final InfiniteScrollController controller = Get.put(InfiniteScrollController());
+  InfiniteScrollController controller = Get.put(InfiniteScrollController());
   Widget _containerSelector(BuildContext context,int cnt) {
+    Get.delete<InfiniteScrollController>();
+    controller = Get.put(InfiniteScrollController());
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: Column(

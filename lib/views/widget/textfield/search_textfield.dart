@@ -17,9 +17,6 @@ class SearchTextfield extends GetView<SearchTextfieldController> {
         size: 54,
         color: Colors.grey,
       ),
-      SizedBox(
-        width: 50,
-      ),
       Expanded(
         // TextField에 Expanded 위젯 추가
         child: Obx((){

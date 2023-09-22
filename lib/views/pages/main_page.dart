@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
     //   Get.find<InfiniteScrollController>(tag: "info").onClose();
     // }
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: const MainAppbar(),
       body: Column(
         children: [
           Container(

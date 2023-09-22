@@ -12,7 +12,7 @@ class PostAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: const MainAppbar(),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
           child: Column(

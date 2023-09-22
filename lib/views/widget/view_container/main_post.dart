@@ -23,92 +23,94 @@ class MainPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-      height: 120,
-      width: MediaQuery.of(context).size.width - 20,
-      child: Row(
-        children: [
-          Container(
-            child: Image.asset('assets/images/test.png',
-                width: 100, height: 90, fit: BoxFit.cover),
-          ),
-          const SizedBox(width: 10), // 가로 여백 추가
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+        height: 120,
+        width: MediaQuery.of(context).size.width - 20,
+        child: InkWell(
+          child: Row(
             children: [
-              Text(title,
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 4),
-              const Text("문준호",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey)),
-              const Expanded(
-                  child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: Text("1,000,000원",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)))))
+              Container(
+                child: Image.asset('assets/images/test.png',
+                    width: 100, height: 90, fit: BoxFit.cover),
+              ),
+              const SizedBox(width: 10), // 가로 여백 추가
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  const Text("문준호",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey)),
+                  const Expanded(
+                      child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Text("1,000,000원",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)))))
+                ],
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text("내외동 5분전",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey)),
+                    const SizedBox(height: 4),
+                    const Text("시작가 80,000",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey)),
+                    Expanded(
+                        child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () {},
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.chat, color: Colors.black),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    "5",
+                                    style: TextStyle(color: Colors.black),
+                                  )
+                                ],
+                              )),
+                          TextButton(
+                              onPressed: () {},
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(Icons.favorite, color: Colors.black),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    "5",
+                                    style: TextStyle(color: Colors.black),
+                                  )
+                                ],
+                              ))
+                        ],
+                      ),
+                    ))
+                  ],
+                ),
+              )
             ],
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                const Text("내외동 5분전",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey)),
-                const SizedBox(height: 4),
-                const Text("시작가 80,000",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey)),
-                Expanded(
-                    child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: const Row(
-                            children: [
-                              Icon(Icons.chat, color: Colors.black),
-                              SizedBox(width: 5),
-                              Text(
-                                "5",
-                                style: TextStyle(color: Colors.black),
-                              )
-                            ],
-                          )),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.favorite, color: Colors.black),
-                              SizedBox(width: 5),
-                              Text(
-                                "5",
-                                style: TextStyle(color: Colors.black),
-                              )
-                            ],
-                          ))
-                    ],
-                  ),
-                ))
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+        ));
   }
 }

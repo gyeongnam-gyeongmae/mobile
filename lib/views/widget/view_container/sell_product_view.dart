@@ -6,6 +6,7 @@ import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SellProductView extends GetView<SellProductController> {
   late List<Widget> myContainers;
+
   final InfiniteScrollController scrollController =
       Get.put(InfiniteScrollController());
   SellProductView({super.key}) {

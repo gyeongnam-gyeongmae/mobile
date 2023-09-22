@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mobile/controller/join_controller.dart';
-import 'package:mobile/views/pages/join/phone_page.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/widget/join_page_button.dart';
-
-import 'package:mobile/views/widget/textfield/join_page_textfield.dart';
+import 'package:mobile/views/widget/join_page_textfield.dart';
 
 class JoinPage extends GetView<JoinController> {
   const JoinPage({super.key});

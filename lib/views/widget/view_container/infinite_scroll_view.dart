@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/views/pages/post_detail_page.dart';
 import 'package:mobile/views/widget/view_container/main_post.dart';

@@ -7,7 +7,8 @@ import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
-  final InfiniteScrollController controller = Get.put(InfiniteScrollController());
+  final InfiniteScrollController controller =
+      Get.put(InfiniteScrollController());
   @override
   Widget build(BuildContext context) {
     // if (Get.isRegistered<InfiniteScrollController>(tag: "chat")) {
@@ -17,7 +18,7 @@ class MainPage extends StatelessWidget {
     //   Get.find<InfiniteScrollController>(tag: "info").onClose();
     // }
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: const MainAppbar(),
       body: Column(
         children: [
           Container(
@@ -69,11 +70,11 @@ class MainPage extends StatelessWidget {
           ),
           Expanded(
               child: InfiniteScrollView(
-                controller: controller,
+            controller: controller,
           )),
         ],
       ),
-      bottomNavigationBar: MainBottomBar(),
+      bottomNavigationBar: const MainBottomBar(),
     );
   }
 }

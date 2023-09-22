@@ -5,14 +5,16 @@ class JoinPageButton extends StatelessWidget {
   final double width;
   final double padding;
   final String text;
+  final VoidCallback? onTap; // VoidCallback 형식의 onTap 추가
 
   const JoinPageButton({
-    Key? key, // key 속성을 추가하고, super.key 대신에 key를 사용합니다.
+    Key? key,
     required this.height,
     required this.width,
     required this.padding,
     required this.text,
-  }) : super(key: key); // 슈퍼 클래스의 생성자를 호출할 때 key 속성을 전달합니다.
+    this.onTap, // onTap 속성 추가
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,11 @@ class JoinPageButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(9.0), // 라운드 모서리 반경 설정
+              borderRadius: BorderRadius.circular(9.0),
             ),
             backgroundColor: const Color.fromARGB(255, 156, 119, 248),
           ),
-          onPressed: () {},
+          onPressed: onTap, // onTap 속성 사용
           child: Text(
             text,
             style: const TextStyle(

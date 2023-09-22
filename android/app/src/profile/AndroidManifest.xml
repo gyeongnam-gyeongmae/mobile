@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.CAMERA"/>
 <uses-permission android:name="android.permission.INTERNET" />
     <activity android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity">
             <intent-filter android:label="flutter_web_auth">
@@ -10,4 +11,5 @@
             </intent-filter>
     </activity>
     <uses-permission android:name="android.permission.INTERNET"/>
+    
 </manifest>

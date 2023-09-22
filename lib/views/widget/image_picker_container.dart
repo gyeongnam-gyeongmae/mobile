@@ -19,14 +19,14 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         child: Column(
           children: [
             Row(
               children: [
                 //카메라로 촬영하기
                 Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: Colors.lightBlueAccent,
                       borderRadius: BorderRadius.circular(5),
@@ -48,15 +48,15 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                             });
                           }
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add_a_photo,
                           size: 30,
                           color: Colors.white,
                         ))),
                 //갤러리에서 가져오기
                 Container(
-                    margin: EdgeInsets.only(left: 15),
-                    padding: EdgeInsets.all(5),
+                    margin: const EdgeInsets.only(left: 15),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: Colors.lightBlueAccent,
                       borderRadius: BorderRadius.circular(5),
@@ -75,21 +75,18 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                             images.addAll(multiImage);
                           });
                         },
-                        icon: Icon(
-                          Icons.add_photo_alternate_outlined,
-                          size: 30,
-                          color: Colors.white
-                        ))),
+                        icon: const Icon(Icons.add_photo_alternate_outlined,
+                            size: 30, color: Colors.white))),
               ],
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: GridView.builder(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 shrinkWrap: true,
                 itemCount:
                     images.length, //보여줄 item 개수. images 리스트 변수에 담겨있는 사진 수 만큼.
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, //1 개의 행에 보여줄 사진 개수
                   childAspectRatio: 1 / 1, //사진 의 가로 세로의 비율
                   mainAxisSpacing: 10, //수평 Padding
@@ -117,8 +114,8 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                           //삭제 버튼
                           child: IconButton(
                             padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                            icon: Icon(Icons.close,
+                            constraints: const BoxConstraints(),
+                            icon: const Icon(Icons.close,
                                 color: Colors.white, size: 15),
                             onPressed: () {
                               //버튼을 누르면 해당 이미지가 삭제됨

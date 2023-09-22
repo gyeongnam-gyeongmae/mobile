@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:mobile/controller/join_controller.dart';
 
-class TextFieldWidget extends StatefulWidget {
-  String? hintText; // 변경 가능한 변수로 선언
+class PhoneText extends StatefulWidget {
+  String? hintText;
   final double width;
   final double height;
   final double padding;
 
-  TextFieldWidget({
+  PhoneText({
     Key? key,
     this.hintText,
     required this.width,
@@ -18,19 +21,12 @@ class TextFieldWidget extends StatefulWidget {
   _TextFieldWidgetState createState() => _TextFieldWidgetState();
 }
 
-class _TextFieldWidgetState extends State<TextFieldWidget> {
+class _TextFieldWidgetState extends State<PhoneText> {
   bool _isFocused = false;
   double vertical = 30;
-  final TextEditingController _textEditingController =
-      TextEditingController(); // 컨트롤러 추가
-
-  @override
-  void dispose() {
-    // State가 dispose될 때 컨트롤러를 해제
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
+  final TextEditingController _textEditingController = TextEditingController();
+  final JoinController joinController =
+      Get.find<JoinController>(); // JoinController 인스턴스 찾기
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -40,30 +36,28 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         child: Padding(
           padding: EdgeInsets.only(left: widget.padding, right: widget.padding),
           child: TextFormField(
-            controller: _textEditingController, // 컨트롤러 연결
+            controller: _textEditingController,
             decoration: InputDecoration(
               labelText: _isFocused ? null : widget.hintText,
               labelStyle: const TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
               ),
-
               contentPadding: EdgeInsets.only(
                 top: vertical,
-              ), // 원하는 패딩을 설정
+              ),
               suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
-                    _textEditingController.clear(); // TextFormField의 내용을 지움
+                    _textEditingController.clear();
                     _isFocused = false;
                   });
                 },
                 icon: const Icon(Icons.cancel_outlined),
               ),
-
               suffixIconConstraints: const BoxConstraints(
-                maxHeight: 100, // 아이콘의 최대 높이 설정
-                maxWidth: 40, // 아이콘의 최대 너비 설정
+                maxHeight: 100,
+                maxWidth: 40,
               ),
             ),
             onTap: () {
@@ -75,6 +69,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             onChanged: (text) {
               setState(() {
                 _isFocused = text.isNotEmpty;
+                // 수정: onTextChanged를 호출하여 텍스트를 상위 위젯에 전달
+
+                joinController.setAuthenticationNumber(text);
               });
             },
           ),

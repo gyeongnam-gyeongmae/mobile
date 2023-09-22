@@ -6,19 +6,20 @@ import 'package:mobile/controller/dropdown_controller.dart';
 class CategoryDropdown extends GetView<DropdownController> {
   final List<String> categories;
 
-  CategoryDropdown({Key? key, required this.categories}) : super(key: key);
+  const CategoryDropdown({Key? key, required this.categories})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         child: Obx(() {
           return DropdownButton(
             value: controller.categoryItem.value,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-            underline: SizedBox.shrink(),
+            underline: const SizedBox.shrink(),
             items: categories
                 .map((category) => DropdownMenuItem(
                       value: category,

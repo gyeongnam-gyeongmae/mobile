@@ -14,7 +14,7 @@ class PostAddPage extends StatelessWidget {
     return Scaffold(
       appBar: MainAppbar(),
       body: Padding(
-          padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
           child: Column(
             children: [
               Expanded(
@@ -22,7 +22,7 @@ class PostAddPage extends StatelessWidget {
                     child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           '제목',
@@ -30,10 +30,10 @@ class PostAddPage extends StatelessWidget {
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Container(
+                      const SizedBox(height: 10),
+                      SizedBox(
                         width: (MediaQuery.of(context).size.width) - 30,
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
@@ -58,8 +58,8 @@ class PostAddPage extends StatelessWidget {
                           keyboardType: TextInputType.text,
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Align(
+                      const SizedBox(height: 20),
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           '물건 설명',
@@ -67,10 +67,10 @@ class PostAddPage extends StatelessWidget {
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Container(
+                      const SizedBox(height: 10),
+                      SizedBox(
                         width: (MediaQuery.of(context).size.width) - 30,
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
@@ -95,8 +95,8 @@ class PostAddPage extends StatelessWidget {
                           maxLines: 5,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Row(
+                      const SizedBox(height: 10),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -106,19 +106,20 @@ class PostAddPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
-                      Row(
+                      const SizedBox(height: 10),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [CustomDatepicker(), CustomTimepicker()],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            padding: EdgeInsets.only(left: 13),
+                            padding: const EdgeInsets.only(left: 13),
                             width: (MediaQuery.of(context).size.width) / 3.5,
-                            child: CategoryDropdown(categories: ['의류', '디지털','가구','기타']),
+                            child: CategoryDropdown(
+                                categories: const ['의류', '디지털', '가구', '기타']),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -126,7 +127,7 @@ class PostAddPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             width: (MediaQuery.of(context).size.width) / 1.8,
-                            child: TextField(
+                            child: const TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
                               style: TextStyle(fontSize: 20),
@@ -141,14 +142,14 @@ class PostAddPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ImagePickerContainer(),
+                      const ImagePickerContainer(),
                     ],
                   ),
                 )),
               ),
               Container(
                 width: 400,
-                padding: EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -157,9 +158,9 @@ class PostAddPage extends StatelessWidget {
                     backgroundColor: const Color.fromARGB(255, 156, 119, 248),
                   ),
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     '판매하기',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
@@ -170,7 +171,6 @@ class PostAddPage extends StatelessWidget {
             ],
           )),
       bottomNavigationBar: CustomBottomBar(),
-
     );
   }
 }

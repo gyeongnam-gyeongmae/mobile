@@ -3,6 +3,7 @@ import 'package:get/get.dart'; // Get 패키지의 모든 기능을 사용하기
 
 import 'package:mobile/app_binding.dart';
 import 'package:mobile/views/pages/info_page.dart';
+import 'package:mobile/views/pages/join/login_page.dart';
 import 'package:mobile/views/pages/search_result_page.dart';
 import 'package:mobile/views/widget/image_picker_container.dart';
 import 'package:mobile/views/pages/main_page.dart';
@@ -25,9 +26,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
     // 화면이 빌드된 후 3초 후에 LoginPage로 이동
     Future.delayed(const Duration(seconds: 3), () {
-
-      Get.to(() => const LoginPage());
-
+      Get.to(() => const PostAddPage());
     });
   }
 
@@ -36,7 +35,7 @@ class _LoadingPageState extends State<LoadingPage> {
     return GetMaterialApp(
       initialBinding: AppBinding(),
       // GetMaterialApp을 사용
-      home: Scaffold(
+      home: const Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

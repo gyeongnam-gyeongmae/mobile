@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/views/widget/join_page_button.dart';
-import 'package:mobile/views/widget/join_page_textfield.dart';
+import 'package:mobile/views/widget/textfield/join_page_textfield.dart';
+import 'package:mobile/views/widget/textfield/phone_text.dart';
 
-class PhonePage extends StatelessWidget {
+class PhonePage extends GetView<JoinController> {
   const PhonePage({super.key});
 
   @override
@@ -49,7 +52,7 @@ class PhonePage extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                TextFieldWidget(
+                PhoneText(
                   hintText: "인증번호를 입력해 주세요",
                   width: 400,
                   height: 40,
@@ -58,20 +61,26 @@ class PhonePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const JoinPageButton(
+                JoinPageButton(
                   height: 40,
                   width: 400,
                   padding: 20,
                   text: "인증번호 확인",
+                  onTap: () {
+                    controller.getPhoneVerificationRequest();
+                  },
                 ),
                 const SizedBox(
                   height: 50,
                 ),
-                const JoinPageButton(
+                JoinPageButton(
                   height: 100,
                   width: 320,
                   padding: 100,
                   text: "Best Deal 시작하기!",
+                  onTap: () {
+                    controller.register();
+                  },
                 ),
               ],
             ),

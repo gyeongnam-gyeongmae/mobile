@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:mobile/controller/join_controller.dart';
+import 'package:mobile/views/pages/join/phone_page.dart';
+import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/widget/join_page_button.dart';
 
-import 'package:mobile/views/widget/join_page_textfield.dart';
+import 'package:mobile/views/widget/textfield/join_page_textfield.dart';
 
-class JoinPage extends StatelessWidget {
+class JoinPage extends GetView<JoinController> {
   const JoinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String? phoneNumber; // TextFieldWidget의 값을 저장할 변수
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus(); // 키보드 닫기 이벤트
@@ -54,17 +60,27 @@ class JoinPage extends StatelessWidget {
                 TextFieldWidget(
                   hintText: "휴대폰 번호를 입력하세요!!",
                   width: 400,
-                  height: 40,
+                  height: 70,
                   padding: 20,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const JoinPageButton(
+                JoinPageButton(
                   height: 40,
                   width: 400,
                   padding: 20,
                   text: "계속하기",
+                  onTap: () {
+                    if (controller.checkPhoneNumber == true) {
+                      print(controller.checkPhoneNumber);
+                      controller.sendPhoneVerificationRequest();
+                      Get.to(() => const MainPage());
+                    } else {
+                      print(controller.checkPhoneNumber);
+                      print("에러");
+                    }
+                  },
                 ),
               ],
             ),

@@ -60,10 +60,10 @@ class MainPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.add),
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: MainBottomBar(),
+      bottomNavigationBar: const MainBottomBar(),
     );
   }
 }

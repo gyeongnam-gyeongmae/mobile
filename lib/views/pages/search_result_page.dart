@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/infinite_scroll_view.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-import 'package:mobile/views/widget/popular_dropdown.dart';
-import 'package:mobile/views/widget/price_dropdown.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/bar/saerch_appbar.dart';
+
+import 'package:mobile/views/widget/dropdown/popular_dropdown.dart';
+import 'package:mobile/views/widget/dropdown/price_dropdown.dart';
 import 'package:mobile/views/widget/textfield/search_textfield.dart';
-import 'package:mobile/views/widget/sell_bool_dropdown.dart';
+import 'package:mobile/views/widget/dropdown/sell_bool_dropdown.dart';
+import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SearchResultPage extends StatelessWidget {
-  const SearchResultPage({super.key});
-
+  SearchResultPage({super.key});
+  InfiniteScrollController controller = Get.put(InfiniteScrollController());
   @override
   Widget build(BuildContext context) {
+    Get.delete<InfiniteScrollController>();
+    controller = Get.put(InfiniteScrollController());
     return Scaffold(
+      appBar: const SearchAppbar(),
       body: Column(
         children: [
-          SearchTextfield(content: "삼성 카메라"),
+          // Container(margin: EdgeInsets.only(right: 40),child: SearchTextfield(content: "삼성 카메라"),),
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             margin: const EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,7 +34,10 @@ class SearchResultPage extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: InfiniteScrollView())
+          Expanded(
+              child: InfiniteScrollView(
+            controller: controller,
+          ))
         ],
       ),
       bottomNavigationBar: const MainBottomBar(),

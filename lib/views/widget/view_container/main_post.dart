@@ -23,7 +23,7 @@ class MainPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       height: 120,
       width: MediaQuery.of(context).size.width - 20,
       child: Row(
@@ -32,19 +32,20 @@ class MainPost extends StatelessWidget {
             child: Image.asset('assets/images/test.png',
                 width: 100, height: 90, fit: BoxFit.cover),
           ),
-          SizedBox(width: 10), // 가로 여백 추가
+          const SizedBox(width: 10), // 가로 여백 추가
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-              SizedBox(height: 4),
-              Text("문준호",
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              const Text("문준호",
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey)),
-              Expanded(
+              const Expanded(
                   child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
@@ -58,13 +59,13 @@ class MainPost extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text("내외동 5분전",
+                const Text("내외동 5분전",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)),
-                SizedBox(height: 4),
-                Text("시작가 80,000",
+                const SizedBox(height: 4),
+                const Text("시작가 80,000",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -77,7 +78,7 @@ class MainPost extends StatelessWidget {
                     children: [
                       TextButton(
                           onPressed: () {},
-                          child: Row(
+                          child: const Row(
                             children: [
                               Icon(Icons.chat, color: Colors.black),
                               SizedBox(width: 5),
@@ -89,7 +90,7 @@ class MainPost extends StatelessWidget {
                           )),
                       TextButton(
                           onPressed: () {},
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Icon(Icons.favorite, color: Colors.black),

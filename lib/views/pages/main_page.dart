@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/infinite_scroll_view.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
+  MainPage({super.key});
+  final InfiniteScrollController controller =
+      Get.put(InfiniteScrollController());
   @override
   Widget build(BuildContext context) {
+    // if (Get.isRegistered<InfiniteScrollController>(tag: "chat")) {
+    //   Get.find<InfiniteScrollController>(tag: "chat").onClose();
+    // }
+    // if (Get.isRegistered<InfiniteScrollController>(tag: "info")) {
+    //   Get.find<InfiniteScrollController>(tag: "info").onClose();
+    // }
     return Scaffold(
       appBar: MainAppbar(),
       body: Column(
@@ -30,7 +39,8 @@ class MainPage extends StatelessWidget {
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
@@ -39,7 +49,8 @@ class MainPage extends StatelessWidget {
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
@@ -48,7 +59,8 @@ class MainPage extends StatelessWidget {
                   Expanded(
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         onPressed: () {},
@@ -56,12 +68,11 @@ class MainPage extends StatelessWidget {
                   )
                 ]),
           ),
-          Expanded(child: InfiniteScrollView()),
+          Expanded(
+              child: InfiniteScrollView(
+            controller: controller,
+          )),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const MainBottomBar(),
     );

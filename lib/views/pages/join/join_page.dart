@@ -75,7 +75,7 @@ class JoinPage extends GetView<JoinController> {
                     if (controller.checkPhoneNumber == true) {
                       print(controller.checkPhoneNumber);
                       controller.sendPhoneVerificationRequest();
-                      Get.to(() => const MainPage());
+                      Get.to(() => MainPage());
                     } else {
                       print(controller.checkPhoneNumber);
                       print("에러");

@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
-import 'package:mobile/views/widget/main_post.dart';
+import 'package:mobile/views/pages/post_detail_page.dart';
+import 'package:mobile/views/widget/view_container/main_post.dart';
 
 class InfiniteScrollView extends GetView<InfiniteScrollController> {
+  @override
+  final InfiniteScrollController controller; // 수정: 컨트롤러를 받도록 함
+
+  const InfiniteScrollView({required this.controller, super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => Padding(
@@ -17,7 +23,10 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                 var datum = controller.data[index];
                 return Material(
                   elevation: 2,
-                  child: Container(
+                  child: InkWell(
+                    onTap: (() {
+                      Get.to(() => PostDetailPage(), arguments: datum);
+                    }),
                     child: MainPost(
                       title: "$datum번째 리트",
                       name: "문준호",
@@ -32,7 +41,8 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
               }
 
               if (controller.hasMore.value || controller.isLoading.value) {
-                return Center(child: RefreshProgressIndicator()); //로딩안됬을 때 새로고침
+                return const Center(
+                    child: RefreshProgressIndicator()); //로딩안됬을 때 새로고침
               }
 
               return Container(
@@ -41,18 +51,18 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                 child: Center(
                   child: Column(
                     children: [
-                      Text('마지막데이터'),
+                      const Text('마지막데이터'),
                       IconButton(
                           onPressed: () {
                             controller.reload();
                           },
-                          icon: Icon(Icons.refresh_outlined))
+                          icon: const Icon(Icons.refresh_outlined))
                     ],
                   ),
                 ),
               );
             },
-            separatorBuilder: (_, index) => Divider(),
+            separatorBuilder: (_, index) => const Divider(),
             itemCount: controller.data.length + 1,
           ),
         ));

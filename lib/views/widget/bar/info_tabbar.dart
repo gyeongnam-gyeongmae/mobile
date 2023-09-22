@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
-import 'package:mobile/views/widget/buy_product_view.dart';
-import 'package:mobile/views/widget/sell_product_view.dart';
+import 'package:mobile/views/widget/view_container/sell_product_view.dart';
+import 'package:mobile/views/widget/view_container/buy_product_view.dart';
 
 class InfoTabbar extends GetView<TabbarController> {
+  const InfoTabbar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 10,left: 10),
+          margin: const EdgeInsets.only(top: 10, left: 10),
           alignment: Alignment.centerLeft,
           child: TabBar(
             isScrollable: true,
@@ -21,7 +23,7 @@ class InfoTabbar extends GetView<TabbarController> {
             tabs: controller.myTabs,
           ),
         ),
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height * 0.6, // 높이를 지정
           child: Column(
             children: [

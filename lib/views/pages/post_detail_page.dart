@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
-import 'package:mobile/views/widget/custom_page_view.dart';
+import 'package:get/get.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
+import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
 class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({super.key});
-
+  PostDetailPage({super.key});
+  var datum = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppbar(),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+        padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
         child: Column(
           children: [
             Center(
-              child: Text("음 어쨋든 머라도 팝니다",
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
+              child: Text("$datum",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800, fontSize: 23)),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10),
               child: Row(
                 children: [
@@ -27,7 +29,8 @@ class PostDetailPage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "작성자: 문준호 줍줍",
-                        style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -36,7 +39,8 @@ class PostDetailPage extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Text(
                       "2023년 9월 5일 내외동",
-                      style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
                     ),
                   )),
                 ],
@@ -44,18 +48,18 @@ class PostDetailPage extends StatelessWidget {
             ),
             CustomPageView(),
             Container(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Row(
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.grey,
+                            backgroundColor: Colors.grey,
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: Center(
+                        child: const Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -76,11 +80,11 @@ class PostDetailPage extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFFD7575),
+                            backgroundColor: const Color(0xFFFD7575),
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: Center(
+                        child: const Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -103,10 +107,11 @@ class PostDetailPage extends StatelessWidget {
               children: [
                 Expanded(
                     child: Container(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: const Text(
                             "아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...",
-                            style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500),
                             softWrap: true)))
               ],
             ),
@@ -115,7 +120,7 @@ class PostDetailPage extends StatelessWidget {
               children: [
                 TextButton(
                     onPressed: () {},
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.person, color: Colors.black),
                         SizedBox(width: 5),
@@ -127,7 +132,7 @@ class PostDetailPage extends StatelessWidget {
                     )),
                 TextButton(
                     onPressed: () {},
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.chat, color: Colors.black),
                         SizedBox(width: 5),
@@ -139,7 +144,7 @@ class PostDetailPage extends StatelessWidget {
                     )),
                 TextButton(
                     onPressed: () {},
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Icon(Icons.favorite, color: Colors.black),
@@ -153,44 +158,45 @@ class PostDetailPage extends StatelessWidget {
               ],
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Container(
+              SizedBox(
                 width: (MediaQuery.of(context).size.width) / 3.5,
                 child: TextButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.grey,
                         foregroundColor: Colors.white,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold)),
                     onPressed: () {},
-                    child: Text('+100')),
+                    child: const Text('+100')),
               ),
-              Container(
+              SizedBox(
                 width: (MediaQuery.of(context).size.width) / 3.5,
                 child: TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 168, 203, 255),
+                        backgroundColor:
+                            const Color.fromARGB(255, 168, 203, 255),
                         foregroundColor: Colors.white,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold)),
                     onPressed: () {},
-                    child: Text('+1000')),
+                    child: const Text('+1000')),
               ),
-              Container(
+              SizedBox(
                 width: (MediaQuery.of(context).size.width) / 3.5,
                 child: TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFF95FC93),
+                        backgroundColor: const Color(0xFF95FC93),
                         foregroundColor: Colors.white,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold)),
                     onPressed: () {},
-                    child: Text('+10000')),
+                    child: const Text('+10000')),
               ),
             ]),
           ],
         ),
       ),
-      bottomNavigationBar: MainBottomBar(),
+      bottomNavigationBar: const MainBottomBar(),
     );
   }
 }

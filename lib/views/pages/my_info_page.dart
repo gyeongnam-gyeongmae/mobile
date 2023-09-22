@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
-import 'package:mobile/controller/join_controller.dart';
-import 'package:mobile/views/pages/join/join_page.dart';
-import 'package:mobile/views/pages/join/phone_page.dart';
-import 'package:mobile/views/widget/image_picker_container.dart';
+import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
 class MyInfoPage extends StatelessWidget {
   const MyInfoPage({super.key});

@@ -9,13 +9,13 @@ class CustomDatepicker extends StatefulWidget {
 
 class _CustomDatepicker extends State<CustomDatepicker> {
   DateTime? _selectedDate;
-  DateTime fiveMinutesLater = DateTime.now().add(Duration(minutes: 5));
-  DateTime oneMonthLater = DateTime.now().add(Duration(days: 30));
+  DateTime fiveMinutesLater = DateTime.now().add(const Duration(minutes: 5));
+  DateTime oneMonthLater = DateTime.now().add(const Duration(days: 30));
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(15.0),
@@ -34,7 +34,7 @@ class _CustomDatepicker extends State<CustomDatepicker> {
                 style: const TextStyle(fontSize: 25)),
           )),
           IconButton(
-            icon: Icon(Icons.calendar_month, size: 30),
+            icon: const Icon(Icons.calendar_month, size: 30),
             onPressed: () {
               showDate(context);
             },

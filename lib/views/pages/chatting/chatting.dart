@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
-import 'package:mobile/views/widget/info_tabbar.dart';
-import 'package:mobile/views/widget/main_appbar.dart';
-import 'package:mobile/views/widget/main_bottom_bar.dart';
+import 'package:mobile/views/widget/bar/info_tabbar.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 
 class Chatting extends StatelessWidget {
   const Chatting({super.key});

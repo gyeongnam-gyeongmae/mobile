@@ -13,7 +13,7 @@ class _CustomTimepickerState extends State<CustomTimepicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(15.0),
@@ -26,11 +26,11 @@ class _CustomTimepickerState extends State<CustomTimepicker> {
             },
             child: Text(
               '$_selectedTime',
-              style: TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 25),
             ),
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.alarm,
               size: 30,
             ),

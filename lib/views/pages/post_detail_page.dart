@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile/model/product_detail_model.dart';
+import 'package:mobile/model/product_item.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
 class PostDetailPage extends StatelessWidget {
-  PostDetailPage({super.key});
-  var datum = Get.arguments;
+  final ProductDetailModel productDetail = Get.arguments;
+
+  String changeDifTime(){
+    DateTime now = DateTime.now();
+    int days = productDetail.closedTime.difference(now).inDays;
+    int hours = productDetail.closedTime.difference(now).inHours % 24;
+    int minutes = productDetail.closedTime.difference(now).inMinutes % 60;
+    String difTime ='';
+    if (days > 0) difTime+=' ${days}d';
+    if (hours > 0) difTime+=' ${hours}h';
+    if(minutes > 0) difTime+=' ${minutes}m';
+    return '-' + difTime;
+  }
   @override
   Widget build(BuildContext context) {
+    String startDate = DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime);
     return Scaffold(
       appBar: MainAppbar(),
       body: Padding(
@@ -16,7 +31,7 @@ class PostDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: Text("$datum",
+              child: Text("${productDetail.name}",
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
             ),
             Padding(
@@ -27,19 +42,20 @@ class PostDetailPage extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "작성자: 문준호 줍줍",
-                        style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400),
+                        "작성자: ${productDetail.nickname}",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
-                  Expanded(
-                      child: Align(
+                  Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "2023년 9월 5일 내외동",
-                      style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400),
+                      "$startDate",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
                     ),
-                  )),
+                  )
                 ],
               ),
             ),
@@ -65,7 +81,7 @@ class PostDetailPage extends StatelessWidget {
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
-                                "10000",
+                                "${productDetail.price}",
                                 style: TextStyle(fontSize: 17),
                               )
                             ],
@@ -90,7 +106,7 @@ class PostDetailPage extends StatelessWidget {
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
-                                "52300",
+                                "${productDetail.price}",
                                 style: TextStyle(fontSize: 17),
                               )
                             ],
@@ -100,57 +116,71 @@ class PostDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(
-                            "아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...아 아무것도 하기 싫다...",
-                            style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
-                            softWrap: true)))
-              ],
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(top: 15, left: 15),
+                      child: Text("${productDetail.content}",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                          softWrap: true))
+                ],
+              ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TextButton(
-                    onPressed: () {},
+                Expanded(
                     child: Row(
-                      children: [
-                        Icon(Icons.person, color: Colors.black),
-                        SizedBox(width: 5),
-                        Text(
-                          "37",
-                          style: TextStyle(color: Colors.black),
-                        )
-                      ],
-                    )),
-                TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Icon(Icons.chat, color: Colors.black),
-                        SizedBox(width: 5),
-                        Text(
-                          "5",
-                          style: TextStyle(color: Colors.black),
-                        )
-                      ],
-                    )),
-                TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(Icons.favorite, color: Colors.black),
-                        SizedBox(width: 5),
-                        Text(
-                          "5",
-                          style: TextStyle(color: Colors.black),
-                        )
-                      ],
-                    ))
+                  children: [
+                    TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.person, color: Colors.black),
+                            SizedBox(width: 5),
+                            Text(
+                              "${productDetail.viewCount}",
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        )),
+                    TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.chat, color: Colors.black),
+                            SizedBox(width: 5),
+                            Text(
+                              "${productDetail.viewCount}",
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        )),
+                    TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.favorite, color: Colors.black),
+                            SizedBox(width: 5),
+                            Text(
+                              "${productDetail.likeCount}",
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        )),
+                  ],
+                )),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    changeDifTime(),
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/date_picker_controller.dart';
 
-class CustomTimepicker extends StatefulWidget {
-  const CustomTimepicker({super.key});
 
-  @override
-  State<CustomTimepicker> createState() => _CustomTimepickerState();
-}
-
-class _CustomTimepickerState extends State<CustomTimepicker> {
+class CustomTimepicker extends GetView<DatePickerController> {
   String? _selectedTime = "end time";
 
   @override
@@ -24,10 +20,13 @@ class _CustomTimepickerState extends State<CustomTimepicker> {
             onTap: () {
               showTime(context);
             },
-            child: Text(
-              '$_selectedTime',
-              style: TextStyle(fontSize: 25),
-            ),
+            child: Obx(() {
+              return Text(
+                controller.selectedTime.value != null
+                    ? controller.selectedTime.value!.format(context)
+                    : "end time",
+                style: const TextStyle(fontSize: 25));
+            })
           ),
           IconButton(
             icon: Icon(
@@ -44,17 +43,14 @@ class _CustomTimepickerState extends State<CustomTimepicker> {
   }
 
   Future<void> showTime(BuildContext con) async {
-    Future<TimeOfDay?> future =
-        showTimePicker(context: con, initialTime: TimeOfDay.now());
-
-    future.then((timeOfDay) {
-      setState(() {
-        if (timeOfDay == "end time") {
-          _selectedTime = "end time";
-        } else {
-          _selectedTime = '${timeOfDay?.hour}시 ${timeOfDay?.minute}분';
-        }
-      });
-    });
+    final date = await showTimePicker(
+      context: con,
+      initialTime: TimeOfDay.now()
+      );
+    print(date);
+    if(date != null){
+      controller.updateTime(date);
+    }
+    print(controller.getDate());
   }
 }

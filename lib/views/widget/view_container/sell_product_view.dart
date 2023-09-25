@@ -2,29 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
+import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SellProductView extends GetView<SellProductController> {
   late List<Widget> myContainers;
-  InfiniteScrollController scrollController = Get.put(InfiniteScrollController());
-  SellProductView({super.key}) {
-    myContainers = [
-      Container(child: InfiniteScrollView(controller: scrollController,)),
-      Container(child: InfiniteScrollView(controller: scrollController,)),
-      Container(child: InfiniteScrollView(controller: scrollController,)),
-    ];
-  }
-
+  late InfiniteScrollController scrollController;
   //내정보 페이지에서 버튼 클릭시 아래에 표시할 컨테이너, 위젯list로 관리하면 될듯
   Widget _buildContainer() {
     Get.delete<InfiniteScrollController>();
-    scrollController = Get.put(InfiniteScrollController());
+    scrollController = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
+      keyword: "", category: "",
+      nick_name: "", closed: false,
+      search_time: true, like: true,
+      search_price: true)));
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: myContainers[controller.selectedId.value],
+      child: Container(child: InfiniteScrollView(controller: scrollController)),
     );
   }
 
@@ -58,7 +55,7 @@ class SellProductView extends GetView<SellProductController> {
                   children: [
                     _containerSelectorButton(0, '전체'),
                     _containerSelectorButton(1, '판매중'),
-                    _containerSelectorButton(2, '예약중'),
+                    _containerSelectorButton(2, '판매완료'),
                   ]),
             ),
             Container(

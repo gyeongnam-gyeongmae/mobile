@@ -82,7 +82,7 @@ class MainPost extends StatelessWidget {
                               onPressed: () {},
                               child: Row(
                                 children: [
-                                  Icon(Icons.chat, color: Colors.black),
+                                  Icon(Icons.person, color: Colors.black),
                                   SizedBox(width: 5),
                                   Text(
                                     comment_cnt.toString(),

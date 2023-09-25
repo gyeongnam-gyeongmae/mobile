@@ -18,8 +18,7 @@ class BottomBarController extends GetxController {
       case 1:
         Get.to(PostAddPage());
         break;
-      case 2:
-        Get.to(SearchResultPage()); //채팅내역으로 바꿔야함
+      case 2://채팅내역으로 바꿔야함
         break;
       case 3:
         Get.to(InfoPage());

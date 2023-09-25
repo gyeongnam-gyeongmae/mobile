@@ -31,7 +31,13 @@ class PopularDropdown extends GetView<DropdownController> {
                     ))
                 .toList(),
             onChanged: (value) {
-              controller.setPopularItem(value!);
+              controller.setPopularItem(value.toString());
+              int index = items.indexOf(value.toString());
+              if(index == 0) {
+                controller.setPopularBool(true);
+              } else {
+                controller.setPopularBool(false);
+              }
             },
           );
         }));

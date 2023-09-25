@@ -18,7 +18,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: (){
               Get.to(SearchPage());
             },
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.search, color: Colors.grey),
             padding: EdgeInsets.fromLTRB(0, 8, 0, 0)),
         IconButton(
             onPressed: null,

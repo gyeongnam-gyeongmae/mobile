@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
+import 'package:mobile/model/product_search_model.dart';
+import 'package:mobile/views/pages/search_result_page.dart';
 
 class SearchAppbar extends GetView<SearchTextfieldController>
     implements PreferredSizeWidget {
@@ -32,7 +37,7 @@ class SearchAppbar extends GetView<SearchTextfieldController>
                 controller:
                     TextEditingController(text: controller.content.value),
                 decoration: InputDecoration(
-                  hintText: '             원하는 것을 찾으세요 !',
+                  hintText: '원하는 것을 찾으세요 !',
                   contentPadding: EdgeInsets.symmetric(horizontal: 12),
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(
@@ -40,8 +45,10 @@ class SearchAppbar extends GetView<SearchTextfieldController>
                   ),
                 ),
                 maxLines: 1, // 단일 줄 입력
-                onSubmitted: (value){
+                onSubmitted: (value) async{
                   controller.setContent(value);
+                  Get.to(SearchResultPage(
+                  ));
                 },
               );
             }))

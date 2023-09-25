@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class BuyProductView extends StatelessWidget {
 
   BuyProductView({super.key});
-  InfiniteScrollController controller = Get.put(InfiniteScrollController());
+  late InfiniteScrollController controller;
   Widget _containerSelector(BuildContext context,int cnt) {
     Get.delete<InfiniteScrollController>();
-    controller = Get.put(InfiniteScrollController());
+    controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
+      keyword: "", category: "",
+      nick_name: "", closed: false,
+      search_time: true, like: true,
+      search_price: true)));
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: Column(

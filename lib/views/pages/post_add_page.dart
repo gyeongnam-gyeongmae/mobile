@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/add_product_controller.dart';
+import 'package:mobile/controller/date_picker_controller.dart';
+import 'package:mobile/model/add_product_model.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/dropdown/category_dropdown.dart';
@@ -6,15 +11,15 @@ import 'package:mobile/views/widget/picker/custom_datepicker.dart';
 import 'package:mobile/views/widget/picker/custom_timepicker.dart';
 import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
-class PostAddPage extends StatelessWidget {
-  const PostAddPage({super.key});
-
+class PostAddPage extends GetView<AddProductController> {
+  PostAddPage({super.key});
+  final DatePickerController datePickerController = Get.find<DatePickerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppbar(),
       body: Padding(
-          padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
           child: Column(
             children: [
               Expanded(
@@ -22,7 +27,7 @@ class PostAddPage extends StatelessWidget {
                     child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           '제목',
@@ -30,11 +35,12 @@ class PostAddPage extends StatelessWidget {
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         width: (MediaQuery.of(context).size.width) - 30,
                         child: TextField(
-                          decoration: InputDecoration(
+                          inputFormatters: [LengthLimitingTextInputFormatter(15)],
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
                             hintText: '판매 물품 이름을 포함해 주세요.',
@@ -56,10 +62,13 @@ class PostAddPage extends StatelessWidget {
                             ),
                           ),
                           keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            controller.setTitle(value);
+                          },
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Align(
+                      const SizedBox(height: 20),
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           '물건 설명',
@@ -67,11 +76,11 @@ class PostAddPage extends StatelessWidget {
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         width: (MediaQuery.of(context).size.width) - 30,
                         child: TextField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
                             hintText: '판매 물품 설명',
@@ -93,10 +102,13 @@ class PostAddPage extends StatelessWidget {
                             ),
                           ),
                           maxLines: 5,
+                          onChanged: (value) {
+                            controller.setContent(value);
+                          },
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Row(
+                      const SizedBox(height: 10),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -106,19 +118,20 @@ class PostAddPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [CustomDatepicker(), CustomTimepicker()],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            padding: EdgeInsets.only(left: 13),
+                            padding: const EdgeInsets.only(left: 13),
                             width: (MediaQuery.of(context).size.width) / 3.5,
-                            child: CategoryDropdown(categories: ['의류', '디지털','가구','기타']),
+                            child: CategoryDropdown(
+                                categories: ['의류', '디지털', '가구', '기타']),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -129,26 +142,30 @@ class PostAddPage extends StatelessWidget {
                             child: TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 suffixText: '원',
                                 border: InputBorder.none,
                                 hintText: '경매 시작가를 입력해 주세요.',
                                 hintStyle: TextStyle(fontSize: 15),
                               ),
+                              onSubmitted: (value) {
+                                print(value);
+                                controller.setPrice(int.parse(value));
+                              },
                             ),
                           ),
                         ],
                       ),
-                      ImagePickerContainer(),
+                      const ImagePickerContainer(),
                     ],
                   ),
                 )),
               ),
               Container(
                 width: 400,
-                padding: EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -156,10 +173,13 @@ class PostAddPage extends StatelessWidget {
                     ),
                     backgroundColor: const Color.fromARGB(255, 156, 119, 248),
                   ),
-                  onPressed: () {},
-                  child: Text(
+                  onPressed: () {
+                    controller.setCloseTime(datePickerController.getDate());
+                    controller.AddProduct();
+                  },
+                  child: const Text(
                     '판매하기',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
@@ -170,7 +190,6 @@ class PostAddPage extends StatelessWidget {
             ],
           )),
       bottomNavigationBar: MainBottomBar(),
-
     );
   }
 }

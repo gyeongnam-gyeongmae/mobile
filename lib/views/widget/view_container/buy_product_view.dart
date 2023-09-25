@@ -5,7 +5,6 @@ import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class BuyProductView extends StatelessWidget {
-
   BuyProductView({super.key});
   late InfiniteScrollController controller;
   Widget _containerSelector(BuildContext context,int cnt) {
@@ -16,39 +15,45 @@ class BuyProductView extends StatelessWidget {
       search_time: true, like: true,
       search_price: true)));
     return Container(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 10, left: 25),
+              margin: const EdgeInsets.only(top: 10, left: 25),
               child: Text('상품 $cnt건',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: Divider(color: Colors.grey, thickness: 1),
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: const Divider(color: Colors.grey, thickness: 1),
             )
           ],
         ));
   }
+
   Widget _buildContainer() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: Container(child: InfiniteScrollView(controller: controller,)),
+      child: Container(
+          child: InfiniteScrollView(
+        controller: controller,
+      )),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-          children: [
-          _containerSelector(context, 0),
-          Expanded(child: _buildContainer())],
-        );
+      children: [
+        _containerSelector(context, 0),
+        Expanded(child: _buildContainer())
+      ],
+    );
   }
 }

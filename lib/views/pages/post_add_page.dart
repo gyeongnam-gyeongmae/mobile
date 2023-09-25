@@ -17,7 +17,7 @@ class PostAddPage extends GetView<AddProductController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: const MainAppbar(),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
           child: Column(
@@ -139,7 +139,7 @@ class PostAddPage extends GetView<AddProductController> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             width: (MediaQuery.of(context).size.width) / 1.8,
-                            child: TextField(
+                            child: const TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
                               style: const TextStyle(fontSize: 20),

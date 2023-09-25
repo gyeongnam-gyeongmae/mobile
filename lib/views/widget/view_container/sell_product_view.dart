@@ -33,7 +33,7 @@ class SellProductView extends GetView<SellProductController> {
                 id == controller.selectedId.value ? Colors.black : Colors.white,
             foregroundColor:
                 id == controller.selectedId.value ? Colors.white : Colors.black,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {
           controller.setSelectedId(id);
@@ -44,11 +44,11 @@ class SellProductView extends GetView<SellProductController> {
   //버튼 생성
   Widget _containerSelector(BuildContext context, int cnt) {
     return Container(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,13 +60,14 @@ class SellProductView extends GetView<SellProductController> {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 10, left: 25),
+              margin: const EdgeInsets.only(top: 10, left: 25),
               child: Text('상품 $cnt건',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: Divider(color: Colors.grey, thickness: 1),
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: const Divider(color: Colors.grey, thickness: 1),
             )
           ],
         ));

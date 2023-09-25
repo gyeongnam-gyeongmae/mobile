@@ -10,7 +10,7 @@ class CustomPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width - 30, // 원하는 크기로 조정
           height: 200, // 원하는 크기로 조정
           child: PageView.builder(

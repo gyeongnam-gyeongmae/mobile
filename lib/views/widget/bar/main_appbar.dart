@@ -4,7 +4,7 @@ import 'package:mobile/views/pages/search_page.dart';
 import 'package:mobile/views/widget/dropdown/location_dropdown.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
-  MainAppbar({super.key});
+  const MainAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 1.0,
       backgroundColor: Colors.white,
       leadingWidth: 300,
-      leading: LocationDropdown(),
-      actions: [
+      leading: const LocationDropdown(),
+      actions: const [
         IconButton(
             onPressed: (){
               Get.to(SearchPage());
@@ -29,5 +29,5 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(70);
 }

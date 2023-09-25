@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class DropdownController extends GetxController{
+class DropdownController extends GetxController {
   RxString popularItem = '인기 많은순'.obs;
   RxBool popularBool = true.obs;
 
@@ -12,7 +12,7 @@ class DropdownController extends GetxController{
 
   RxString categoryItem = '기타'.obs;
 
-  void setPopularItem(String item){
+  void setPopularItem(String item) {
     popularItem.value = item;
   }
 
@@ -36,7 +36,7 @@ class DropdownController extends GetxController{
     sellBool.value = result;
   }
 
-  void setCategoryItem(String item){
+  void setCategoryItem(String item) {
     categoryItem.value = item;
   }
 }

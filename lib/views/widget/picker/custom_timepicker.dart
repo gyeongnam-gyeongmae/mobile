@@ -9,7 +9,7 @@ class CustomTimepicker extends GetView<DatePickerController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(15.0),
@@ -29,7 +29,7 @@ class CustomTimepicker extends GetView<DatePickerController> {
             })
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.alarm,
               size: 30,
             ),

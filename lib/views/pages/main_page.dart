@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
       search_time: true, like: true,
       search_price: true)));
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: const MainAppbar(),
       body: Column(
         children: [
           Container(
@@ -81,11 +81,11 @@ class MainPage extends StatelessWidget {
           ),
           Expanded(
               child: InfiniteScrollView(
-                controller: controller,
+            controller: controller,
           )),
         ],
       ),
-      bottomNavigationBar: MainBottomBar(),
+      bottomNavigationBar: const MainBottomBar(),
     );
   }
 }

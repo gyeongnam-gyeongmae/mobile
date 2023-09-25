@@ -9,7 +9,7 @@ class CustomDatepicker extends GetView<DatePickerController>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(15.0),

@@ -15,13 +15,13 @@ class CategoryDropdown extends GetView<DropdownController> {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         child: Obx(() {
           return DropdownButton(
             value: controller.categoryItem.value,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-            underline: SizedBox.shrink(),
+            underline: const SizedBox.shrink(),
             items: categories
                 .map((category) => DropdownMenuItem(
                       value: category,

@@ -31,7 +31,13 @@ class PriceDropdown extends GetView<DropdownController> {
                     ))
                 .toList(),
             onChanged: (value) {
-              controller.setPriceItem(value!);
+              controller.setPriceItem(value.toString());
+              int index = items.indexOf(value.toString());
+              if(index == 0) {
+                controller.setPriceBool(false);
+              } else {
+                controller.setPriceBool(true);
+              }
             },
           );
         }));

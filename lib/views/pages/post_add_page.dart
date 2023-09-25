@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/add_product_controller.dart';
+import 'package:mobile/controller/date_picker_controller.dart';
+import 'package:mobile/model/add_product_model.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/dropdown/category_dropdown.dart';
@@ -6,9 +11,9 @@ import 'package:mobile/views/widget/picker/custom_datepicker.dart';
 import 'package:mobile/views/widget/picker/custom_timepicker.dart';
 import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
-class PostAddPage extends StatelessWidget {
-  const PostAddPage({super.key});
-
+class PostAddPage extends GetView<AddProductController> {
+  PostAddPage({super.key});
+  final DatePickerController datePickerController = Get.find<DatePickerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +36,11 @@ class PostAddPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      SizedBox(
+                      Container(
                         width: (MediaQuery.of(context).size.width) - 30,
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextField(
+                          inputFormatters: [LengthLimitingTextInputFormatter(15)],
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
                             hintText: '판매 물품 이름을 포함해 주세요.',
@@ -56,6 +62,9 @@ class PostAddPage extends StatelessWidget {
                             ),
                           ),
                           keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            controller.setTitle(value);
+                          },
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -68,10 +77,10 @@ class PostAddPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      SizedBox(
+                      Container(
                         width: (MediaQuery.of(context).size.width) - 30,
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextField(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
                             hintText: '판매 물품 설명',
@@ -93,6 +102,9 @@ class PostAddPage extends StatelessWidget {
                             ),
                           ),
                           maxLines: 5,
+                          onChanged: (value) {
+                            controller.setContent(value);
+                          },
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -107,7 +119,7 @@ class PostAddPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [CustomDatepicker(), CustomTimepicker()],
                       ),
@@ -118,7 +130,7 @@ class PostAddPage extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.only(left: 13),
                             width: (MediaQuery.of(context).size.width) / 3.5,
-                            child: const CategoryDropdown(
+                            child: CategoryDropdown(
                                 categories: ['의류', '디지털', '가구', '기타']),
                           ),
                           Container(
@@ -130,14 +142,18 @@ class PostAddPage extends StatelessWidget {
                             child: const TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 suffixText: '원',
                                 border: InputBorder.none,
                                 hintText: '경매 시작가를 입력해 주세요.',
                                 hintStyle: TextStyle(fontSize: 15),
                               ),
+                              onSubmitted: (value) {
+                                print(value);
+                                controller.setPrice(int.parse(value));
+                              },
                             ),
                           ),
                         ],
@@ -157,7 +173,10 @@ class PostAddPage extends StatelessWidget {
                     ),
                     backgroundColor: const Color.fromARGB(255, 156, 119, 248),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.setCloseTime(datePickerController.getDate());
+                    controller.AddProduct();
+                  },
                   child: const Text(
                     '판매하기',
                     style: TextStyle(
@@ -170,7 +189,7 @@ class PostAddPage extends StatelessWidget {
               )
             ],
           )),
-      bottomNavigationBar: const MainBottomBar(),
+      bottomNavigationBar: MainBottomBar(),
     );
   }
 }

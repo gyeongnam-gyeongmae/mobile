@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/bar/search_appbar.dart';
 
 class SearchPage extends StatelessWidget {
@@ -64,6 +66,7 @@ class SearchPage extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: MainBottomBar(),
     );
   }
 }

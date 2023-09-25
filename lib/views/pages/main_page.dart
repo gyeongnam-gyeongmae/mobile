@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
-  final InfiniteScrollController controller =
-      Get.put(InfiniteScrollController());
   @override
   Widget build(BuildContext context) {
-    // if (Get.isRegistered<InfiniteScrollController>(tag: "chat")) {
-    //   Get.find<InfiniteScrollController>(tag: "chat").onClose();
-    // }
-    // if (Get.isRegistered<InfiniteScrollController>(tag: "info")) {
-    //   Get.find<InfiniteScrollController>(tag: "info").onClose();
-    // }
+    Get.delete<InfiniteScrollController>();
+    InfiniteScrollController controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
+      keyword: "", category: "",
+      nick_name: "", closed: false,
+      search_time: true, like: true,
+      search_price: true)));
     return Scaffold(
       appBar: const MainAppbar(),
       body: Column(
@@ -33,7 +32,10 @@ class MainPage extends StatelessWidget {
                             foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.setCategory('의류');
+                          controller.reload();
+                        },
                         child: const Text('의류')),
                   ),
                   Expanded(
@@ -43,7 +45,10 @@ class MainPage extends StatelessWidget {
                             foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.setCategory('디지털');
+                          controller.reload();
+                        },
                         child: const Text('디지털')),
                   ),
                   Expanded(
@@ -53,7 +58,10 @@ class MainPage extends StatelessWidget {
                             foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.setCategory('디지털');
+                          controller.reload();
+                        },
                         child: const Text('가구')),
                   ),
                   Expanded(
@@ -63,7 +71,10 @@ class MainPage extends StatelessWidget {
                             foregroundColor: Colors.black,
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.setCategory('기타');
+                          controller.reload();
+                        },
                         child: const Text('기타')),
                   )
                 ]),

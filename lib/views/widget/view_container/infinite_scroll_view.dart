@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/views/pages/post_detail_page.dart';
 import 'package:mobile/views/widget/view_container/main_post.dart';
 
@@ -24,17 +25,18 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                 return Material(
                   elevation: 2,
                   child: InkWell(
-                    onTap: (() {
-                      Get.to(() => PostDetailPage(), arguments: datum);
+                    onTap: (() async {
+                      final ProductDetailModel product = await controller.getProductDetail(controller.data[index].id);
+                      Get.to(()=>PostDetailPage(),arguments: product);
                     }),
                     child: MainPost(
-                      title: "$datum번째 리트",
-                      name: "문준호",
-                      price: 1000000,
-                      post_created: "내외동 5분전",
-                      start_price: "시작가 80,000",
-                      comment_cnt: 5,
-                      like_cnt: 1,
+                      title: controller.data[index].name, 
+                      name: controller.data[index].name,//작성자 이름대체
+                      price: controller.data[index].price,
+                      post_created: controller.changeTime(index),
+                      start_price: controller.data[index].price,//현재가,시작가 필요
+                      comment_cnt: controller.data[index].viewCount,
+                      like_cnt: controller.data[index].likeCount,
                     ),
                   ),
                 );

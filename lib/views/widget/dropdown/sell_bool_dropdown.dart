@@ -19,7 +19,7 @@ class SellBoolDropdown extends GetView<DropdownController> {
         alignment: Alignment.center,
         child: Obx(() {
           return DropdownButton(
-            value: controller.sellBool.value,
+            value: controller.sellItem.value,
             icon: Icon(Icons.unfold_more),
             style: TextStyle(
                 fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
@@ -31,7 +31,14 @@ class SellBoolDropdown extends GetView<DropdownController> {
                     ))
                 .toList(),
             onChanged: (value) {
-              controller.setSellBool(value!);
+              controller.setSellItem(value.toString());
+              int index = items.indexOf(value.toString());
+              if(index == 0) {
+                controller.setSellBool(true);
+              } else {
+                controller.setSellBool(false);
+              }
+              // //나중에 이건 번호순으로 보내줘야할 수도 있음
             },
           );
         }));

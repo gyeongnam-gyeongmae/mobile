@@ -139,7 +139,7 @@ class PostAddPage extends GetView<AddProductController> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             width: (MediaQuery.of(context).size.width) / 1.8,
-                            child: const TextField(
+                            child: TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
                               style: const TextStyle(fontSize: 20),
@@ -151,7 +151,6 @@ class PostAddPage extends GetView<AddProductController> {
                                 hintStyle: TextStyle(fontSize: 15),
                               ),
                               onSubmitted: (value) {
-                                print(value);
                                 controller.setPrice(int.parse(value));
                               },
                             ),

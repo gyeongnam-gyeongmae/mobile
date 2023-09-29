@@ -13,5 +13,5 @@ import 'package:mobile/views/pages/my_info_page.dart';
 import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
 void main() {
-  runApp(const MyInfoPage());
+  runApp(LoadingPage());
 }

@@ -1,10 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import "package:mobile/controller/comment_scroll_controller.dart";
 
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/model/product_detail_model.dart';
-import 'package:mobile/views/pages/post_detail_page.dart';
+
 import 'package:mobile/views/widget/view_container/main_post.dart';
+import 'package:mobile/views/widget/view_container/product_detail_page.dart';
 
 class InfiniteScrollView extends GetView<InfiniteScrollController> {
   @override
@@ -21,13 +24,16 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
             shrinkWrap: true,
             itemBuilder: (_, index) {
               if (index < controller.data.length) {
-                var datum = controller.data[index];
                 return Material(
                   elevation: 2,
                   child: InkWell(
                     onTap: (() async {
                       final ProductDetailModel product = await controller.getProductDetail(controller.data[index].id);
-                      Get.to(()=>PostDetailPage(),arguments: product);
+                      Get.delete<CommentScrollController>();
+                      CommentScrollController commentScrollcontroller =
+                          Get.put(CommentScrollController(productId: product.id));
+                      await commentScrollcontroller.loadData();
+                      Get.to(()=>ProductDetailView(controller: commentScrollcontroller,productDetail: product));
                     }),
                     child: MainPost(
                       title: controller.data[index].name, 

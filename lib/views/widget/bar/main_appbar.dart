@@ -13,7 +13,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       leadingWidth: 300,
       leading: const LocationDropdown(),
-      actions: const [
+      actions: [
         IconButton(
             onPressed: (){
               Get.to(SearchPage());

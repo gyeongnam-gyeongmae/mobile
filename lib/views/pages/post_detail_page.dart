@@ -8,7 +8,8 @@ import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
 class PostDetailPage extends StatelessWidget {
-  final ProductDetailModel productDetail = Get.arguments;
+  final ProductDetailModel productDetail;
+  PostDetailPage({required this.productDetail,super.key});
 
   String changeDifTime(){
     DateTime now = DateTime.now();
@@ -24,9 +25,7 @@ class PostDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String startDate = DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime);
-    return Scaffold(
-      appBar: const MainAppbar(),
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
         child: Column(
           children: [
@@ -34,7 +33,7 @@ class PostDetailPage extends StatelessWidget {
               child: Text("${productDetail.name}",
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: Row(
                 children: [
@@ -72,7 +71,7 @@ class PostDetailPage extends StatelessWidget {
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -97,7 +96,7 @@ class PostDetailPage extends StatelessWidget {
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -221,8 +220,6 @@ class PostDetailPage extends StatelessWidget {
             ]),
           ],
         ),
-      ),
-      bottomNavigationBar: const MainBottomBar(),
-    );
+      );
   }
 }

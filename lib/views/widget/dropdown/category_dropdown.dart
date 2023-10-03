@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile/controller/add_product_controller.dart';
 import 'package:mobile/controller/dropdown_controller.dart';
 
 //앱바 오른쪽 드롭다운으로 만들었지만 나중에 지도api호출해서 값 반영해야할 듯
 class CategoryDropdown extends GetView<DropdownController> {
   final List<String> categories;
 
-  const CategoryDropdown({Key? key, required this.categories})
-      : super(key: key);
+  AddProductController addProductController = Get.find<AddProductController>();
+
+  CategoryDropdown({Key? key, required this.categories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,9 @@ class CategoryDropdown extends GetView<DropdownController> {
                     ))
                 .toList(),
             onChanged: (value) {
+              print(value);
               controller.setCategoryItem(value!);
+              addProductController.setCategory(value);
             },
           );
         }));

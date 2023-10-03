@@ -13,16 +13,16 @@ class BottomBarController extends GetxController {
     selectedIndex.value = index;
     switch (index) {
       case 0:
-        Get.off(MainPage());
+        Get.to(MainPage());
         break;
       case 1:
-        Get.off(const PostAddPage());
+        Get.to(PostAddPage());
         break;
       case 2:
         Get.to(Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
-        Get.off(const InfoPage());
+        //채팅내역으로 바꿔야함
         break;
       default:
         break;

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/date_picker_controller.dart';
 
-class CustomDatepicker extends StatefulWidget {
-  const CustomDatepicker({super.key});
-
-  @override
-  State<CustomDatepicker> createState() => _CustomDatepicker();
-}
-
-class _CustomDatepicker extends State<CustomDatepicker> {
-  DateTime? _selectedDate;
-  DateTime fiveMinutesLater = DateTime.now().add(const Duration(minutes: 5));
-  DateTime oneMonthLater = DateTime.now().add(const Duration(days: 30));
+class CustomDatepicker extends GetView<DatePickerController>{
+  DateTime fiveMinutesLater = DateTime.now().add(Duration(minutes: 5));
+  DateTime oneMonthLater = DateTime.now().add(Duration(days: 30));
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +21,19 @@ class _CustomDatepicker extends State<CustomDatepicker> {
             onTap: () {
               showDate(context);
             },
-            child: Text(
-                _selectedDate != null
-                    ? _selectedDate.toString().split(" ")[0]
+            child: Obx(() {
+              return Text(
+                controller.selectedDate.value != null
+                    ? controller.selectedDate.value.toString().split(" ")[0]
                     : "end date",
-                style: const TextStyle(fontSize: 25)),
+                style: const TextStyle(fontSize: 25));
+            })
           )),
           IconButton(
-            icon: const Icon(Icons.calendar_month, size: 30),
+            icon: Icon(
+              Icons.calendar_month,
+              size: 30
+            ),
             onPressed: () {
               showDate(context);
             },
@@ -45,15 +44,15 @@ class _CustomDatepicker extends State<CustomDatepicker> {
   }
 
   Future<void> showDate(BuildContext con) async {
-    showDatePicker(
+    final date = await showDatePicker(
       context: con,
-      initialDate: DateTime.now(),
+      initialDate: fiveMinutesLater,
       firstDate: fiveMinutesLater,
       lastDate: oneMonthLater,
-    ).then((selectedDate) => {
-          setState(() {
-            _selectedDate = selectedDate;
-          })
-        });
+    );
+    print(date);
+    if(date != null){
+      controller.updateDate(date);
+    }
   }
 }

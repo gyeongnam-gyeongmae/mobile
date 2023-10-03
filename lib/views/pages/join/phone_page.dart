@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/join_controller.dart';
-import 'package:mobile/views/widget/join_page_button.dart';
-import 'package:mobile/views/widget/textfield/join_page_textfield.dart';
+import 'package:mobile/views/widget/button/join_page_button.dart';
 import 'package:mobile/views/widget/phone_text.dart';
 
 class PhonePage extends GetView<JoinController> {

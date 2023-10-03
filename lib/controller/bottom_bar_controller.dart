@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/views/pages/chatting/chatting.dart';
 import 'package:mobile/views/pages/info_page.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/post_add_page.dart';
@@ -18,7 +19,7 @@ class BottomBarController extends GetxController {
         Get.off(const PostAddPage());
         break;
       case 2:
-        Get.to(SearchResultPage()); //채팅내역으로 바꿔야함
+        Get.to(Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
         Get.off(const InfoPage());

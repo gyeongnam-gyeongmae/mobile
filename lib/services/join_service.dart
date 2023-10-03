@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:mobile/views/pages/join/phone_page.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobile/views/pages/main_page.dart'; // Rename the import prefix
+import 'package:mobile/views/pages/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Rename the import prefix
 
 class JoinService {
   // Rename the local variable to avoid conflicts
@@ -57,7 +58,6 @@ class JoinService {
     String phoneNumbers,
     String authenticationNumber,
     String vendorAccessToken,
-    String phone,
   ) async {
     final url = Uri.parse('$baseUrl/authentications/register/KAKAO');
     final response = await httpClient.post(
@@ -66,7 +66,6 @@ class JoinService {
         'vendorAccessToken': vendorAccessToken,
         'phoneNumber': phoneNumbers,
         'phoneAuthenticationCode': authenticationNumber,
-        'password': phone,
       }), // JSON 형식으로 데이터 보내기
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -74,9 +73,12 @@ class JoinService {
     );
 
     if (response.statusCode == 201) {
-      print('요청이 성공했습니다: ${response.body}');
-      print("라우팅할게요");
-      Get.to(() => const PhonePage());
+      final headers = response.headers;
+      final cookies = headers['set-cookie'];
+      print("쿠기는$cookies");
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString("JSESSIONID", cookies!);
+      Get.to(() => MainPage());
     } else {
       // 오류 응답 처리
       print('Error: ${response.statusCode}, ${response.reasonPhrase}');

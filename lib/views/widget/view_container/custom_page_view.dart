@@ -12,7 +12,7 @@ class CustomPageView extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width - 30, // 원하는 크기로 조정
-          height: 200, // 원하는 크기로 조정
+          height: 150, // 원하는 크기로 조정
           child: PageView.builder(
             scrollDirection: Axis.horizontal,
             controller: pageController,

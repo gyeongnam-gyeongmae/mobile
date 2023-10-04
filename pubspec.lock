@@ -236,10 +236,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "47da2161c2e9f8f8a9cbbd89d466d174333fbdd769aeed848912e0b16d9cb369"
+      sha256: "0c7b83bbe2980c8a8e36e974f055e11e51675784e13a4762889feed0f3937ff2"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.8"
+    version: "0.8.8+1"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -316,82 +316,82 @@ packages:
     dependency: "direct main"
     description:
       name: kakao_flutter_sdk
-      sha256: "69a580eaf35f70d8244f407517749127d1b5799947db5fcc2ef7c6ddf7351964"
+      sha256: "6bf0fc09c088829c37fa4f80940ff283af2b40634f5122a51e9a7d209c755063"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_auth:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_auth
-      sha256: "7e160576ba9722203befef15f44abc4ff0fc4855154a3ee46feb7c30d5997fb2"
+      sha256: "5bcd1e507f601a700907034c5a396f0eb1d093611963b86a73b52f4aed581ada"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_common:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_common
-      sha256: "46a35a07e1a19bb27c90e7a703abaa9987495da9966fb55f17afa1306bc84f84"
+      sha256: b5f0e3cd177d6b4af914bd2b7d204a410581e47f18cf618c65c0c75898000812
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_friend:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_friend
-      sha256: e344f7f8b34ddef06c786fed775e0c7aa434413afa8e920e4a013a56ee19f24a
+      sha256: "17f2445c479e9c42dd256a78ad51466d8964bab61cd117ce9cc7ad1199880539"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_navi:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_navi
-      sha256: f6a6896dba55fb4467393402a3f0067ea530a6f7ae03299a194a8db072b9713f
+      sha256: e1a30be993ff2baeb429530ad58f871aba2d8edaa62adf7a2a0cca7f83c1a833
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_share:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_share
-      sha256: "881b81126364f7fca58df6073c1c6014dd18a145bc7e3b648f1ae95532d88639"
+      sha256: bc63e295b890f38b2711f09ed8ba5530e350c151369eee2a2e4363ba028af3e6
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_story:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_story
-      sha256: "510c641c092bcb3207b7d6a81ab91398907171f1a01a773c0e1d0c2edca193b2"
+      sha256: "0fc3c5abd069430fe0446d6b10a77eb3d97e20d7c5032c01efffa379d4102f62"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_talk:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_talk
-      sha256: "110ed5c7f8f0d11c855c455e195bd7266daa150055219bf2e5f2d279b757cf85"
+      sha256: c9968ddbf9bdf6f81dbf5cdb9012022aecfab0b919e45d3952ad426ef248d381
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_template:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_template
-      sha256: fe98aa51940d2fb0e5fa47a8c70f9722bf17ac80af89069c2df31556ca46a55d
+      sha256: f4c149dcc4cb644769915ee04b494fcf83eb23c57dc88c0362035d887ea50b34
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   kakao_flutter_sdk_user:
     dependency: transitive
     description:
       name: kakao_flutter_sdk_user
-      sha256: "273facdeed0c393b1068cce43e704f77f5acc8dd321d138a4265c9e327e70352"
+      sha256: "909d7267e8fadb08db558dd038026dec52042df90fca67a34f839847c804b1f9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   lints:
     dependency: transitive
     description:
@@ -665,10 +665,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: c97defd418eef4ec88c0d1652cdce84b9f7b63dd7198e266d06ac1710d527067
+      sha256: "350a11abd2d1d97e0cc7a28a81b781c08002aa2864d9e3f192ca0ffa18b06ed3"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.8"
+    version: "5.0.9"
   xdg_directories:
     dependency: transitive
     description:

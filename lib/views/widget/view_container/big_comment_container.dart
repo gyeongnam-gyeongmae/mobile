@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/widget/bar/main_appbar.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile/controller/comment_scroll_controller.dart';
 
-class BigCommentContainer extends StatelessWidget {
-
+class BigCommentContainer extends GetView<CommentScrollController> {
+  final int commentId;
+  final int userId;
   final String content;
   final String nickName;
-  BigCommentContainer({required this.content, required this.nickName, super.key});
+  final DateTime createdAt;
+  BigCommentContainer(
+      {required this.commentId,
+      required this.userId,
+      required this.content,
+      required this.nickName,
+      required this.createdAt,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
+    String contentText = '';
+    int lineLength = 35; // 텍스트 최대 글자수
+    for (int i = 0; i < content.length; i += lineLength) {
+      int end = i + lineLength;
+      if (end > content.length) {
+        end = content.length;
+      }
+      contentText += content.substring(i, end) + '\n';
+    }
     return Container(
         padding: const EdgeInsets.fromLTRB(60, 10, 20, 10),
         decoration: BoxDecoration(
@@ -27,22 +46,95 @@ class BigCommentContainer extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.black)),
                 SizedBox(width: 7),
-                Text('날짜',
+                Text(formatTimeAgo(),
                     style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)),
+                Spacer(),
+                if (userId == 1)
+                  IconButton(
+                  onPressed: () {
+                    _editCommentDialog(context).then((value) async{
+                      if (value == 'edit') {
+                        controller.setEditComment(content,userId,commentId);
+                          controller.textFocus.requestFocus();
+                          controller.reload();
+                      }
+                      else if (value == 'remove') {
+                        await controller.removeComment(userId, commentId);
+                        controller.reload();
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    Icons.keyboard_control_sharp,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                ),
               ],
             ),
             Row(
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 3),
-                  child: Text(content),
+                  child: Text(contentText, softWrap: true),
                 )
               ],
             ),
           ],
         ));
+  }
+  String formatTimeAgo() {
+  final now = DateTime.now();
+  final dateTime = createdAt.add(Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
+  final difference = now.difference(dateTime); // 차이 계산
+  if (difference.inDays >= 1) {
+    return DateFormat('d일 전').format(dateTime);
+  } else if (difference.inHours > 1) {
+    return DateFormat('H시간 전').format(dateTime);
+  } else if (difference.inHours == 1) {
+    return '1시간 전';
+  } else if (difference.inMinutes >= 1) {
+    return '${difference.inMinutes}분 전';
+  } else {
+    return '방금';
+  }
+  }
+  Future<dynamic> _editCommentDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'edit');
+                    },
+                    child: Text('댓글 수정하기',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  Divider(
+                    height: 0,
+                    color: Colors.grey,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'remove');
+                    },
+                    child: Text('댓글 삭제하기',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ],
+              ),
+            ));
   }
 }

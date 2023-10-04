@@ -150,7 +150,7 @@ class PostAddPage extends GetView<AddProductController> {
                                 hintText: '경매 시작가를 입력해 주세요.',
                                 hintStyle: TextStyle(fontSize: 15),
                               ),
-                              onSubmitted: (value) {
+                              onChanged: (value) {
                                 controller.setPrice(int.parse(value));
                               },
                             ),

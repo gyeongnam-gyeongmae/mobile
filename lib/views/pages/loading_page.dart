@@ -4,8 +4,7 @@ import 'package:get/get.dart'; // Get 패키지의 모든 기능을 사용하기
 import 'package:mobile/app_binding.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/post_add_page.dart';
-import 'package:mobile/views/widget/view_container/comment_container.dart';
-import 'package:mobile/views/widget/view_container/comment_scroll_view.dart';
+
 
 // LoginPage 클래스가 있는 파일을 import 합니다.
 

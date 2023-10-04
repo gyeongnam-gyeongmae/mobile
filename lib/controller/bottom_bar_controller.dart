@@ -21,6 +21,7 @@ class BottomBarController extends GetxController {
         break;
       case 3:
         //채팅내역으로 바꿔야함
+        Get.to(InfoPage());
         break;
       default:
         break;

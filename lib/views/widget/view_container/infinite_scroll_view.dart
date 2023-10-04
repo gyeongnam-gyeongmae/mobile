@@ -7,7 +7,7 @@ import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 
 import 'package:mobile/views/widget/view_container/main_post.dart';
-import 'package:mobile/views/widget/view_container/product_detail_page.dart';
+import 'package:mobile/views/pages/product_detail_page.dart';
 
 class InfiniteScrollView extends GetView<InfiniteScrollController> {
   @override
@@ -33,7 +33,7 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                       CommentScrollController commentScrollcontroller =
                           Get.put(CommentScrollController(productId: product.id));
                       await commentScrollcontroller.loadData();
-                      Get.to(()=>ProductDetailView(controller: commentScrollcontroller,productDetail: product));
+                      Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product));
                     }),
                     child: MainPost(
                       title: controller.data[index].name, 

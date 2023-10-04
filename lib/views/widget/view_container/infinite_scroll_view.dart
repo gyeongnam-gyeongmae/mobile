@@ -39,7 +39,7 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                       title: controller.data[index].name, 
                       name: controller.data[index].name,//작성자 이름대체
                       price: controller.data[index].price,
-                      post_created: controller.changeTime(index),
+                      post_closed: controller.changeTime(index),
                       start_price: controller.data[index].price,//현재가,시작가 필요
                       comment_cnt: controller.data[index].viewCount,
                       like_cnt: controller.data[index].likeCount,

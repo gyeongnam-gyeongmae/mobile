@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile/controller/add_product_controller.dart';
 
 class ImagePickerContainer extends StatefulWidget {
   const ImagePickerContainer({super.key});
@@ -14,8 +16,8 @@ final picker = ImagePicker();
 XFile? image;
 List<XFile?> multiImage = [];
 List<XFile?> images = [];
-
 class _ImagePickerContainerState extends State<ImagePickerContainer> {
+  AddProductController controller = Get.find<AddProductController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,6 +47,8 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                           if (image != null) {
                             setState(() {
                               images.add(image);
+                              controller.images.add(image);
+                              print(controller.images.length);
                             });
                           }
                         },
@@ -73,6 +77,7 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                           setState(() {
                             //갤러리에서 가지고 온 사진들은 리스트 변수에 저장되므로 addAll()을 사용해서 images와 multiImage 리스트를 합쳐줍니다.
                             images.addAll(multiImage);
+                            controller.images.addAll(multiImage);
                           });
                         },
                         icon: const Icon(Icons.add_photo_alternate_outlined,
@@ -120,6 +125,7 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                             onPressed: () {
                               //버튼을 누르면 해당 이미지가 삭제됨
                               setState(() {
+                                controller.images.remove(controller.images[index]);
                                 images.remove(images[index]);
                               });
                             },

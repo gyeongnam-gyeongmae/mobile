@@ -134,7 +134,7 @@ class CommentContainer extends GetView<CommentScrollController> {
 
   String formatTimeAgo() {
   final now = DateTime.now();
-  final dateTime = createdAt.add(Duration(hours: 9));
+  final dateTime = createdAt.add(Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
   final difference = now.difference(dateTime); // 차이 계산
   if (difference.inDays >= 1) {
     return DateFormat('d일 전').format(dateTime);

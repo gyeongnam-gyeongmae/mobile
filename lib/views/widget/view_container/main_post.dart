@@ -5,7 +5,7 @@ class MainPost extends StatelessWidget {
   final String title;
   final String name;
   final int price;
-  final String post_created;
+  final String post_closed;
   final int start_price;
   final int comment_cnt;
   final int like_cnt;
@@ -13,7 +13,7 @@ class MainPost extends StatelessWidget {
     required this.title,
     required this.name,
     required this.price,
-    required this.post_created,
+    required this.post_closed,
     required this.start_price,
     required this.comment_cnt,
     required this.like_cnt,
@@ -61,7 +61,7 @@ class MainPost extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(post_created,
+                    Text(post_closed,
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

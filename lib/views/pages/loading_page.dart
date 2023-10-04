@@ -34,7 +34,7 @@ class _LoadingPageState extends State<LoadingPage> {
       // if (cookie != null) {
       //  Get.to(() => MainPage());
       //} else {
-      Get.to(() => LoginPage());
+      Get.to(() => MainPage());
       //}
     });
   }

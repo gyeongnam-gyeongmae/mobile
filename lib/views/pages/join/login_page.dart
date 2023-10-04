@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/views/pages/join/join_page.dart';
-import 'package:mobile/views/pages/join/phone_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -13,12 +12,12 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Center(
           child: Container(
             color: Colors.white,
 

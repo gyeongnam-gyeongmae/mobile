@@ -1,44 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/controller/join_controller.dart';
 
-class JoinPageButton extends StatelessWidget {
-  final double height;
+class TextFieldWidget extends StatefulWidget {
+  String? hintText;
   final double width;
+  final double height;
   final double padding;
-  final String text;
 
-  const JoinPageButton({
-    Key? key, // key 속성을 추가하고, super.key 대신에 key를 사용합니다.
-    required this.height,
+  TextFieldWidget({
+    Key? key,
+    this.hintText,
     required this.width,
+    required this.height,
     required this.padding,
-    required this.text,
-    required Null Function() onTap,
-  }) : super(key: key); // 슈퍼 클래스의 생성자를 호출할 때 key 속성을 전달합니다.
+  }) : super(key: key);
+
+  @override
+  _TextFieldWidgetState createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  bool _isFocused = false;
+  double vertical = 30;
+
+  final TextEditingController _textEditingController = TextEditingController();
+  final JoinController joinController =
+      Get.find<JoinController>(); // JoinController 인스턴스 찾기
+
+  final RegExp phoneNumberRegExp = RegExp(r'^\d{11}$');
+  bool showError = false; // 오류 메시지를 표시할지 여부를 나타내는 상태 변수
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      width: width,
-      child: Padding(
-        padding: EdgeInsets.only(left: padding),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(9.0), // 라운드 모서리 반경 설정
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: widget.height,
+            width: widget.width,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: widget.padding, right: widget.padding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      controller: _textEditingController,
+                      decoration: InputDecoration(
+                        labelText: _isFocused ? null : widget.hintText,
+                        labelStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey,
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          top: vertical,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _textEditingController.clear();
+                              _isFocused = false;
+                            });
+                          },
+                          icon: const Icon(Icons.cancel_outlined),
+                        ),
+                        suffixIconConstraints: const BoxConstraints(
+                          maxHeight: 100,
+                          maxWidth: 40,
+                        ),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          vertical = 10;
+                          _isFocused = true;
+                        });
+                      },
+                      onChanged: (text) {
+                        setState(
+                          () {
+                            _isFocused = text.isNotEmpty;
+                            // 수정: onTextChanged를 호출하여 텍스트를 상위 위젯에 전달
+                          },
+                        );
+                        joinController.setPhoneNumber(text);
+                        if (phoneNumberRegExp.hasMatch(text)) {
+                          joinController.checkPhoneNumber.value = true;
+                          showError = false;
+                        } else {
+                          showError = true;
+                          joinController.checkPhoneNumber.value = false;
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-            backgroundColor: const Color.fromARGB(255, 156, 119, 248),
           ),
-          onPressed: () {},
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
+          Visibility(
+            visible: showError,
+            child: const Text(
+              '휴대폰 번호 형식이 올바르지 않습니다.',
+              style: TextStyle(
+                color: Colors.red, // 오류 메시지 색상 설정
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

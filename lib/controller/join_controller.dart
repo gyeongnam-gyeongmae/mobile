@@ -51,7 +51,6 @@ class JoinController extends GetxController {
         phoneNumbers.value,
         authenticationNumber.value,
         vendorAccessToken.value,
-        "22",
       );
     } catch (e) {
       // 예외 처리

@@ -14,7 +14,8 @@ class AddProductService{
       },
       body: jsonEncode(product.toJson())
     );
-
+    print(url);
+    print(response.body);
     if(response.statusCode == 201){
       return "경매품 추가";
     }

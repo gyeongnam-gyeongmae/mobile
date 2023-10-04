@@ -139,7 +139,7 @@ class PostAddPage extends GetView<AddProductController> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             width: (MediaQuery.of(context).size.width) / 1.8,
-                            child: const TextField(
+                            child: TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
                               style: const TextStyle(fontSize: 20),
@@ -150,8 +150,7 @@ class PostAddPage extends GetView<AddProductController> {
                                 hintText: '경매 시작가를 입력해 주세요.',
                                 hintStyle: TextStyle(fontSize: 15),
                               ),
-                              onSubmitted: (value) {
-                                print(value);
+                              onChanged: (value) {
                                 controller.setPrice(int.parse(value));
                               },
                             ),

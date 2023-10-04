@@ -21,7 +21,6 @@ class AddProductModel {
       'price':price,
       'category':category,
       'content':content,
-      'status':"NEW",
       'closedTime':closeTime.toUtc().toIso8601String(),
       'userId':userId
     };

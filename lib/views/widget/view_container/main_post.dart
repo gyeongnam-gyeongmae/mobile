@@ -46,7 +46,7 @@ class MainPost extends StatelessWidget {
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey)),
-                  const Expanded(
+                  Expanded(
                       child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
@@ -80,7 +80,7 @@ class MainPost extends StatelessWidget {
                         children: [
                           TextButton(
                               onPressed: () {},
-                              child: const Row(
+                              child: Row(
                                 children: [
                                   Icon(Icons.person, color: Colors.black),
                                   SizedBox(width: 5),
@@ -92,7 +92,7 @@ class MainPost extends StatelessWidget {
                               )),
                           TextButton(
                               onPressed: () {},
-                              child: const Row(
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Icon(Icons.favorite, color: Colors.black),

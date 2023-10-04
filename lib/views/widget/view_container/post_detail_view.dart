@@ -13,9 +13,10 @@ class PostDetailView extends StatelessWidget {
 
   String changeDifTime() {
     DateTime now = DateTime.now();
-    int days = productDetail.closedTime.difference(now).inDays;
-    int hours = productDetail.closedTime.difference(now).inHours % 24;
-    int minutes = productDetail.closedTime.difference(now).inMinutes % 60;
+    DateTime dateTime = productDetail.closedTime.add(Duration(hours: 9));
+    int days = dateTime.difference(now).inDays;
+    int hours = dateTime.difference(now).inHours % 24;
+    int minutes = dateTime.difference(now).inMinutes % 60;
     String difTime = '';
     if (days > 0) difTime += ' ${days}d';
     if (hours > 0) difTime += ' ${hours}h';
@@ -26,7 +27,7 @@ class PostDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String startDate =
-        DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime);
+        DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime.add(Duration(hours: 9)));
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
       child: Column(
@@ -36,21 +37,21 @@ class PostDetailView extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(bottom: 3),
             child: Row(
               children: [
                 Expanded(
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.topLeft,
                     child: Text(
                       "작성자: ${productDetail.nickname}",
                       style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   child: Text(
                     "$startDate",
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),

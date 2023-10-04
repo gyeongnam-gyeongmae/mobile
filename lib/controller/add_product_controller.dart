@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile/model/add_product_model.dart';
 import 'package:mobile/service/add_product_service.dart';
 
@@ -8,12 +9,13 @@ class AddProductController extends GetxController{
         title: "", price: 0,
         category: "기타", content: "", 
         closeTime: DateTime.now(), userId: 1);
+  
+  List<XFile?> images = [];
 
   final AddProductService addProductService = AddProductService();
 
   Future<String> AddProduct(){
-    print(addProductModel.toJson());
-    return addProductService.addProduct(addProductModel);
+    return addProductService.addProduct(addProductModel, images);
   }
 
   void setTitle(String title){

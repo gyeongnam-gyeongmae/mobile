@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/model/write_comment_model.dart';
+import 'package:mobile/views/widget/bar/product_detail_appbar.dart';
 import 'package:mobile/views/widget/view_container/post_detail_view.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
@@ -20,7 +21,7 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MainAppbar(),
+        appBar: ProductDetailAppbar(productId: productDetail.id,),
         body: ProductDetailScrollView(
             controller: controller, productDetail: productDetail),
         bottomNavigationBar: MainBottomBar(),

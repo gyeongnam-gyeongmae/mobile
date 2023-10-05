@@ -9,6 +9,7 @@ class MainPost extends StatelessWidget {
   final int start_price;
   final int comment_cnt;
   final int like_cnt;
+  final String image_url;
   const MainPost({
     required this.title,
     required this.name,
@@ -17,6 +18,7 @@ class MainPost extends StatelessWidget {
     required this.start_price,
     required this.comment_cnt,
     required this.like_cnt,
+    required this.image_url,
     Key? key,
   }) : super(key: key);
 
@@ -29,10 +31,12 @@ class MainPost extends StatelessWidget {
         child: InkWell(
           child: Row(
             children: [
-              Container(
-                child: Image.asset('assets/images/test.png',
-                    width: 100, height: 90, fit: BoxFit.cover),
-              ),
+              Container( //이부분은 나중에 고쳐서 조건문 없애도 될듯
+                  child: image_url.isEmpty
+                      ? Image.asset('assets/images/test.png',
+                          width: 100, height: 90, fit: BoxFit.cover)
+                      : Image.network('$image_url',
+                          width:100, height: 90, fit:BoxFit.cover)),
               const SizedBox(width: 10), // 가로 여백 추가
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +65,7 @@ class MainPost extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(post_closed,
+                    Text("마감 $post_closed",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

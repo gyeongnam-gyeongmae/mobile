@@ -73,6 +73,10 @@ class InfiniteScrollController extends GetxController {
     return productDetailModel;
   }
 
+  Future<String> removeProduct(int id) async{
+    return await productDetailService.removeProduct(id);
+  }
+
   void setCategory(String category){
     searchData.category = category;
   }

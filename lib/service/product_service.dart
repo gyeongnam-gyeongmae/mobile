@@ -34,7 +34,6 @@ class ProductService {
     final now = DateTime.now();
     final dateTime = time.add(Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
     final difference = dateTime.difference(now); // 차이 계산
-    print(difference);
     if (difference.inDays >= 1) {
       final days = difference.inDays;
       return '$days일 전';

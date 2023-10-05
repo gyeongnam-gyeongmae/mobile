@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/add_product_controller.dart';
+import 'package:mobile/controller/bottom_bar_controller.dart';
+import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/model/add_product_model.dart';
+import 'package:mobile/model/product_detail_model.dart';
+import 'package:mobile/views/pages/product_detail_page.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/dropdown/category_dropdown.dart';
@@ -14,6 +19,8 @@ import 'package:mobile/views/widget/picker/image_picker_container.dart';
 class PostAddPage extends GetView<AddProductController> {
   PostAddPage({super.key});
   final DatePickerController datePickerController = Get.find<DatePickerController>();
+  final BottomBarController barController = Get.find<BottomBarController>();
+  final InfiniteScrollController scrollController = Get.find<InfiniteScrollController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,7 +164,7 @@ class PostAddPage extends GetView<AddProductController> {
                           ),
                         ],
                       ),
-                      const ImagePickerContainer(),
+                      ImagePickerContainer(),
                     ],
                   ),
                 )),
@@ -172,9 +179,19 @@ class PostAddPage extends GetView<AddProductController> {
                     ),
                     backgroundColor: const Color.fromARGB(255, 156, 119, 248),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
                     controller.setCloseTime(datePickerController.getDate());
-                    controller.AddProduct();
+                    final int id = await controller.AddProduct();
+                    barController.selectedIndex(0);
+                    final ProductDetailModel product = await scrollController.getProductDetail(id);
+                      Get.delete<CommentScrollController>();
+                      CommentScrollController commentScrollcontroller =
+                          Get.put(CommentScrollController(productId: product.id));
+                      await commentScrollcontroller.loadData();
+                      datePickerController.updateDate(null);
+                      datePickerController.updateTime(null);
+                      controller.reset();
+                      Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product));
                   },
                   child: const Text(
                     '판매하기',

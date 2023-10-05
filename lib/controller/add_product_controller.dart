@@ -10,12 +10,20 @@ class AddProductController extends GetxController{
         category: "기타", content: "", 
         closeTime: DateTime.now(), userId: 1);
   
-  List<XFile?> images = [];
+  RxList<XFile?> images = RxList<XFile?>([]);
 
   final AddProductService addProductService = AddProductService();
 
-  Future<String> AddProduct(){
+  Future<int> AddProduct(){
     return addProductService.addProduct(addProductModel, images);
+  }
+
+  void reset(){
+    setTitle("");
+    setPrice(0);
+    setCategory("기타");
+    setContent("");
+    images.clear();
   }
 
   void setTitle(String title){

@@ -22,7 +22,7 @@ class ProductDetailScrollView extends StatelessWidget {
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.74,
-            child: PostDetailView(productDetail: productDetail),
+            child: PostDetailView(productDetail: productDetail,commentCount:controller.count.value),
           ),
           ListView.builder(
             shrinkWrap: true,

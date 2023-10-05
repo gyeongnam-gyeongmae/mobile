@@ -36,16 +36,16 @@ class ProductService {
     final difference = dateTime.difference(now); // 차이 계산
     if (difference.inDays >= 1) {
       final days = difference.inDays;
-      return '$days일 전';
+      return '마감 $days일 전';
     } else if (difference.inHours > 1) {
       final hours = difference.inHours;
-      return '$hours시간 전';
+      return '마감 $hours시간 전';
     } else if (difference.inHours == 1) {
-      return '1시간 전';
+      return '마감 1시간 전';
     } else if (difference.inMinutes >= 1) {
-      return '${difference.inMinutes}분 전';
-    } else {
-      return '방금';
+      return '마감 ${difference.inMinutes}분 전';
+    } else{
+      return '경매 마감';
     }
   }
 }

@@ -158,14 +158,14 @@ class CommentContainer extends GetView<CommentScrollController> {
                   onPressed: () {
                     Navigator.pop(context, 'OK');
                   },
-                  child: Text('OK', style: TextStyle(color: Colors.black)),
+                  child: Text('대댓글 작성하기', style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context, 'CANCEL');
                     },
                     child:
-                        Text('CANCEL', style: TextStyle(color: Colors.black)))
+                        Text('취소', style: TextStyle(color: Colors.black)))
               ],
             ));
   }

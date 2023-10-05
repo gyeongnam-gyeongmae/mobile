@@ -31,12 +31,34 @@ class MainPost extends StatelessWidget {
         child: InkWell(
           child: Row(
             children: [
-              Container( //이부분은 나중에 고쳐서 조건문 없애도 될듯
-                  child: image_url.isEmpty
-                      ? Image.asset('assets/images/test.png',
-                          width: 100, height: 90, fit: BoxFit.cover)
-                      : Image.network('$image_url',
-                          width:100, height: 90, fit:BoxFit.cover)),
+              Stack(
+                children: [
+                  Container(
+                    width: 100,
+                    height: 90,
+                    child: image_url.isEmpty
+                        ? Image.asset('assets/images/test.png',
+                            fit: BoxFit.cover)
+                        : Image.network('$image_url', fit: BoxFit.cover),
+                  ),
+                  if(post_closed == "경매 마감")
+                    Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      color: Colors.black.withOpacity(0.7), // 배경색 및 투명도 조절
+                      child: Text(
+                        "판매완료",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(width: 10), // 가로 여백 추가
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +87,7 @@ class MainPost extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text("마감 $post_closed",
+                    Text("$post_closed",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

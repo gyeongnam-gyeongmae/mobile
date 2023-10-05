@@ -60,7 +60,7 @@ class PostDetailView extends StatelessWidget {
               ],
             ),
           ),
-          CustomPageView(),
+          CustomPageView(images: productDetail.images,),
           Container(
             padding: const EdgeInsets.only(top: 5),
             child: Row(

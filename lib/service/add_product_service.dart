@@ -9,7 +9,7 @@ class AddProductService{
   final String url = 'http://203.241.228.51:5000/api/auctions/';
   final String imageUrl = 'http://203.241.228.51:5000/api/AuctionItem/';
 
-  Future<String> addProduct(AddProductModel product,List<XFile?> images) async{
+  Future<int> addProduct(AddProductModel product,List<XFile?> images) async{
     final response = await http.post(
       Uri.parse(url),
       headers: {
@@ -17,9 +17,12 @@ class AddProductService{
       },
       body: jsonEncode(product.toJson())
     );
-    if(response.statusCode == 201){
-      await uploadImage(images, 31);
-      return "경매품 추가";
+    if(response.statusCode == 200){
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      final int id = responseData['id'];
+      print(id);
+      await uploadImage(images, id);
+      return id;
     }
     else { throw Exception('addProductService 오류');}
   }

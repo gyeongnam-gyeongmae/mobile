@@ -31,22 +31,23 @@ class MainPost extends StatelessWidget {
         child: InkWell(
           child: Row(
             children: [
-              Container( //이부분은 나중에 고쳐서 조건문 없애도 될듯
+              Container(
+                  //이부분은 나중에 고쳐서 조건문 없애도 될듯
                   child: image_url.isEmpty
                       ? Image.asset('assets/images/test.png',
                           width: 100, height: 90, fit: BoxFit.cover)
-                      : Image.network('$image_url',
-                          width:100, height: 90, fit:BoxFit.cover)),
+                      : Image.network(image_url,
+                          width: 100, height: 90, fit: BoxFit.cover)),
               const SizedBox(width: 10), // 가로 여백 추가
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
                   Text(name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey)),
@@ -54,9 +55,9 @@ class MainPost extends StatelessWidget {
                       child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.only(bottom: 10),
                               child: Text(price.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)))))
                 ],
@@ -66,13 +67,13 @@ class MainPost extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text("마감 $post_closed",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(price.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey)),
@@ -86,11 +87,11 @@ class MainPost extends StatelessWidget {
                               onPressed: () {},
                               child: Row(
                                 children: [
-                                  Icon(Icons.person, color: Colors.black),
-                                  SizedBox(width: 5),
+                                  const Icon(Icons.person, color: Colors.black),
+                                  const SizedBox(width: 5),
                                   Text(
                                     comment_cnt.toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   )
                                 ],
                               )),
@@ -99,11 +100,12 @@ class MainPost extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(Icons.favorite, color: Colors.black),
-                                  SizedBox(width: 5),
+                                  const Icon(Icons.favorite,
+                                      color: Colors.black),
+                                  const SizedBox(width: 5),
                                   Text(
                                     like_cnt.toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   )
                                 ],
                               ))

@@ -108,8 +108,14 @@ class _ChattingRomState extends State<ChattingRom> {
                     width: 2,
                   ),
                   const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/kakao.png"),
+                    backgroundColor:
+                        Color.fromARGB(255, 159, 197, 240), // 배경색 설정
                     maxRadius: 20,
+                    child: Icon(
+                      Icons.person, // 사용할 아이콘 선택
+                      size: 30, // 아이콘 크기 설정
+                      color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
+                    ),
                   ),
                   const SizedBox(
                     width: 12,

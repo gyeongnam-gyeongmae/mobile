@@ -23,10 +23,10 @@ class ProductDetailAppbar extends StatelessWidget
       actions: [
         IconButton(
             onPressed: () {
-              Get.to(SearchPage());
+              Get.to(const SearchPage());
             },
-            icon: Icon(Icons.search, color: Colors.grey),
-            padding: EdgeInsets.fromLTRB(0, 8, 0, 0)),
+            icon: const Icon(Icons.search, color: Colors.grey),
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 0)),
         if (userId == 1)
           IconButton(
               onPressed: () {
@@ -39,12 +39,12 @@ class ProductDetailAppbar extends StatelessWidget
                   }
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.red,
                 size: 30,
               ),
-              padding: EdgeInsets.fromLTRB(0, 8, 0, 0))
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 0))
       ],
     );
   }
@@ -53,19 +53,21 @@ class ProductDetailAppbar extends StatelessWidget
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              content: Text("경매를 중단하시겠습니까?"),
+              content: const Text("경매를 중단하시겠습니까?"),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context, 'remove');
                   },
-                  child: Text('삭제하기', style: TextStyle(color: Colors.black)),
+                  child:
+                      const Text('삭제하기', style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context, 'cancel');
                     },
-                    child: Text('취소', style: TextStyle(color: Colors.black)))
+                    child:
+                        const Text('취소', style: TextStyle(color: Colors.black)))
               ],
             ));
   }

@@ -17,17 +17,14 @@ class ProductDetailPage extends StatelessWidget {
   final CommentScrollController controller;
   final textEditingController = TextEditingController();
 
-  ProductDetailPage(
-      {super.key, required this.controller, required this.productDetail});
+  ProductDetailPage({required this.controller, required this.productDetail});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ProductDetailAppbar(
-          productId: productDetail.id,
-        ),
+        appBar: ProductDetailAppbar(productId: productDetail.id,),
         body: ProductDetailScrollView(
             controller: controller, productDetail: productDetail),
-        bottomNavigationBar: const MainBottomBar(),
+        bottomNavigationBar: MainBottomBar(),
         bottomSheet: GetBuilder<CommentScrollController>(builder: (controller) {
           return Container(
             height: 50,
@@ -38,16 +35,16 @@ class ProductDetailPage extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(8.0), // 테두리 모서리 둥글기 설정
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            margin: const EdgeInsets.only(right: 13, left: 13),
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            margin: EdgeInsets.only(right: 13, left: 13),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 15,
                   backgroundImage:
                       AssetImage('assets/images/kakao.png'), // 이미지 파일의 경로
                 ),
-                const SizedBox(width: 12), // 이미지와 텍스트 입력 칸 사이의 간격 조절
+                SizedBox(width: 12), // 이미지와 텍스트 입력 칸 사이의 간격 조절
                 Expanded(child: Obx(() {
                   textEditingController.text = controller.editCommentText.value;
                   return TextField(
@@ -61,21 +58,22 @@ class ProductDetailPage extends StatelessWidget {
                 })),
                 IconButton(
                   // 오른쪽에 아이콘
-                  icon: const Icon(Icons.send), // 아이콘 지정
+                  icon: Icon(Icons.send), // 아이콘 지정
                   onPressed: () async {
-                    if (controller.sendMode == 'add') {
+                    if(controller.sendMode == 'add'){
                       await controller.writeComment(
-                          // content, productid, userid
-                          textEditingController.text,
-                          productDetail.id,
-                          1);
-                    } else if (controller.sendMode == 'edit') {
-                      await controller.editComment(textEditingController.text);
+                        // content, productid, userid
+                        textEditingController.text, productDetail.id, 1);
+                    }
+                    else if(controller.sendMode == 'edit'){
+                      await controller.editComment(
+                        textEditingController.text);
                     }
                     controller.textFocus.unfocus();
                     controller.editCommentText.value = "";
                     controller.reload();
                     textEditingController.text = '';
+                    
                   },
                 ),
               ],

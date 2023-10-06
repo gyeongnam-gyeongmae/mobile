@@ -1,21 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile/controller/add_product_controller.dart';
 
-class ImagePickerContainer extends StatefulWidget {
-  const ImagePickerContainer({super.key});
-
-  @override
-  State<ImagePickerContainer> createState() => _ImagePickerContainerState();
-}
-
-final picker = ImagePicker();
-XFile? image;
-List<XFile?> multiImage = [];
-List<XFile?> images = [];
-
-class _ImagePickerContainerState extends State<ImagePickerContainer> {
+class ImagePickerContainer extends GetView<AddProductController> {
+  final picker = ImagePicker();
+  XFile? image;
+  List<XFile?> multiImage = [];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,9 +36,8 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                               source: ImageSource.camera);
                           //카메라로 촬영하지 않고 뒤로가기 버튼을 누를 경우, null값이 저장되므로 if문을 통해 null이 아닐 경우에만 images변수로 저장하도록 합니다
                           if (image != null) {
-                            setState(() {
-                              images.add(image);
-                            });
+                            controller.images.add(image);
+                            controller.update();
                           }
                         },
                         icon: const Icon(
@@ -70,10 +62,8 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                     child: IconButton(
                         onPressed: () async {
                           multiImage = await picker.pickMultiImage();
-                          setState(() {
-                            //갤러리에서 가지고 온 사진들은 리스트 변수에 저장되므로 addAll()을 사용해서 images와 multiImage 리스트를 합쳐줍니다.
-                            images.addAll(multiImage);
-                          });
+                          controller.images.addAll(multiImage);
+                          controller.update();
                         },
                         icon: const Icon(Icons.add_photo_alternate_outlined,
                             size: 30, color: Colors.white))),
@@ -81,11 +71,12 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
             ),
             Container(
               margin: const EdgeInsets.all(10),
-              child: GridView.builder(
+              child: Obx(() {
+                return GridView.builder(
                 padding: const EdgeInsets.all(0),
                 shrinkWrap: true,
                 itemCount:
-                    images.length, //보여줄 item 개수. images 리스트 변수에 담겨있는 사진 수 만큼.
+                    controller.images.length, //보여줄 item 개수. images 리스트 변수에 담겨있는 사진 수 만큼.
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, //1 개의 행에 보여줄 사진 개수
                   childAspectRatio: 1 / 1, //사진 의 가로 세로의 비율
@@ -102,7 +93,7 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                             borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(
                                 fit: BoxFit.cover, //사진을 크기를 상자 크기에 맞게 조절
-                                image: FileImage(File(images[index]!
+                                image: FileImage(File(controller.images[index]!
                                         .path // images 리스트 변수 안에 있는 사진들을 순서대로 표시함
                                     )))),
                       ),
@@ -119,15 +110,16 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                                 color: Colors.white, size: 15),
                             onPressed: () {
                               //버튼을 누르면 해당 이미지가 삭제됨
-                              setState(() {
-                                images.remove(images[index]);
-                              });
+                              controller.images
+                                  .remove(controller.images[index]);
+                              controller.update();
                             },
                           ))
                     ],
                   );
                 },
-              ),
+              );
+              })
             ),
           ],
         ));

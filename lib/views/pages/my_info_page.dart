@@ -51,7 +51,7 @@ class MyInfoPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                const ImagePickerContainer(),
+                ImagePickerContainer(),
                 const Text(
                   "닉네임",
                   style: TextStyle(

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:mobile/controller/add_product_controller.dart';
+
 import 'package:mobile/controller/bottom_bar_controller.dart';
+import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
 import 'package:mobile/controller/dropdown_controller.dart';
 import 'package:mobile/controller/homeController.dart';
@@ -25,6 +26,8 @@ class AppBinding extends Bindings {
             search_time: true,
             like: true,
             search_price: true));
+    final commentScrollController = CommentScrollController(productId: 3);
+
     final homeController = HomeController();
     final tabbarController = TabbarController();
     final sellProductController = SellProductController();
@@ -32,9 +35,12 @@ class AppBinding extends Bindings {
     final dropdownController = DropdownController();
     final bottomBarController = BottomBarController();
     final datePickerController = DatePickerController();
+
     final addProductController = AddProductController();
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
+
+    Get.put(commentScrollController);
 
     Get.put(addProductController);
     Get.put(datePickerController);

@@ -18,4 +18,14 @@ class ProductDetailService{
         throw Exception('ProductDetailService 오류발생');
       }
     }
+
+    Future<String> removeProduct(int id) async{
+      final response = await http.delete(Uri.parse('$baseUrl/$id'));
+
+      if(response.statusCode == 200){
+        return "삭제 성공";
+      } else {
+        throw Exception('ProductDetailService 삭제 오류발생');
+      }
+    }
 }

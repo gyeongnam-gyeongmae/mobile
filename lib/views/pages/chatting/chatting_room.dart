@@ -133,6 +133,8 @@ class _ChattingRomState extends State<ChattingRom> {
                       ],
                     ),
                   ),
+                  /*
+                  */
                   const Icon(
                     Icons.settings,
                     color: Colors.black54,

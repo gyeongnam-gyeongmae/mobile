@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/add_product_controller.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
-import 'package:mobile/model/add_product_model.dart';
+
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/dropdown/category_dropdown.dart';
@@ -13,7 +13,8 @@ import 'package:mobile/views/widget/picker/image_picker_container.dart';
 
 class PostAddPage extends GetView<AddProductController> {
   PostAddPage({super.key});
-  final DatePickerController datePickerController = Get.find<DatePickerController>();
+  final DatePickerController datePickerController =
+      Get.find<DatePickerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +37,12 @@ class PostAddPage extends GetView<AddProductController> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Container(
+                      SizedBox(
                         width: (MediaQuery.of(context).size.width) - 30,
                         child: TextField(
-                          inputFormatters: [LengthLimitingTextInputFormatter(15)],
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(15)
+                          ],
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 6, horizontal: 7),
@@ -77,7 +80,7 @@ class PostAddPage extends GetView<AddProductController> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Container(
+                      SizedBox(
                         width: (MediaQuery.of(context).size.width) - 30,
                         child: TextField(
                           decoration: const InputDecoration(
@@ -131,7 +134,7 @@ class PostAddPage extends GetView<AddProductController> {
                             padding: const EdgeInsets.only(left: 13),
                             width: (MediaQuery.of(context).size.width) / 3.5,
                             child: CategoryDropdown(
-                                categories: ['의류', '디지털', '가구', '기타']),
+                                categories: const ['의류', '디지털', '가구', '기타']),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -139,7 +142,7 @@ class PostAddPage extends GetView<AddProductController> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             width: (MediaQuery.of(context).size.width) / 1.8,
-                            child: const TextField(
+                            child: TextField(
                               keyboardType: TextInputType.number,
                               textDirection: TextDirection.rtl,
                               style: const TextStyle(fontSize: 20),
@@ -189,7 +192,7 @@ class PostAddPage extends GetView<AddProductController> {
               )
             ],
           )),
-      bottomNavigationBar: MainBottomBar(),
+      bottomNavigationBar: const MainBottomBar(),
     );
   }
 }

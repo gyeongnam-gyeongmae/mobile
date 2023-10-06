@@ -10,20 +10,24 @@ import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 class PostDetailPage extends StatelessWidget {
   final ProductDetailModel productDetail = Get.arguments;
 
-  String changeDifTime(){
+  PostDetailPage({super.key});
+
+  String changeDifTime() {
     DateTime now = DateTime.now();
     int days = productDetail.closedTime.difference(now).inDays;
     int hours = productDetail.closedTime.difference(now).inHours % 24;
     int minutes = productDetail.closedTime.difference(now).inMinutes % 60;
-    String difTime ='';
-    if (days > 0) difTime+=' ${days}d';
-    if (hours > 0) difTime+=' ${hours}h';
-    if(minutes > 0) difTime+=' ${minutes}m';
-    return '-' + difTime;
+    String difTime = '';
+    if (days > 0) difTime += ' ${days}d';
+    if (hours > 0) difTime += ' ${hours}h';
+    if (minutes > 0) difTime += ' ${minutes}m';
+    return '-$difTime';
   }
+
   @override
   Widget build(BuildContext context) {
-    String startDate = DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime);
+    String startDate =
+        DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime);
     return Scaffold(
       appBar: const MainAppbar(),
       body: Padding(
@@ -31,11 +35,12 @@ class PostDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: Text("${productDetail.name}",
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
+              child: Text(productDetail.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800, fontSize: 23)),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
                   Expanded(
@@ -43,7 +48,7 @@ class PostDetailPage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "작성자: ${productDetail.nickname}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w400),
                       ),
                     ),
@@ -51,9 +56,9 @@ class PostDetailPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "$startDate",
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                      startDate,
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.w400),
                     ),
                   )
                 ],
@@ -72,17 +77,17 @@ class PostDetailPage extends StatelessWidget {
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "시작가",
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
                                 "${productDetail.price}",
-                                style: TextStyle(fontSize: 17),
+                                style: const TextStyle(fontSize: 17),
                               )
                             ],
                           ),
@@ -97,17 +102,17 @@ class PostDetailPage extends StatelessWidget {
                             fixedSize: Size(
                                 (MediaQuery.of(context).size.width) / 2.5, 50)),
                         onPressed: () {},
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "현재가",
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
                                 "${productDetail.price}",
-                                style: TextStyle(fontSize: 17),
+                                style: const TextStyle(fontSize: 17),
                               )
                             ],
                           ),
@@ -121,9 +126,9 @@ class PostDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      padding: EdgeInsets.only(top: 15, left: 15),
-                      child: Text("${productDetail.content}",
-                          style: TextStyle(
+                      padding: const EdgeInsets.only(top: 15, left: 15),
+                      child: Text(productDetail.content,
+                          style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w500),
                           softWrap: true))
                 ],
@@ -139,11 +144,11 @@ class PostDetailPage extends StatelessWidget {
                         onPressed: () {},
                         child: Row(
                           children: [
-                            Icon(Icons.person, color: Colors.black),
-                            SizedBox(width: 5),
+                            const Icon(Icons.person, color: Colors.black),
+                            const SizedBox(width: 5),
                             Text(
                               "${productDetail.viewCount}",
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             )
                           ],
                         )),
@@ -151,11 +156,11 @@ class PostDetailPage extends StatelessWidget {
                         onPressed: () {},
                         child: Row(
                           children: [
-                            Icon(Icons.chat, color: Colors.black),
-                            SizedBox(width: 5),
+                            const Icon(Icons.chat, color: Colors.black),
+                            const SizedBox(width: 5),
                             Text(
                               "${productDetail.viewCount}",
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             )
                           ],
                         )),
@@ -164,11 +169,11 @@ class PostDetailPage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Icon(Icons.favorite, color: Colors.black),
-                            SizedBox(width: 5),
+                            const Icon(Icons.favorite, color: Colors.black),
+                            const SizedBox(width: 5),
                             Text(
                               "${productDetail.likeCount}",
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             )
                           ],
                         )),
@@ -178,7 +183,8 @@ class PostDetailPage extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Text(
                     changeDifTime(),
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

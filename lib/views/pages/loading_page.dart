@@ -28,11 +28,11 @@ class _LoadingPageState extends State<LoadingPage> {
     Future.delayed(const Duration(seconds: 1), () async {
       final prefs = await SharedPreferences.getInstance();
       final cookie = prefs.getString("JSESSIONID");
-      // if (cookie != null) {
-      //  Get.to(() => MainPage());
-      //} else {
-      Get.to(() => LoginPage());
-      //}
+      if (cookie != null) {
+        Get.to(() => const MainPage());
+      } else {
+        Get.to(() => LoginPage());
+      }
     });
   }
 

@@ -40,10 +40,17 @@ class ChattingWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start, // 왼쪽 정렬
                 children: [
                   const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/kakao.png"),
-                    maxRadius: 25,
+                    backgroundColor:
+                        Color.fromARGB(255, 159, 197, 240), // 배경색 설정
+                    maxRadius: 20,
+                    child: Icon(
+                      Icons.person, // 사용할 아이콘 선택
+                      size: 30, // 아이콘 크기 설정
+                      color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
+                    ),
                   ),
                   const SizedBox(
                     width: 16,
@@ -52,6 +59,8 @@ class ChattingWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Column(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.start, // 내용 왼쪽 정렬
                           children: [
                             Text(
                               user,

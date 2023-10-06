@@ -51,15 +51,46 @@ class MyInfoPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                ImagePickerContainer(),
-                const Text(
-                  "닉네임",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color.fromARGB(255, 249, 249, 249), // 버튼의 배경색
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(45.0), // 버튼을 둥글게 만듦
+                    ),
+                    minimumSize: const Size(
+                        40.0, 40.0), // 버튼의 최소 크기를 CircleAvatar 크기로 지정
+                    side: const BorderSide(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        width: 1.0), // 테두리 색상과 너비 설정
+                  ),
+                  onPressed: () {
+                    // 버튼 클릭 시 다이얼로그 표시
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ImagePickerDialog(); // ImagePickerDialog 표시
+                      },
+                    );
+                  },
+                  child: Container(
+                    width: 80, // 버튼의 너비 설정
+                    height: 80, // 버튼의 높이 설정
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle, // 원 모양의 버튼
+                      color: const Color.fromARGB(255, 159, 197, 240), // 배경색 설정
+                      border: Border.all(
+                        color: Colors.white, // 테두리 색상
+                        width: 2.0, // 테두리 두께
+                      ),
+                    ),
+                    child: const CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/person.jpg"),
+                      maxRadius: 20,
+                    ),
                   ),
                 ),
+
                 const SizedBox(
                   height: 20,
                 ),
@@ -85,6 +116,24 @@ class MyInfoPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ImagePickerDialog extends StatelessWidget {
+  const ImagePickerDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('사진'),
+      actions: [
+        SizedBox(
+          width: 200,
+          height: 90,
+          child: ImagePickerContainer(),
+        )
+      ],
     );
   }
 }

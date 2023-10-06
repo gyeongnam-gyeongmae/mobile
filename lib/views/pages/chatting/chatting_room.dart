@@ -108,7 +108,7 @@ class _ChattingRomState extends State<ChattingRom> {
                     width: 2,
                   ),
                   const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/kakao.png"),
+                    backgroundImage: AssetImage("assets/images/person.jpg"),
                     maxRadius: 20,
                   ),
                   const SizedBox(

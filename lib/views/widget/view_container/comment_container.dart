@@ -11,7 +11,7 @@ class CommentContainer extends GetView<CommentScrollController> {
   final int commentId;
   final int commentCount;
   final DateTime createdAt;
-  CommentContainer(
+  const CommentContainer(
       {required this.commentId,
       required this.userId,
       required this.content,
@@ -29,11 +29,11 @@ class CommentContainer extends GetView<CommentScrollController> {
       if (end > content.length) {
         end = content.length;
       }
-      contentText += content.substring(i, end) + '\n';
+      contentText += '${content.substring(i, end)}\n';
     }
     return Container(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(color: Colors.grey), // 아래쪽 라인
           ),
@@ -42,19 +42,27 @@ class CommentContainer extends GetView<CommentScrollController> {
           children: [
             Row(
               children: [
-                //이미지 들어가야할 자리
+                const CircleAvatar(
+                  backgroundColor: Color.fromARGB(255, 159, 197, 240), // 배경색 설정
+                  maxRadius: 10,
+                  child: Icon(
+                    Icons.person, // 사용할 아이콘 선택
+                    size: 20, // 아이콘 크기 설정
+                    color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
+                  ),
+                ),
                 Text(nickName,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                         color: Colors.black)),
-                SizedBox(width: 7),
+                const SizedBox(width: 7),
                 Text(formatTimeAgo(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   onPressed: () {
                     //1대신에 쿠키의 유저 아이디 비교하기
@@ -82,7 +90,7 @@ class CommentContainer extends GetView<CommentScrollController> {
                       });
                     }
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.keyboard_control_sharp,
                     color: Colors.black,
                     size: 25,
@@ -94,7 +102,7 @@ class CommentContainer extends GetView<CommentScrollController> {
               children: [
                 Flexible(
                     child: Container(
-                  padding: EdgeInsets.only(top: 3),
+                  padding: const EdgeInsets.only(top: 3),
                   child: Text(contentText, softWrap: true),
                 ))
               ],
@@ -106,17 +114,17 @@ class CommentContainer extends GetView<CommentScrollController> {
                     onPressed: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.chat, color: Colors.black, size: 20),
-                        SizedBox(width: 5),
+                        const Icon(Icons.chat, color: Colors.black, size: 20),
+                        const SizedBox(width: 5),
                         Text(
                           commentCount.toString(),
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         )
                       ],
                     )),
                 TextButton(
                     onPressed: () {},
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.favorite, color: Colors.black, size: 18),
                         SizedBox(width: 5),
@@ -133,20 +141,21 @@ class CommentContainer extends GetView<CommentScrollController> {
   }
 
   String formatTimeAgo() {
-  final now = DateTime.now();
-  final dateTime = createdAt.add(Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
-  final difference = now.difference(dateTime); // 차이 계산
-  if (difference.inDays >= 1) {
-    return DateFormat('d일 전').format(dateTime);
-  } else if (difference.inHours > 1) {
-    return DateFormat('H시간 전').format(dateTime);
-  } else if (difference.inHours == 1) {
-    return '1시간 전';
-  } else if (difference.inMinutes >= 1) {
-    return '${difference.inMinutes}분 전';
-  } else {
-    return '방금';
-  }
+    final now = DateTime.now();
+    final dateTime =
+        createdAt.add(const Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
+    final difference = now.difference(dateTime); // 차이 계산
+    if (difference.inDays >= 1) {
+      return DateFormat('d일 전').format(dateTime);
+    } else if (difference.inHours > 1) {
+      return DateFormat('H시간 전').format(dateTime);
+    } else if (difference.inHours == 1) {
+      return '1시간 전';
+    } else if (difference.inMinutes >= 1) {
+      return '${difference.inMinutes}분 전';
+    } else {
+      return '방금';
+    }
   }
 
   Future<dynamic> _bigCommentDialog(BuildContext context) {
@@ -181,13 +190,13 @@ class CommentContainer extends GetView<CommentScrollController> {
                     onPressed: () {
                       Navigator.pop(context, 'add');
                     },
-                    child: Text('대댓글 작성하기',
+                    child: const Text('대댓글 작성하기',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
                   ),
-                  Divider(
+                  const Divider(
                     height: 0,
                     color: Colors.grey,
                   ),
@@ -195,13 +204,13 @@ class CommentContainer extends GetView<CommentScrollController> {
                     onPressed: () {
                       Navigator.pop(context, 'edit');
                     },
-                    child: Text('댓글 수정하기',
+                    child: const Text('댓글 수정하기',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
                   ),
-                  Divider(
+                  const Divider(
                     height: 0,
                     color: Colors.grey,
                   ),
@@ -209,7 +218,7 @@ class CommentContainer extends GetView<CommentScrollController> {
                       onPressed: () {
                         Navigator.pop(context, 'remove');
                       },
-                      child: Text('댓글 삭제하기',
+                      child: const Text('댓글 삭제하기',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,

@@ -58,27 +58,12 @@ class JoinController extends GetxController {
     }
   }
 
-/*
-  Future<void> registerUser({
-    required String vendorAccessToken,
-    required String phoneNumber,
-    required String phoneAuthenticationCode,
-    required String password,
-  }) async {
+  void profile() async {
     try {
-      final user = await joinService.registerUser(
-        vendorAccessToken: vendorAccessToken,
-        phoneNumber: phoneNumber,
-        phoneAuthenticationCode: phoneAuthenticationCode,
-        password: password,
-      );
-
-      // 성공적으로 회원 가입한 사용자 정보를 출력
-      print('회원 가입 성공 - 사용자 정보: ${user.username}, ${user.email}');
+      await joinService.profile();
     } catch (e) {
-      // 오류 처리
-      print('회원 가입 오류 - $e');
+      // 예외 처리
+      print('Error: $e');
     }
   }
-*/
 }

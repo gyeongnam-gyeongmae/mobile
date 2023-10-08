@@ -64,11 +64,11 @@ class MainPost extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
                   Text(name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey)),
@@ -76,9 +76,9 @@ class MainPost extends StatelessWidget {
                       child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.only(bottom: 10),
                               child: Text(price.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)))))
                 ],
@@ -92,9 +92,9 @@ class MainPost extends StatelessWidget {
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(price.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey)),
@@ -108,11 +108,11 @@ class MainPost extends StatelessWidget {
                               onPressed: () {},
                               child: Row(
                                 children: [
-                                  Icon(Icons.person, color: Colors.black),
-                                  SizedBox(width: 5),
+                                  const Icon(Icons.person, color: Colors.black),
+                                  const SizedBox(width: 5),
                                   Text(
                                     comment_cnt.toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   )
                                 ],
                               )),
@@ -121,11 +121,12 @@ class MainPost extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(Icons.favorite, color: Colors.black),
-                                  SizedBox(width: 5),
+                                  const Icon(Icons.favorite,
+                                      color: Colors.black),
+                                  const SizedBox(width: 5),
                                   Text(
                                     like_cnt.toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   )
                                 ],
                               ))

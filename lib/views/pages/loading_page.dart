@@ -12,7 +12,6 @@ import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 // LoginPage 클래스가 있는 파일을 import 합니다.
 
 class LoadingPage extends StatefulWidget {

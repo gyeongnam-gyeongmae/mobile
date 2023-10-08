@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
   @override
   Widget build(BuildContext context) {
+    final JoinController joinController = Get.find<JoinController>();
+    joinController.profile();
     Get.delete<InfiniteScrollController>();
     InfiniteScrollController controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
       keyword: "", category: "",

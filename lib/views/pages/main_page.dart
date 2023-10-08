@@ -13,9 +13,9 @@ class MainPage extends StatelessWidget {
     Get.delete<InfiniteScrollController>();
     InfiniteScrollController controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
       keyword: "", category: "",
-      nick_name: "", closed: false,
+      nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true)));
+      search_price: true, basic: true)));
     return Scaffold(
       appBar: const MainAppbar(),
       body: Column(

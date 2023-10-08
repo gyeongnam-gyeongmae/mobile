@@ -9,6 +9,7 @@ import 'package:mobile/controller/homeController.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
+import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
 
@@ -18,9 +19,9 @@ class AppBinding extends Bindings{
   void dependencies(){
     final infinitescrollController = InfiniteScrollController(searchData: ProductSearchModel(
       keyword: "", category: "",
-      nick_name: "", closed: false,
+      nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true));
+      search_price: true, basic: true));
     final commentScrollController = CommentScrollController(productId: 3);
     final homeController = HomeController();
     final tabbarController = TabbarController();
@@ -30,7 +31,9 @@ class AppBinding extends Bindings{
     final bottomBarController = BottomBarController();
     final datePickerController = DatePickerController();
     final addProductController = AddProductController();
+    final ssePriceController = SsePriceController();
 
+    Get.put(ssePriceController);
     Get.put(commentScrollController);
     Get.put(addProductController);
     Get.put(datePickerController);

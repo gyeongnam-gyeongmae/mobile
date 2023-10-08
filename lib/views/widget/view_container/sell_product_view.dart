@@ -13,9 +13,9 @@ class SellProductView extends GetView<SellProductController> {
     Get.delete<InfiniteScrollController>();
     scrollController = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
       keyword: "", category: "",
-      nick_name: "", closed: false,
+      nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true)));
+      search_price: true, basic: false)));
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),

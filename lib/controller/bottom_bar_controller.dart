@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/views/pages/chatting/chatting.dart';
@@ -9,7 +10,7 @@ import 'package:mobile/views/pages/search_result_page.dart';
 class BottomBarController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
-  void changePage(int index) {
+  void changePage(int index){
     selectedIndex.value = index;
     switch (index) {
       case 0:

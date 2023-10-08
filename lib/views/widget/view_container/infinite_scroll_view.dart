@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import "package:mobile/controller/comment_scroll_controller.dart";
 
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 
 import 'package:mobile/views/widget/view_container/main_post.dart';
@@ -33,6 +34,7 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                       CommentScrollController commentScrollcontroller =
                           Get.put(CommentScrollController(productId: product.id));
                       await commentScrollcontroller.loadData();
+                      Get.find<SsePriceController>().setPrice(controller.data[index].now_price);
                       Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product));
                     }),
                     child: MainPost(

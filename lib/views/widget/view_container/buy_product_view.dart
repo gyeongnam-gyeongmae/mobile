@@ -11,9 +11,9 @@ class BuyProductView extends StatelessWidget {
     Get.delete<InfiniteScrollController>();
     controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
       keyword: "", category: "",
-      nick_name: "", closed: false,
+      nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true)));
+      search_price: true,basic: false)));
     return Container(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(

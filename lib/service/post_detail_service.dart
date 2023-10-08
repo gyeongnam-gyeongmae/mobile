@@ -57,6 +57,7 @@ class ProductDetailService {
       }
       print(sessionValue);
       print(cookie);
+      print(price);
 
       final uri = Uri.parse("http://203.241.228.51:5000");
       final sessionCookie = Cookie('SESSION', sessionValue);
@@ -76,12 +77,13 @@ class ProductDetailService {
             'Content-Type': 'application/json',
             'Cookie': cookieHeader,
           },
-          body: jsonEncode(jsonEncode({'price': price})));
+          body: jsonEncode({'price': price}));
       if (response.statusCode == 201) {
         print("입찰됨");
         return "입찰성공";
       } else
         print(response.statusCode);
+        print(response.body);
     } catch (e) {
       print("addProductService addPrice 오류 $e");
     }

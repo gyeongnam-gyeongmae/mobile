@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
-import 'package:mobile/model/product_item.dart';
-import 'package:mobile/views/widget/bar/main_appbar.dart';
-import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
-class PostDetailView extends StatelessWidget {
+class PostDetailView extends GetView<InfiniteScrollController> {
   final ProductDetailModel productDetail;
-  PostDetailView({required this.productDetail, super.key});
+  final SsePriceController priceController = Get.find<SsePriceController>();
+  final int commentCount;
+  PostDetailView({required this.productDetail, required this.commentCount});
 
   String changeDifTime() {
     DateTime now = DateTime.now();
     DateTime dateTime = productDetail.closedTime.add(Duration(hours: 9));
-    int days = dateTime.difference(now).inDays;
-    int hours = dateTime.difference(now).inHours % 24;
-    int minutes = dateTime.difference(now).inMinutes % 60;
+    bool isNegative = dateTime.difference(now).isNegative;
+    int days = dateTime.difference(now).inDays.abs();
+    int hours = (dateTime.difference(now).inHours % 24).abs();
+    int minutes = (dateTime.difference(now).inMinutes % 60).abs();
     String difTime = '';
+    String negative = isNegative ? "+ " : "- ";
+    difTime += negative;
     if (days > 0) difTime += ' ${days}d';
     if (hours > 0) difTime += ' ${hours}h';
     if (minutes > 0) difTime += ' ${minutes}m';
-    return '-' + difTime;
+    return difTime;
   }
 
   @override
   Widget build(BuildContext context) {
-    String startDate =
-        DateFormat('yyyy-MM-dd HH:mm').format(productDetail.createdTime.add(Duration(hours: 9)));
+    int likeCountState = productDetail.likeCount;
+    String startDate = DateFormat('yyyy-MM-dd HH:mm')
+        .format(productDetail.createdTime.add(Duration(hours: 9)));
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
       child: Column(
@@ -60,7 +65,9 @@ class PostDetailView extends StatelessWidget {
               ],
             ),
           ),
-          CustomPageView(images: productDetail.images,),
+          CustomPageView(
+            images: productDetail.images,
+          ),
           Container(
             padding: const EdgeInsets.only(top: 5),
             child: Row(
@@ -91,29 +98,30 @@ class PostDetailView extends StatelessWidget {
                 ),
                 Expanded(
                     child: Align(
-                  alignment: Alignment.centerRight,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFD7575),
-                          fixedSize: Size(
-                              (MediaQuery.of(context).size.width) / 2.5, 50)),
-                      onPressed: () {},
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "현재가",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            Text(
-                              "${productDetail.price}",
-                              style: TextStyle(fontSize: 17),
-                            )
-                          ],
-                        ),
-                      )),
-                ))
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFFD7575),
+                                fixedSize: Size(
+                                    (MediaQuery.of(context).size.width) / 2.5,
+                                    50)),
+                            onPressed: () {},
+                            child: Center(child: Obx(() {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "현재가",
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    //priceController.price
+                                    "${priceController.price}",
+                                    style: TextStyle(fontSize: 17),
+                                  )
+                                ],
+                              );
+                            })))))
               ],
             ),
           ),
@@ -121,7 +129,7 @@ class PostDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 90,
+                  height: 90,
                   padding: EdgeInsets.only(top: 15, left: 15),
                   child: Text("${productDetail.content}",
                       style:
@@ -154,24 +162,36 @@ class PostDetailView extends StatelessWidget {
                           Icon(Icons.chat, color: Colors.black),
                           SizedBox(width: 5),
                           Text(
-                            "${productDetail.viewCount}",
+                            "${commentCount}",
                             style: TextStyle(color: Colors.black),
                           )
                         ],
                       )),
-                  TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(Icons.favorite, color: Colors.black),
-                          SizedBox(width: 5),
-                          Text(
-                            "${productDetail.likeCount}",
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
+                  Obx(() {
+                    return TextButton(
+                        onPressed: () async {
+                          controller.isLike.value = !controller.isLike.value;
+                          await controller.changeLike(1);
+                          if (controller.isLike == true) {
+                            likeCountState++;
+                          } else
+                            likeCountState--;
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            controller.isLike.value
+                                ? Icon(Icons.favorite, color: Colors.red)
+                                : Icon(Icons.favorite_outline,
+                                    color: Colors.black),
+                            SizedBox(width: 5),
+                            Text(
+                              "$likeCountState",
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        ));
+                  })
                 ],
               )),
               Align(
@@ -192,7 +212,15 @@ class PostDetailView extends StatelessWidget {
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
-                  onPressed: () {},
+                  onPressed: () {
+                    _PriceDialog(context, productDetail.price + 100)
+                        .then((value) {
+                      if (value == 'OK') {
+                        controller.addPrice(productDetail.id,
+                            productDetail.price + 100); //id, price
+                      }
+                    });
+                  },
                   child: const Text('+100')),
             ),
             SizedBox(
@@ -203,7 +231,15 @@ class PostDetailView extends StatelessWidget {
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
-                  onPressed: () {},
+                  onPressed: () {
+                    _PriceDialog(context, productDetail.price + 1000)
+                        .then((value) {
+                      if (value == 'OK') {
+                        controller.addPrice(productDetail.id,
+                            productDetail.price + 1000); //id, price
+                      }
+                    });
+                  },
                   child: const Text('+1000')),
             ),
             SizedBox(
@@ -214,12 +250,42 @@ class PostDetailView extends StatelessWidget {
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
-                  onPressed: () {},
+                  onPressed: () {
+                    _PriceDialog(context, productDetail.price + 10000)
+                        .then((value) {
+                      if (value == 'OK') {
+                        controller.addPrice(productDetail.id,
+                            productDetail.price + 10000); //id, price
+                      }
+                    });
+                  },
                   child: const Text('+10000')),
             ),
           ]),
         ],
       ),
     );
+  }
+
+  Future<dynamic> _PriceDialog(BuildContext context, int price) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text('입찰하기'),
+              content: Text('$price원에 입찰하겠습니까?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'OK');
+                  },
+                  child: Text('입찰', style: TextStyle(color: Colors.black)),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'CANCEL');
+                    },
+                    child: Text('취소', style: TextStyle(color: Colors.black)))
+              ],
+            ));
   }
 }

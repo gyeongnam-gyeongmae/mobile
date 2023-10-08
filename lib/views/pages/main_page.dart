@@ -14,15 +14,11 @@ class MainPage extends StatelessWidget {
     final JoinController joinController = Get.find<JoinController>();
     joinController.profile();
     Get.delete<InfiniteScrollController>();
-    InfiniteScrollController controller = Get.put(InfiniteScrollController(
-        searchData: ProductSearchModel(
-            keyword: "",
-            category: "",
-            nick_name: "",
-            closed: false,
-            search_time: true,
-            like: true,
-            search_price: true)));
+    InfiniteScrollController controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
+      keyword: "", category: "",
+      nick_name: "", closed: "ALL",
+      search_time: true, like: true,
+      search_price: true, basic: true)));
     return Scaffold(
       appBar: const MainAppbar(),
       body: Column(

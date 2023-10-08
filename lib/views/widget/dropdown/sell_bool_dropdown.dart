@@ -34,9 +34,9 @@ class SellBoolDropdown extends GetView<DropdownController> {
               controller.setSellItem(value.toString());
               int index = items.indexOf(value.toString());
               if(index == 0) {
-                controller.setSellBool(true);
+                controller.setSellBool("OPEN");
               } else {
-                controller.setSellBool(false);
+                controller.setSellBool("CLOSED");
               }
               // //나중에 이건 번호순으로 보내줘야할 수도 있음
             },

@@ -32,7 +32,8 @@ class SearchResultPage extends StatelessWidget {
                               closed: dropdownController.sellBool.value,
                               search_time: true,
                               like: dropdownController.popularBool.value,
-                              search_price: dropdownController.priceBool.value
+                              search_price: dropdownController.priceBool.value,
+                              basic: false
                               )));
         return Column(
         children: [

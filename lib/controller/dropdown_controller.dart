@@ -8,7 +8,7 @@ class DropdownController extends GetxController {
   RxBool priceBool = true.obs;
 
   RxString sellItem = '판매중'.obs;
-  RxBool sellBool = true.obs;
+  RxString sellBool = "OPEN".obs;
 
   RxString categoryItem = '기타'.obs;
 
@@ -32,7 +32,7 @@ class DropdownController extends GetxController {
     sellItem.value = item;
   }
 
-  void setSellBool(bool result){
+  void setSellBool(String result){
     sellBool.value = result;
   }
 

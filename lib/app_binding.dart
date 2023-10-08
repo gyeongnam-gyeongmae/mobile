@@ -11,21 +11,18 @@ import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/controller/map_controller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
+import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
 
 class AppBinding extends Bindings {
   @override
-  void dependencies() {
-    final infinitescrollController = InfiniteScrollController(
-        searchData: ProductSearchModel(
-            keyword: "",
-            category: "",
-            nick_name: "",
-            closed: false,
-            search_time: true,
-            like: true,
-            search_price: true));
+  void dependencies(){
+    final infinitescrollController = InfiniteScrollController(searchData: ProductSearchModel(
+      keyword: "", category: "",
+      nick_name: "", closed: "ALL",
+      search_time: true, like: true,
+      search_price: true, basic: true));
     final commentScrollController = CommentScrollController(productId: 3);
 
     final homeController = HomeController();
@@ -37,9 +34,11 @@ class AppBinding extends Bindings {
     final datePickerController = DatePickerController();
 
     final addProductController = AddProductController();
+    final ssePriceController = SsePriceController();
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
 
+    Get.put(ssePriceController);
     Get.put(commentScrollController);
 
     Get.put(addProductController);

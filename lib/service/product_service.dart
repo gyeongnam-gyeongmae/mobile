@@ -18,7 +18,7 @@ class ProductService {
     try {
       // final response = await http.get(Uri.parse('$baseUrl?page=$page'));
       final response = await http.get(Uri.parse(
-          "$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&nick_name=${postSearchModel.nick_name}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&page=$page"));
+          "$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&nick_name=${postSearchModel.nick_name}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&basic=${postSearchModel.basic}&page=$page"));
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);
@@ -36,16 +36,16 @@ class ProductService {
     final difference = dateTime.difference(now); // 차이 계산
     if (difference.inDays >= 1) {
       final days = difference.inDays;
-      return '$days일 전';
+      return '마감 $days일 전';
     } else if (difference.inHours > 1) {
       final hours = difference.inHours;
-      return '$hours시간 전';
+      return '마감 $hours시간 전';
     } else if (difference.inHours == 1) {
-      return '1시간 전';
+      return '마감 1시간 전';
     } else if (difference.inMinutes >= 1) {
-      return '${difference.inMinutes}분 전';
-    } else {
-      return '방금';
+      return '마감 ${difference.inMinutes}분 전';
+    } else{
+      return '경매 마감';
     }
   }
 }

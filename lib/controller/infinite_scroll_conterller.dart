@@ -19,6 +19,7 @@ class InfiniteScrollController extends GetxController {
   var hasMore = false.obs;
   var maxItemLength = 0.obs;
   int currentPage = 1;
+  RxBool isLike = false.obs;
 
   InfiniteScrollController({required this.searchData});
   @override
@@ -73,6 +74,7 @@ class InfiniteScrollController extends GetxController {
   String changeTime(int index) {
     return productService.changeDatetime(data[index].closedTime);
   }
+  
 
   Future<ProductDetailModel> getProductDetail(int id) async {
     ProductDetailModel productDetailModel =
@@ -84,7 +86,15 @@ class InfiniteScrollController extends GetxController {
     return await productDetailService.removeProduct(id);
   }
 
-  void setCategory(String category) {
+  Future<String> addPrice(int id, int price) async{
+    return productDetailService.addPrice(id, price);
+  }
+
+  Future<void> changeLike(int userId) async{
+    productDetailService.changeLike(userId);
+  }
+
+  void setCategory(String category){
     searchData.category = category;
   }
 }

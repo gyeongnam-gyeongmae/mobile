@@ -38,7 +38,7 @@ dependencies:
   get: ^4.6.6
   smooth_page_indicator: ^1.0.0+2
   kakao_flutter_sdk: ^1.1.0
-  http: ^1.1.0
+  http: ^0.13.6
 
   shared_preferences: ^2.2.1
   flutter_naver_map: ^1.0.0
@@ -48,6 +48,8 @@ dependencies:
   comment_box: ^0.0.18
   geolocator: ^10.1.0
   dio: ^5.3.3
+  universal_html: ^2.2.4
+  sse_channel: ^0.0.3
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,7 @@ class AppBinding extends Bindings {
       keyword: "", category: "",
       nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true, basic: true));
+      search_price: true, basic: true), mode: "all");
     final commentScrollController = CommentScrollController(productId: 3);
 
     final homeController = HomeController();

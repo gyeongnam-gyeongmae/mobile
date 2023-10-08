@@ -34,7 +34,7 @@ class SearchResultPage extends StatelessWidget {
                               like: dropdownController.popularBool.value,
                               search_price: dropdownController.priceBool.value,
                               basic: false
-                              )));
+                              ), mode: "all"));
         return Column(
         children: [
           // Container(margin: EdgeInsets.only(right: 40),child: SearchTextfield(content: "삼성 카메라"),),

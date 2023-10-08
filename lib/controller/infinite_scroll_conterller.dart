@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:mobile/model/product_detail_model.dart';
+import 'package:mobile/model/product_page.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/model/product_item.dart';
 import 'package:mobile/service/post_detail_service.dart';
@@ -18,10 +19,11 @@ class InfiniteScrollController extends GetxController {
   var isLoading = false.obs;
   var hasMore = false.obs;
   var maxItemLength = 0.obs;
+  String mode = "all"; //mode, user
   int currentPage = 1;
   RxBool isLike = false.obs;
 
-  InfiniteScrollController({required this.searchData});
+  InfiniteScrollController({required this.searchData, required this.mode});
   @override
   void onInit() {
     _getData();
@@ -48,8 +50,20 @@ class InfiniteScrollController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 200));
 
     try {
-      final item =
-          await productService.fetchProductItems(currentPage, searchData);
+      ProductPage item;
+      if(mode == "all"){
+        item = await productService.fetchProductItems(currentPage, searchData);
+      } else if(mode == "user"){
+        item = await productService.fetchUsersellItems(currentPage, searchData);
+      } else if(mode == "buy"){
+        item = await productService.fetchUserbuyItems(currentPage);
+      } else if(mode == "like"){
+        item = await productService.fetchUserLikeItems(currentPage);
+      }
+      else {
+        item = await productService.fetchProductItems(currentPage, searchData);
+      }
+      
       maxItemLength.value = item.productPageInfo.totalItems;
       currentPage++;
       data.addAll(item.auctionItemFirstViewPage);

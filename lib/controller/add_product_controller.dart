@@ -10,7 +10,7 @@ class AddProductController extends GetxController {
       category: "기타",
       content: "",
       closeTime: DateTime.now(),
-      userId: 1);
+      userId: 2);
 
   RxList<XFile?> images = RxList<XFile?>([]);
 

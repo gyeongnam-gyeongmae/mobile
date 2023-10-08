@@ -7,21 +7,48 @@ import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
 class SellProductView extends GetView<SellProductController> {
   late List<Widget> myContainers;
+  String closed = "ALL";
   late InfiniteScrollController scrollController;
+  int total = 0;
+
   //내정보 페이지에서 버튼 클릭시 아래에 표시할 컨테이너, 위젯list로 관리하면 될듯
   Widget _buildContainer() {
     Get.delete<InfiniteScrollController>();
-    scrollController = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
-      keyword: "", category: "",
-      nick_name: "", closed: "ALL",
-      search_time: true, like: true,
-      search_price: true, basic: false)));
+    scrollController = Get.put(InfiniteScrollController(
+        searchData: ProductSearchModel(
+            keyword: "",
+            category: "",
+            nick_name: "",
+            closed: closed,
+            search_time: true,
+            like: true,
+            search_price: true,
+            basic: false),
+        mode: "user"));
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: Container(child: InfiniteScrollView(controller: scrollController)),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 25),
+            child: Obx((){
+              return Text('상품 ${scrollController.maxItemLength}건',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+            })
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            child: const Divider(color: Colors.grey, thickness: 1),
+          ),
+          Container(child: InfiniteScrollView(controller: scrollController)),
+        ],
+      ),
     );
   }
 
@@ -37,6 +64,13 @@ class SellProductView extends GetView<SellProductController> {
                 borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {
           controller.setSelectedId(id);
+          if (id == 0) {
+            closed = 'ALL';
+          } else if (id == 1) {
+            closed = 'OPEN';
+          } else if (id == 2) {
+            closed = "CLOSED";
+          }
         },
         child: Text(text));
   }
@@ -44,7 +78,8 @@ class SellProductView extends GetView<SellProductController> {
   //버튼 생성
   Widget _containerSelector(BuildContext context, int cnt) {
     return Container(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 15,top: 10, bottom: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -58,17 +93,6 @@ class SellProductView extends GetView<SellProductController> {
                     _containerSelectorButton(2, '판매완료'),
                   ]),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(top: 10, left: 25),
-              child: Text('상품 $cnt건',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: const Divider(color: Colors.grey, thickness: 1),
-            )
           ],
         ));
   }

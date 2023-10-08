@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
+import 'package:mobile/views/widget/view_container/like_product_view.dart';
 import 'package:mobile/views/widget/view_container/sell_product_view.dart';
 import 'package:mobile/views/widget/view_container/buy_product_view.dart';
 
@@ -34,7 +35,7 @@ class InfoTabbar extends GetView<TabbarController> {
                   children: [
                     SellProductView(),
                     BuyProductView(),
-                    BuyProductView(),
+                    LikeProductView(),
                   ],
                 ),
               ),

@@ -7,9 +7,11 @@ import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/model/product_page.dart';
 import 'package:mobile/model/product_page_info.dart';
+import 'package:mobile/model/user_search_model.dart';
 
 class ProductService {
   final String baseUrl;
+  final String profileUrl = "http://203.241.228.51:5000/api/users/profile/";
 
   ProductService(this.baseUrl);
 
@@ -29,6 +31,57 @@ class ProductService {
       throw Exception(e.toString() + '프로덕트 서비스에서 오류');
     }
   }
+
+  Future<ProductPage> fetchUsersellItems(
+      int page, ProductSearchModel postSearchModel) async {
+    try {
+      final response = await http.get(Uri.parse(
+          "${profileUrl}2/auctionItems?closed=${postSearchModel.closed}&page=$page"));
+      if (response.statusCode == 200) {
+        final data = json.decode(utf8.decode(response.bodyBytes));
+        return ProductPage.fromJson(data);
+      } else {
+        throw Exception('옥션 페이지로드 실패');
+      }
+    } catch (e) {
+      throw Exception(e.toString() + '프로덕트 서비스 유저 물품 조회 에서 오류');
+    }
+  }
+
+  Future<ProductPage> fetchUserbuyItems(
+      int page) async {
+    try {
+      final response = await http.get(Uri.parse(
+          "${profileUrl}2/auctionItems/buy?page=$page"));
+          print("${profileUrl}3/auctionItems/buy?page=$page");
+      if (response.statusCode == 200) {
+        final data = json.decode(utf8.decode(response.bodyBytes));
+        return ProductPage.fromJson(data);
+      } else {
+        throw Exception('옥션 페이지로드 실패');
+      }
+    } catch (e) {
+      throw Exception(e.toString() + '프로덕트 서비스 유저 물품 조회 에서 오류');
+    }
+  }
+
+  Future<ProductPage> fetchUserLikeItems(
+      int page) async {
+    try {
+      final response = await http.get(Uri.parse(
+          "${profileUrl}liked/2?page=$page"));
+          print("${profileUrl}2/liked?page=$page");
+      if (response.statusCode == 200) {
+        final data = json.decode(utf8.decode(response.bodyBytes));
+        return ProductPage.fromJson(data);
+      } else {
+        throw Exception('옥션 페이지로드 실패');
+      }
+    } catch (e) {
+      throw Exception(e.toString() + '프로덕트 서비스 유저 물품 조회 에서 오류');
+    }
+  }
+
 
   String changeDatetime(DateTime time) {
     final now = DateTime.now();

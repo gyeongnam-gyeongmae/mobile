@@ -4,30 +4,35 @@ import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
-class BuyProductView extends StatelessWidget {
-  BuyProductView({super.key});
+class LikeProductView extends StatelessWidget {
+  LikeProductView({super.key});
   late InfiniteScrollController controller;
-  Widget _containerSelector(BuildContext context,int cnt) {
+  Widget _containerSelector(BuildContext context, int cnt) {
     Get.delete<InfiniteScrollController>();
-    controller = Get.put(InfiniteScrollController(searchData: ProductSearchModel(
-      keyword: "", category: "",
-      nick_name: "", closed: "ALL",
-      search_time: true, like: true,
-      search_price: true,basic: false),mode: "buy"));
+    controller = Get.put(InfiniteScrollController(
+        searchData: ProductSearchModel(
+            keyword: "",
+            category: "",
+            nick_name: "",
+            closed: "ALL",
+            search_time: true,
+            like: true,
+            search_price: true,
+            basic: false),
+        mode: "like"));
     return Container(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(top: 10, left: 25),
-              child: Obx((){
-                return Text('상품 ${controller.maxItemLength}건',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold));
-              })
-            ),
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(top: 10, left: 25),
+                child: Obx(() {
+                  return Text('상품 ${controller.maxItemLength}건',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold));
+                })),
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
               child: const Divider(color: Colors.grey, thickness: 1),

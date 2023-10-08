@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
       keyword: "", category: "",
       nick_name: "", closed: "ALL",
       search_time: true, like: true,
-      search_price: true, basic: true)));
+      search_price: true, basic: true), mode: "all"));
     return Scaffold(
       appBar: const MainAppbar(),
       body: Column(

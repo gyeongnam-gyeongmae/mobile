@@ -14,6 +14,7 @@ class CommentService{
 
   Future<List<CommentModel>> getCommentList(int id) async{
     final response = await http.get(Uri.parse('$baseUrl/$id'));
+    print(response.statusCode);
     if(response.statusCode == 200){
       final List<dynamic> data = json.decode(utf8.decode(response.bodyBytes));
       return data.map((comment) => CommentModel.fromJson(comment)).toList();
@@ -30,7 +31,6 @@ class CommentService{
       },
       body: jsonEncode(comment.toAddJson())
     );
-
     if(response.statusCode == 201){
       return "$id 댓글 추가";
     }
@@ -55,7 +55,6 @@ class CommentService{
       },
       body: jsonEncode(comment.toEditJson())
     );
-
     if(response.statusCode == 200){
       return "댓글 수정";
     }

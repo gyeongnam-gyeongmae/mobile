@@ -213,11 +213,11 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
                   onPressed: () {
-                    _PriceDialog(context, productDetail.price + 100)
+                    _PriceDialog(context, priceController.price.value + 100)
                         .then((value) {
                       if (value == 'OK') {
                         controller.addPrice(productDetail.id,
-                            productDetail.price + 100); //id, price
+                            priceController.price.value + 100); //id, price
                       }
                     });
                   },
@@ -232,11 +232,11 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
                   onPressed: () {
-                    _PriceDialog(context, productDetail.price + 1000)
+                    _PriceDialog(context, priceController.price.value + 1000)
                         .then((value) {
                       if (value == 'OK') {
                         controller.addPrice(productDetail.id,
-                            productDetail.price + 1000); //id, price
+                            priceController.price.value + 1000); //id, price
                       }
                     });
                   },
@@ -251,11 +251,11 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
                   onPressed: () {
-                    _PriceDialog(context, productDetail.price + 10000)
+                    _PriceDialog(context, priceController.price.value + 10000)
                         .then((value) {
                       if (value == 'OK') {
                         controller.addPrice(productDetail.id,
-                            productDetail.price + 10000); //id, price
+                            priceController.price.value + 10000); //id, price
                       }
                     });
                   },

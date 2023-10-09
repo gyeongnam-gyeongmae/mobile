@@ -12,6 +12,7 @@ import 'package:mobile/controller/map_controller.dart';
 import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
 import 'package:mobile/model/product_search_model.dart';

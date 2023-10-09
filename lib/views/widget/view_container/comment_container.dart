@@ -30,11 +30,17 @@ class CommentContainer extends StatefulWidget {
 class _CommentContainerState extends State<CommentContainer> {
   final CommentScrollController controller =
       Get.find<CommentScrollController>();
+  int likeCountState = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    likeCountState = widget.likeCount;
+  }
 
   @override
   Widget build(BuildContext context) {
     String contentText = '';
-    int likeCountState = widget.likeCount;
     int lineLength = 70; // 텍스트 최대 글자수
     for (int i = 0; i < widget.content.length; i += lineLength) {
       int end = i + lineLength;
@@ -152,12 +158,13 @@ class _CommentContainerState extends State<CommentContainer> {
                     child: Row(
                       children: [
                         widget.likeState
-                            ? Icon(Icons.favorite, color: Colors.red)
-                            : Icon(Icons.favorite_outline, color: Colors.black),
-                        SizedBox(width: 5),
+                            ? const Icon(Icons.favorite, color: Colors.red)
+                            : const Icon(Icons.favorite_outline,
+                                color: Colors.black),
+                        const SizedBox(width: 5),
                         Text(
-                          "${likeCountState}",
-                          style: TextStyle(color: Colors.black),
+                          "$likeCountState",
+                          style: const TextStyle(color: Colors.black),
                         )
                       ],
                     ))
@@ -194,14 +201,15 @@ class _CommentContainerState extends State<CommentContainer> {
                   onPressed: () {
                     Navigator.pop(context, 'OK');
                   },
-                  child:
-                      Text('대댓글 작성하기', style: TextStyle(color: Colors.black)),
+                  child: const Text('대댓글 작성하기',
+                      style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context, 'CANCEL');
                     },
-                    child: Text('취소', style: TextStyle(color: Colors.black)))
+                    child:
+                        const Text('취소', style: TextStyle(color: Colors.black)))
               ],
             ));
   }

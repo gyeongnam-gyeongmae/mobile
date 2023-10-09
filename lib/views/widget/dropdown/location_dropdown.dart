@@ -28,7 +28,7 @@ class _LocationDropdownState extends State<LocationDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    if (mapController.city.value != '' && _cities.isEmpty) {
+    if (mapController.city.value != '' && _cities.length < 2) {
       print("map?");
       _cities.add(mapController.city.value);
       print("1");

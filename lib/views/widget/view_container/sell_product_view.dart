@@ -11,6 +11,8 @@ class SellProductView extends GetView<SellProductController> {
   late InfiniteScrollController scrollController;
   int total = 0;
 
+  SellProductView({super.key});
+
   //내정보 페이지에서 버튼 클릭시 아래에 표시할 컨테이너, 위젯list로 관리하면 될듯
   Widget _buildContainer() {
     Get.delete<InfiniteScrollController>();
@@ -34,19 +36,20 @@ class SellProductView extends GetView<SellProductController> {
       child: Column(
         children: [
           Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsets.only(left: 25),
-            child: Obx((){
-              return Text('상품 ${scrollController.maxItemLength}건',
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
-            })
-          ),
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(left: 25),
+              child: Obx(() {
+                return Text('상품 ${scrollController.maxItemLength}건',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold));
+              })),
           Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
             child: const Divider(color: Colors.grey, thickness: 1),
           ),
-          Container(child: InfiniteScrollView(controller: scrollController)),
+          Flexible(
+              child: Container(
+                  child: InfiniteScrollView(controller: scrollController))),
         ],
       ),
     );
@@ -79,7 +82,7 @@ class SellProductView extends GetView<SellProductController> {
   Widget _containerSelector(BuildContext context, int cnt) {
     return Container(
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.only(left: 15,top: 10, bottom: 5),
+        padding: const EdgeInsets.only(left: 15, top: 10, bottom: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

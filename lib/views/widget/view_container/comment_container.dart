@@ -30,11 +30,17 @@ class CommentContainer extends StatefulWidget {
 class _CommentContainerState extends State<CommentContainer> {
   final CommentScrollController controller =
       Get.find<CommentScrollController>();
+  int likeCountState = 0;
+
+      @override
+void initState() {
+  super.initState();
+  likeCountState = widget.likeCount;
+}
 
   @override
   Widget build(BuildContext context) {
     String contentText = '';
-    int likeCountState = widget.likeCount;
     int lineLength = 70; // 텍스트 최대 글자수
     for (int i = 0; i < widget.content.length; i += lineLength) {
       int end = i + lineLength;

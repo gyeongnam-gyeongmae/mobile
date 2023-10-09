@@ -12,6 +12,7 @@ import 'package:mobile/controller/map_controller.dart';
 import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
@@ -45,7 +46,9 @@ class AppBinding extends Bindings {
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
     final ProfileController profileController = ProfileController();
+    final SseController sseController = SseController();
 
+    Get.put(sseController);
     Get.put(profileController);
     Get.put(ssePriceController);
     Get.put(commentScrollController);

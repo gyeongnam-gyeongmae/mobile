@@ -22,14 +22,14 @@ class _LocationDropdownState extends State<LocationDropdown> {
   void initState() {
     super.initState();
     setState(() {
-      print(_cities[0]);
       _selectedCity = _cities[0];
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (mapController.city.value.isNotEmpty && _cities.length < 2) {
+    if (mapController.city.value != '' && _cities.isEmpty) {
+      print("map?");
       _cities.add(mapController.city.value);
       print("1");
     }

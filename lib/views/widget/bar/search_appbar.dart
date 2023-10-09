@@ -20,10 +20,15 @@ class SearchAppbar extends GetView<SearchTextfieldController>
       backgroundColor: Colors.white,
       leading: Container(
         margin: const EdgeInsets.only(top: 6),
-        child: const Icon(
-          Icons.keyboard_arrow_left,
-          size: 54,
-          color: Colors.grey,
+        child: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 54,
+            color: Colors.grey,
+          ),
         ),
       ),
       actions: [
@@ -37,7 +42,7 @@ class SearchAppbar extends GetView<SearchTextfieldController>
               return TextField(
                 controller:
                     TextEditingController(text: controller.content.value),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '원하는 것을 찾으세요 !',
                   contentPadding: EdgeInsets.symmetric(horizontal: 12),
                   border: OutlineInputBorder(),
@@ -46,10 +51,9 @@ class SearchAppbar extends GetView<SearchTextfieldController>
                   ),
                 ),
                 maxLines: 1, // 단일 줄 입력
-                onSubmitted: (value) async{
+                onSubmitted: (value) async {
                   controller.setContent(value);
-                  Get.to(SearchResultPage(
-                  ));
+                  Get.to(SearchResultPage());
                 },
               );
             }))

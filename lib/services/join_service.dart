@@ -40,7 +40,7 @@ class JoinService {
     }
   }
 
-  Future<void> getPhoneVerificationRequest(
+  Future<bool> getPhoneVerificationRequest(
       String phoneNumber, String code) async {
     final url = Uri.parse(
         '$baseUrl/authentications/phone?phoneNumber=$phoneNumber&&code=$code');
@@ -53,9 +53,11 @@ class JoinService {
 
     if (response.statusCode == 201) {
       print('요청이 성공했습니다1: ${response.body}');
+      return true;
     } else {
       // 오류 응답 처리
       print('Error: ${response.statusCode}, ${response.reasonPhrase}');
+      return false;
     }
   }
 

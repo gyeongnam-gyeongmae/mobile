@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'package:mobile/services/join_service.dart';
 
@@ -35,13 +37,13 @@ class JoinController extends GetxController {
     }
   }
 
-  void getPhoneVerificationRequest() async {
+  Future<bool> getPhoneVerificationRequest() async {
     try {
-      await joinService.getPhoneVerificationRequest(
+      return await joinService.getPhoneVerificationRequest(
           phoneNumbers.value, authenticationNumber.value);
     } catch (e) {
       // 예외 처리
-      print('Error: $e');
+      return false;
     }
   }
 

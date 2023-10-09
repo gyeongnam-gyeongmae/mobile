@@ -138,8 +138,8 @@ class JoinService {
       prefs.setInt("id", user.id);
       prefs.setString("nickname", user.nickname);
       print('id: $user.id');
-      controller.id = user.id;
-      controller.nickName = user.nickname;
+      ProfileController.to.setId(user.id);
+      ProfileController.to.setNickname(user.nickname);
     } else {
       final prefs = await SharedPreferences.getInstance();
       final id = prefs.getInt("id");

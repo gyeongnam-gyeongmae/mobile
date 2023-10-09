@@ -29,7 +29,7 @@ class _LoadingPageState extends State<LoadingPage> {
     // 화면이 빌드된 후 3초 후에 LoginPage로 이동
     Future.delayed(const Duration(seconds: 1), () async {
       final prefs = await SharedPreferences.getInstance();
-
+      
       final cookie = prefs.getString("JSESSIONID");
       if (cookie != null) {
         Get.to(() => const MainPage());

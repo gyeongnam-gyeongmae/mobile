@@ -1,6 +1,7 @@
 
 import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/views/pages/chatting/chatting.dart';
 import 'package:mobile/views/pages/info_page.dart';
 import 'package:mobile/views/pages/main_page.dart';
@@ -14,15 +15,19 @@ class BottomBarController extends GetxController {
     selectedIndex.value = index;
     switch (index) {
       case 0:
+      SseController.to.disconnect();
         Get.to(() => const MainPage());
         break;
       case 1:
+      SseController.to.disconnect();
         Get.to(() => PostAddPage());
         break;
       case 2:
+      SseController.to.disconnect();
         Get.to(() => const Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
+      SseController.to.disconnect();
         //채팅내역으로 바꿔야함
         Get.to(() => const InfoPage());
         break;

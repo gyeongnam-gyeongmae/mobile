@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/pages/search_result_page.dart';
 
@@ -53,6 +54,7 @@ class SearchAppbar extends GetView<SearchTextfieldController>
                 maxLines: 1, // 단일 줄 입력
                 onSubmitted: (value) async {
                   controller.setContent(value);
+                  SseController.to.disconnect();
                   Get.to(SearchResultPage());
                 },
               );

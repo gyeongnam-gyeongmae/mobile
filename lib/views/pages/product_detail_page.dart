@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile/controller/bottom_bar_controller.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
+import 'package:mobile/views/pages/main_page.dart';
 
 import 'package:mobile/views/widget/bar/product_detail_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
@@ -16,7 +19,6 @@ class ProductDetailPage extends StatefulWidget {
   final CommentScrollController controller;
   final textEditingController = TextEditingController();
   final SsePriceController priceController = Get.find<SsePriceController>();
-
   ProductDetailPage(
       {super.key, required this.controller, required this.productDetail});
 
@@ -26,14 +28,11 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
   final SsePriceController priceController = Get.find<SsePriceController>();
-  late SseChannel channel;
-  StreamSubscription? stream;
   @override
   void initState() {
     super.initState();
-    channel = SseChannel.connect(Uri.parse(
-        "http://203.241.228.51:5000/api/auctions/${widget.productDetail.id}/bids"));
-    stream = channel.stream.listen((event) {
+    SseController.to.connect(widget.productDetail.id);
+    SseController.to.channel!.stream.listen((event) {
       if (event != 'init') priceController.setPrice(int.parse(event));
       print(event);
     });
@@ -41,19 +40,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   void dispose() {
-    channel.sink.close();
+    SseController.to.disconnect();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    String? pageName = Get.arguments;
+    return WillPopScope(
+      onWillPop: () async{
+        if(pageName == "addProduct"){
+          Get.find<BottomBarController>().selectedIndex(0);
+        }
+        return true;
+      },
+      child: Scaffold(
         appBar: ProductDetailAppbar(
           productId: widget.productDetail.id,
         ),
         body: ProductDetailScrollView(
             controller: widget.controller, productDetail: widget.productDetail),
-        bottomNavigationBar: const MainBottomBar(),
+        bottomNavigationBar: MainBottomBar(),
         bottomSheet: GetBuilder<CommentScrollController>(builder: (controller) {
           return Container(
             height: 50,
@@ -109,6 +116,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ],
             ),
           );
-        }));
+        })),  
+    );
   }
 }

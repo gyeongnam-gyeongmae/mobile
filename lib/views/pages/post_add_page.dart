@@ -199,7 +199,7 @@ class PostAddPage extends GetView<AddProductController> {
                     controller.reset();
                     Get.to(() => ProductDetailPage(
                         controller: commentScrollcontroller,
-                        productDetail: product));
+                        productDetail: product), arguments: "addPage");
                   },
                   child: const Text(
                     '판매하기',

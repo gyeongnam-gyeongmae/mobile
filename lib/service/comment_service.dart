@@ -60,4 +60,22 @@ class CommentService{
     }
     else { throw Exception('commentService edit 오류');}
   }
+
+Future<void> changeLike(int userId,int commentId) async{
+  final response = await http.post(Uri.parse("$baseUrl/like"),
+    headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({'userId': userId, 'commentId': commentId})
+  );
+  if (response.statusCode == 200) {
+      print("댓글좋아요 됨");
+    } else {
+      print(response.statusCode);
+      print("$baseUrl/like");
+      print(userId);
+      print(commentId);
+    }
+}
+
 }

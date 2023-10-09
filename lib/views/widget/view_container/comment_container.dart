@@ -4,32 +4,44 @@ import 'package:intl/intl.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 
-class CommentContainer extends GetView<CommentScrollController> {
+class CommentContainer extends StatefulWidget {
   final String content;
   final String nickName;
   final int userId;
   final int commentId;
   final int commentCount;
   final DateTime createdAt;
-  const CommentContainer(
+  final int likeCount;
+  bool likeState;
+  CommentContainer(
       {required this.commentId,
       required this.userId,
       required this.content,
       required this.nickName,
       required this.commentCount,
       required this.createdAt,
+      required this.likeCount,
+      required this.likeState,
       super.key});
+  @override
+  _CommentContainerState createState() => _CommentContainerState();
+}
+
+class _CommentContainerState extends State<CommentContainer> {
+  final CommentScrollController controller =
+      Get.find<CommentScrollController>();
 
   @override
   Widget build(BuildContext context) {
     String contentText = '';
+    int likeCountState = widget.likeCount;
     int lineLength = 70; // 텍스트 최대 글자수
-    for (int i = 0; i < content.length; i += lineLength) {
+    for (int i = 0; i < widget.content.length; i += lineLength) {
       int end = i + lineLength;
-      if (end > content.length) {
-        end = content.length;
+      if (end > widget.content.length) {
+        end = widget.content.length;
       }
-      contentText += '${content.substring(i, end)}\n';
+      contentText += '${widget.content.substring(i, end)}\n';
     }
     return Container(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -51,7 +63,7 @@ class CommentContainer extends GetView<CommentScrollController> {
                     color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
                   ),
                 ),
-                Text(nickName,
+                Text(widget.nickName,
                     style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -66,25 +78,27 @@ class CommentContainer extends GetView<CommentScrollController> {
                 IconButton(
                   onPressed: () {
                     //1대신에 쿠키의 유저 아이디 비교하기
-                    if (userId == 1) {
+                    if (widget.userId == 1) {
                       _editCommentDialog(context).then((value) async {
                         if (value == 'add') {
-                          controller.setcommentParentId(
-                              commentId, "$nickName님에게 답글 쓰기...");
+                          controller.setcommentParentId(widget.commentId,
+                              "${widget.nickName}님에게 답글 쓰기...");
                           controller.textFocus.requestFocus();
                         } else if (value == 'edit') {
-                          controller.setEditComment(content, userId, commentId);
+                          controller.setEditComment(
+                              widget.content, widget.userId, widget.commentId);
                           controller.textFocus.requestFocus();
                         } else if (value == 'remove') {
-                          await controller.removeComment(userId, commentId);
+                          await controller.removeComment(
+                              widget.userId, widget.commentId);
                           controller.reload();
                         }
                       });
                     } else {
                       _bigCommentDialog(context).then((value) {
                         if (value == 'OK') {
-                          controller.setcommentParentId(
-                              commentId, "$nickName님에게 답글 쓰기...");
+                          controller.setcommentParentId(widget.commentId,
+                              "${widget.nickName}님에게 답글 쓰기...");
                           controller.textFocus.requestFocus();
                         }
                       });
@@ -117,19 +131,32 @@ class CommentContainer extends GetView<CommentScrollController> {
                         const Icon(Icons.chat, color: Colors.black, size: 20),
                         const SizedBox(width: 5),
                         Text(
-                          commentCount.toString(),
+                          widget.commentCount.toString(),
                           style: const TextStyle(color: Colors.black),
                         )
                       ],
                     )),
                 TextButton(
-                    onPressed: () {},
-                    child: const Row(
+                    onPressed: () async {
+                      setState(() {
+                        widget.likeState = !widget.likeState;
+                      });
+                      await controller.changeLike(
+                          2, widget.commentId); // 1 => userId
+                      setState(() {
+                        likeCountState = widget.likeState
+                            ? likeCountState + 1
+                            : likeCountState - 1;
+                      });
+                    },
+                    child: Row(
                       children: [
-                        Icon(Icons.favorite, color: Colors.black, size: 18),
+                        widget.likeState
+                            ? Icon(Icons.favorite, color: Colors.red)
+                            : Icon(Icons.favorite_outline, color: Colors.black),
                         SizedBox(width: 5),
                         Text(
-                          "7",
+                          "${likeCountState}",
                           style: TextStyle(color: Colors.black),
                         )
                       ],
@@ -143,7 +170,7 @@ class CommentContainer extends GetView<CommentScrollController> {
   String formatTimeAgo() {
     final now = DateTime.now();
     final dateTime =
-        createdAt.add(const Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
+        widget.createdAt.add(const Duration(hours: 9)); //서버는 미국시간 기준이어서 9시간 더하기
     final difference = now.difference(dateTime); // 차이 계산
     if (difference.inDays >= 1) {
       return DateFormat('d일 전').format(dateTime);
@@ -167,14 +194,14 @@ class CommentContainer extends GetView<CommentScrollController> {
                   onPressed: () {
                     Navigator.pop(context, 'OK');
                   },
-                  child: Text('대댓글 작성하기', style: TextStyle(color: Colors.black)),
+                  child:
+                      Text('대댓글 작성하기', style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context, 'CANCEL');
                     },
-                    child:
-                        Text('취소', style: TextStyle(color: Colors.black)))
+                    child: Text('취소', style: TextStyle(color: Colors.black)))
               ],
             ));
   }

@@ -20,6 +20,7 @@ class CustomDatepicker extends GetView<DatePickerController>{
               child: InkWell(
             onTap: () {
               showDate(context);
+              FocusScope.of(context).unfocus();
             },
             child: Obx(() {
               return Text(

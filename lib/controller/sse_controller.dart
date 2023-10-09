@@ -12,7 +12,6 @@ class SseController extends GetxController{
 
   void disconnect(){
     if(channel!=null){
-      print('해제');
       channel!.sink.close();
       channel = null;
     }

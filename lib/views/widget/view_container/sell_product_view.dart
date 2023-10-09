@@ -46,7 +46,7 @@ class SellProductView extends GetView<SellProductController> {
             margin: const EdgeInsets.only(left: 20, right: 20),
             child: const Divider(color: Colors.grey, thickness: 1),
           ),
-          Container(child: InfiniteScrollView(controller: scrollController)),
+          Flexible(child: Container(child: InfiniteScrollView(controller: scrollController))),
         ],
       ),
     );

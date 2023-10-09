@@ -49,8 +49,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     String? pageName = Get.arguments;
     return WillPopScope(
       onWillPop: () async{
-        if(pageName == "addProduct"){
-          Get.find<BottomBarController>().selectedIndex(0);
+        print(pageName);
+        if(pageName == "addPage"){
+          Get.find<BottomBarController>().changePage(0);
+          return false;
         }
         return true;
       },

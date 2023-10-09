@@ -13,21 +13,18 @@ class BottomBarController extends GetxController {
 
   void changePage(int index){
     selectedIndex.value = index;
+    SseController.to.disconnect();
     switch (index) {
       case 0:
-      SseController.to.disconnect();
         Get.to(() => const MainPage());
         break;
       case 1:
-      SseController.to.disconnect();
         Get.to(() => PostAddPage());
         break;
       case 2:
-      SseController.to.disconnect();
         Get.to(() => const Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
-      SseController.to.disconnect();
         //채팅내역으로 바꿔야함
         Get.to(() => const InfoPage());
         break;

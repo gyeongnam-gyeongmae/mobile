@@ -26,7 +26,9 @@ class PostAddPage extends GetView<AddProductController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
       appBar: const MainAppbar(),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -77,6 +79,9 @@ class PostAddPage extends GetView<AddProductController> {
                           onChanged: (value) {
                             controller.setTitle(value);
                           },
+                          onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
+                              },
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -117,6 +122,9 @@ class PostAddPage extends GetView<AddProductController> {
                           onChanged: (value) {
                             controller.setContent(value);
                           },
+                          onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
+                              },
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -133,7 +141,16 @@ class PostAddPage extends GetView<AddProductController> {
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [CustomDatepicker(), CustomTimepicker()],
+                        children: [
+                          InkWell(
+                            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                            child: CustomDatepicker(),
+                          ),
+                          InkWell(
+                            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                            child: CustomTimepicker(),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -164,6 +181,9 @@ class PostAddPage extends GetView<AddProductController> {
                               ),
                               onChanged: (value) {
                                 controller.setPrice(int.parse(value));
+                              },
+                              onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
                               },
                             ),
                           ),
@@ -214,6 +234,7 @@ class PostAddPage extends GetView<AddProductController> {
             ],
           )),
       bottomNavigationBar: const MainBottomBar(),
+    )
     );
   }
 }

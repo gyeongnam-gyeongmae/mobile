@@ -39,7 +39,7 @@ class JoinController extends GetxController {
     try {
       await joinService.getPhoneVerificationRequest(
           phoneNumbers.value, authenticationNumber.value);
-    } catch (e) { 
+    } catch (e) {
       // 예외 처리
       print('Error: $e');
     }
@@ -59,6 +59,7 @@ class JoinController extends GetxController {
   }
 
   void profile() async {
+    print("profile! API");
     try {
       await joinService.profile();
     } catch (e) {

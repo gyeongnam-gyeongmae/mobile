@@ -22,10 +22,6 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
             },
             icon: const Icon(Icons.search, color: Colors.grey),
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 0)),
-        const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.notifications),
-            padding: EdgeInsets.fromLTRB(0, 8, 0, 0)),
         IconButton(
             onPressed: () => onButtonPressed(context), // context를 전달하여 이동합니다.
             icon: const Icon(Icons.location_pin),

@@ -28,14 +28,13 @@ class _LoadingPageState extends State<LoadingPage> {
 
     // 화면이 빌드된 후 3초 후에 LoginPage로 이동
     Future.delayed(const Duration(seconds: 1), () async {
-      final cookies = "SESSION=NWQwMzBjYTYtOWExYy00N2EzLWFmMzYtOTY5MTk5MzQyNzBi; Path=/; HttpOnly;";
       final prefs = await SharedPreferences.getInstance();
-      final cookie2 = prefs.setString("JSESSIONID", cookies);
+
       final cookie = prefs.getString("JSESSIONID");
-       if (cookie != null) {
-        Get.to(() => MainPage());
+      if (cookie != null) {
+        Get.to(() => const MainPage());
       } else {
-      Get.to(() => LoginPage());
+        Get.to(() => LoginPage());
       }
     });
   }

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
-import 'package:mobile/model/sse.dart';
+
 import 'package:mobile/views/widget/bar/product_detail_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/product_detail_scroll_view.dart';
@@ -18,7 +17,8 @@ class ProductDetailPage extends StatefulWidget {
   final textEditingController = TextEditingController();
   final SsePriceController priceController = Get.find<SsePriceController>();
 
-  ProductDetailPage({required this.controller, required this.productDetail});
+  ProductDetailPage(
+      {super.key, required this.controller, required this.productDetail});
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -29,12 +29,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   late SseChannel channel;
   StreamSubscription? stream;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     channel = SseChannel.connect(Uri.parse(
-      "http://203.241.228.51:5000/api/auctions/${widget.productDetail.id}/bids"));
+        "http://203.241.228.51:5000/api/auctions/${widget.productDetail.id}/bids"));
     stream = channel.stream.listen((event) {
-      if(event != 'init') priceController.setPrice(int.parse(event));
+      if (event != 'init') priceController.setPrice(int.parse(event));
       print(event);
     });
   }
@@ -53,7 +53,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
         body: ProductDetailScrollView(
             controller: widget.controller, productDetail: widget.productDetail),
-        bottomNavigationBar: MainBottomBar(),
+        bottomNavigationBar: const MainBottomBar(),
         bottomSheet: GetBuilder<CommentScrollController>(builder: (controller) {
           return Container(
             height: 50,
@@ -64,16 +64,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               borderRadius: BorderRadius.circular(8.0), // 테두리 모서리 둥글기 설정
             ),
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            margin: EdgeInsets.only(right: 13, left: 13),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            margin: const EdgeInsets.only(right: 13, left: 13),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 15,
                   backgroundImage:
                       AssetImage('assets/images/kakao.png'), // 이미지 파일의 경로
                 ),
-                SizedBox(width: 12), // 이미지와 텍스트 입력 칸 사이의 간격 조절
+                const SizedBox(width: 12), // 이미지와 텍스트 입력 칸 사이의 간격 조절
                 Expanded(child: Obx(() {
                   widget.textEditingController.text =
                       controller.editCommentText.value;
@@ -88,7 +88,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 })),
                 IconButton(
                   // 오른쪽에 아이콘
-                  icon: Icon(Icons.send), // 아이콘 지정
+                  icon: const Icon(Icons.send), // 아이콘 지정
                   onPressed: () async {
                     if (controller.sendMode == 'add') {
                       await controller.writeComment(

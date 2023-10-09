@@ -9,6 +9,7 @@ import 'package:mobile/controller/homeController.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/controller/map_controller.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
@@ -17,12 +18,18 @@ import 'package:mobile/model/product_search_model.dart';
 
 class AppBinding extends Bindings {
   @override
-  void dependencies(){
-    final infinitescrollController = InfiniteScrollController(searchData: ProductSearchModel(
-      keyword: "", category: "",
-      nick_name: "", closed: "ALL",
-      search_time: true, like: true,
-      search_price: true, basic: true), mode: "all");
+  void dependencies() {
+    final infinitescrollController = InfiniteScrollController(
+        searchData: ProductSearchModel(
+            keyword: "",
+            category: "",
+            nick_name: "",
+            closed: "ALL",
+            search_time: true,
+            like: true,
+            search_price: true,
+            basic: true),
+        mode: "all");
     final commentScrollController = CommentScrollController(productId: 3);
 
     final homeController = HomeController();
@@ -37,6 +44,7 @@ class AppBinding extends Bindings {
     final ssePriceController = SsePriceController();
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
+    final ProfileController controller = Get.put(ProfileController());
 
     Get.put(ssePriceController);
     Get.put(commentScrollController);

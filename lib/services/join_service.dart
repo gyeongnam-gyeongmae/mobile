@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:get/get.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/models/user.dart';
 import 'package:mobile/services/map_service.dart';
 import 'package:mobile/views/pages/join/phone_page.dart';
@@ -90,7 +91,8 @@ class JoinService {
   }
 
   Future<void> profile() async {
-    print("1");
+    final controller = Get.find<ProfileController>();
+
     final http.Client httpClient = http.Client();
 
     const String baseUrl = 'http://203.241.228.51:5000';
@@ -103,6 +105,7 @@ class JoinService {
     if (sessionValue == null) {
       throw Exception('세션 쿠키에서 SESSION 값을 찾을 수 없습니다.');
     }
+
     print(sessionValue);
     print(cookie);
 
@@ -125,7 +128,6 @@ class JoinService {
     );
 
     if (response.statusCode == 200) {
-      print("2");
       // 서버 응답을 반환
       final Map<String, dynamic> responseData =
           jsonDecode(utf8.decode(response.bodyBytes));
@@ -135,13 +137,13 @@ class JoinService {
 
       prefs.setInt("id", user.id);
       prefs.setString("nickname", user.nickname);
-
-      print(user.nickname);
+      print('id: $user.id');
+      controller.id = user.id;
+      controller.nickName = user.nickname;
     } else {
-      print("3");
       final prefs = await SharedPreferences.getInstance();
       final id = prefs.getInt("id");
-      print('id$id');
+
       final uri = Uri.parse(baseUrl);
 
       // 저장한 쿠키를 요청 헤더에 추가하여 HTTP 요청 보내기

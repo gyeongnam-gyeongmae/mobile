@@ -108,7 +108,6 @@ class _ChattingRomState extends State<ChattingRom> {
                     width: 2,
                   ),
                   const CircleAvatar(
-
                     backgroundImage: AssetImage("assets/images/person.jpg"),
 
                     backgroundColor:

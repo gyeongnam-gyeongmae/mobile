@@ -42,6 +42,8 @@ class ProductDetailScrollView extends StatelessWidget {
                         controller.data[index].nickName + index.toString(),
                     commentCount: controller.data[index].children.length,
                     createdAt: controller.data[index].createdAt,
+                    likeCount: controller.data[index].likeCount,
+                    likeState: true, // 여기에 댓글리스트인지 체크해서 올리기
                   ),
                 ));
 

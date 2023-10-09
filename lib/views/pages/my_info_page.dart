@@ -51,7 +51,7 @@ class MyInfoPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                ElevatedButton(
+                TextButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         const Color.fromARGB(255, 249, 249, 249), // 버튼의 배경색

@@ -21,6 +21,7 @@ class CommentScrollController extends GetxController{
   var editUserId = 0.obs; //edit할때 필요한 userId
   var sendMode = "add".obs; // add || edit 확인
   final textFocus = FocusNode();
+  RxBool isLike = false.obs;
   CommentScrollController({required this.productId});
 
   @override
@@ -95,6 +96,10 @@ class CommentScrollController extends GetxController{
     this.commentId.value = commentId;
     this.editUserId.value = userId;
     sendMode.value = "edit";
+  }
+
+  Future<void> changeLike(int userId,int commentId) async{
+    commentService.changeLike(userId, commentId);
   }
 
   //댓글 삭제

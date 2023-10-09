@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
 
-
 class CustomTimepicker extends GetView<DatePickerController> {
-  String? _selectedTime = "end time";
+  final String _selectedTime = "end time";
 
+  const CustomTimepicker({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,18 +16,15 @@ class CustomTimepicker extends GetView<DatePickerController> {
       ),
       child: Row(
         children: [
-          InkWell(
-            onTap: () {
-              showTime(context);
-            },
-            child: Obx(() {
-              return Text(
+          InkWell(onTap: () {
+            showTime(context);
+          }, child: Obx(() {
+            return Text(
                 controller.selectedTime.value != null
                     ? controller.selectedTime.value!.format(context)
                     : "end time",
                 style: const TextStyle(fontSize: 25));
-            })
-          ),
+          })),
           IconButton(
             icon: const Icon(
               Icons.alarm,
@@ -43,12 +40,10 @@ class CustomTimepicker extends GetView<DatePickerController> {
   }
 
   Future<void> showTime(BuildContext con) async {
-    final date = await showTimePicker(
-      context: con,
-      initialTime: TimeOfDay.now()
-      );
+    final date =
+        await showTimePicker(context: con, initialTime: TimeOfDay.now());
     print(date);
-    if(date != null){
+    if (date != null) {
       controller.updateTime(date);
     }
     print(controller.getDate());

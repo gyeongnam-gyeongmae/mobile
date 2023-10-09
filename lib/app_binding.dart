@@ -45,7 +45,8 @@ class AppBinding extends Bindings {
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
     final ProfileController controller = Get.put(ProfileController());
-
+    final SseController sseController = SseController();
+    Get.put(sseController);
     Get.put(ssePriceController);
     Get.put(commentScrollController);
 

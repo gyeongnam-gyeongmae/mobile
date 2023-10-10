@@ -10,7 +10,7 @@ import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   MainPage({super.key});
   @override
   _MainPageState createState() => _MainPageState();

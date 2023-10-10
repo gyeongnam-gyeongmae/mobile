@@ -21,7 +21,6 @@ class ProductService {
       // final response = await http.get(Uri.parse('$baseUrl?page=$page'));
       final response = await http.get(Uri.parse(
           "$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&basic=${postSearchModel.basic}&page=$page&searcherId=$userId"));
-          print("$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&basic=${postSearchModel.basic}&page=$page&searcherId=$userId");
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);

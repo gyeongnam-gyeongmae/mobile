@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mobile/controller/bottom_bar_controller.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
@@ -57,6 +58,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           Get.find<BottomBarController>().changePage(0);
           return false;
         }
+        Get.find<InfiniteScrollController>().reload();
+        Get.back();
         return true;
       },
       child: Scaffold(

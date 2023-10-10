@@ -11,9 +11,9 @@ import 'package:mobile/views/widget/view_container/comment_container.dart';
 class ProductDetailScrollView extends StatelessWidget {
   final ProductDetailModel productDetail;
   final CommentScrollController controller;
-
+  bool isLike;
   ProductDetailScrollView(
-      {required this.controller, required this.productDetail});
+      {required this.controller, required this.productDetail,required this.isLike});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ProductDetailScrollView extends StatelessWidget {
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.74,
-            child: PostDetailView(productDetail: productDetail,commentCount:controller.count.value),
+            child: PostDetailView(productDetail: productDetail,commentCount:controller.count.value,likeState: isLike),
           ),
           ListView.builder(
             shrinkWrap: true,
@@ -43,7 +43,8 @@ class ProductDetailScrollView extends StatelessWidget {
                     commentCount: controller.data[index].children.length,
                     createdAt: controller.data[index].createdAt,
                     likeCount: controller.data[index].likeCount,
-                    likeState: true, // 여기에 댓글리스트인지 체크해서 올리기
+                    likeState: controller.data[index].isLiked,
+                    imageUrl: controller.data[index].imageUrl, // 여기에 댓글리스트인지 체크해서 올리기
                   ),
                 ));
 
@@ -56,6 +57,7 @@ class ProductDetailScrollView extends StatelessWidget {
                         content: child.content,
                         nickName: child.nickName,
                         createdAt: child.createdAt,
+                        imageUrl: child.imageUrl
                       ),
                     ));
                   }

@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 
 import 'package:mobile/controller/join_controller.dart';
+import 'package:mobile/controller/profile_image_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 import 'package:mobile/views/widget/view_container/infinite_scroll_view.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
+class MainPage extends StatelessWidget {
+  MainPage({super.key});
   @override
   _MainPageState createState() => _MainPageState();
 }

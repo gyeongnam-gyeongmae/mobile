@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
 
 class CustomTimepicker extends GetView<DatePickerController> {
-  final String _selectedTime = "end time";
-
-  const CustomTimepicker({super.key});
+  String? _selectedTime = "end time";
   @override
   Widget build(BuildContext context) {
     return Container(

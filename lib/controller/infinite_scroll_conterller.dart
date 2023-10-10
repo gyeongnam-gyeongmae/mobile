@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/model/product_page.dart';
 import 'package:mobile/model/product_search_model.dart';
@@ -52,7 +53,7 @@ class InfiniteScrollController extends GetxController {
     try {
       ProductPage item;
       if(mode == "all"){
-        item = await productService.fetchProductItems(currentPage, searchData);
+        item = await productService.fetchProductItems(currentPage, searchData,2);//userId
       } else if(mode == "user"){
         item = await productService.fetchUsersellItems(currentPage, searchData);
       } else if(mode == "buy"){
@@ -61,7 +62,7 @@ class InfiniteScrollController extends GetxController {
         item = await productService.fetchUserLikeItems(currentPage);
       }
       else {
-        item = await productService.fetchProductItems(currentPage, searchData);
+        item = await productService.fetchProductItems(currentPage, searchData,2);//userId
       }
       
       maxItemLength.value = item.productPageInfo.totalItems;
@@ -104,8 +105,8 @@ class InfiniteScrollController extends GetxController {
     return productDetailService.addPrice(id, price);
   }
 
-  Future<void> changeLike(int userId) async{
-    productDetailService.changeLike(userId);
+  Future<void> changeLike(int postId) async{
+    productDetailService.changeLike(postId,ProfileController.to.getId());
   }
 
   void setCategory(String category){

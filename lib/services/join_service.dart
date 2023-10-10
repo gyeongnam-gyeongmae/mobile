@@ -85,7 +85,7 @@ class JoinService {
       print("쿠기는$cookies");
       final prefs = await SharedPreferences.getInstance();
       prefs.setString("JSESSIONID", cookies!);
-      Get.to(() => const MainPage());
+      Get.to(() => MainPage());
     } else {
       // 오류 응답 처리
       print('Error: ${response.statusCode}, ${response.reasonPhrase}');
@@ -140,8 +140,8 @@ class JoinService {
       prefs.setInt("id", user.id);
       prefs.setString("nickname", user.nickname);
       print('id: $user.id');
-      controller.id = user.id;
-      controller.nickName = user.nickname;
+      ProfileController.to.setId(user.id);
+      ProfileController.to.setNickname(user.nickname);
     } else {
       final prefs = await SharedPreferences.getInstance();
       final id = prefs.getInt("id");

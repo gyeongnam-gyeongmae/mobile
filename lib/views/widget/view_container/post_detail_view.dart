@@ -6,15 +6,34 @@ import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/views/widget/view_container/custom_page_view.dart';
 
-class PostDetailView extends GetView<InfiniteScrollController> {
+class PostDetailView extends StatefulWidget {
   final ProductDetailModel productDetail;
-  final SsePriceController priceController = Get.find<SsePriceController>();
   final int commentCount;
-  PostDetailView({required this.productDetail, required this.commentCount});
+  bool likeState;
+  PostDetailView(
+      {required this.productDetail,
+      required this.commentCount,
+      required this.likeState});
+
+  @override
+  _PostDetailViewState createState() => _PostDetailViewState();
+}
+
+class _PostDetailViewState extends State<PostDetailView> {
+  final InfiniteScrollController controller =
+      Get.find<InfiniteScrollController>();
+  final SsePriceController priceController = Get.find<SsePriceController>();
+  int likeCountState = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    likeCountState = widget.productDetail.likeCount;
+  }
 
   String changeDifTime() {
     DateTime now = DateTime.now();
-    DateTime dateTime = productDetail.closedTime.add(Duration(hours: 9));
+    DateTime dateTime = widget.productDetail.closedTime.add(Duration(hours: 9));
     bool isNegative = dateTime.difference(now).isNegative;
     int days = dateTime.difference(now).inDays.abs();
     int hours = (dateTime.difference(now).inHours % 24).abs();
@@ -30,15 +49,14 @@ class PostDetailView extends GetView<InfiniteScrollController> {
 
   @override
   Widget build(BuildContext context) {
-    int likeCountState = productDetail.likeCount;
     String startDate = DateFormat('yyyy-MM-dd HH:mm')
-        .format(productDetail.createdTime.add(Duration(hours: 9)));
+        .format(widget.productDetail.createdTime.add(Duration(hours: 9)));
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
       child: Column(
         children: [
           Center(
-            child: Text("${productDetail.name}",
+            child: Text("${widget.productDetail.name}",
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 23)),
           ),
           Padding(
@@ -49,7 +67,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "작성자: ${productDetail.nickname}",
+                      "작성자: ${widget.productDetail.nickname}",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                     ),
@@ -66,7 +84,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
             ),
           ),
           CustomPageView(
-            images: productDetail.images,
+            images: widget.productDetail.images,
           ),
           Container(
             padding: const EdgeInsets.only(top: 5),
@@ -89,7 +107,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                               style: TextStyle(fontSize: 17),
                             ),
                             Text(
-                              "${productDetail.price}",
+                              "${widget.productDetail.price}",
                               style: TextStyle(fontSize: 17),
                             )
                           ],
@@ -131,7 +149,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
               Container(
                   height: 90,
                   padding: EdgeInsets.only(top: 15, left: 15),
-                  child: Text("${productDetail.content}",
+                  child: Text("${widget.productDetail.content}",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                       softWrap: true))
@@ -150,7 +168,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                           Icon(Icons.person, color: Colors.black),
                           SizedBox(width: 5),
                           Text(
-                            "${productDetail.viewCount}",
+                            "${widget.productDetail.viewCount}",
                             style: TextStyle(color: Colors.black),
                           )
                         ],
@@ -162,36 +180,40 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                           Icon(Icons.chat, color: Colors.black),
                           SizedBox(width: 5),
                           Text(
-                            "${commentCount}",
+                            "${widget.commentCount}",
                             style: TextStyle(color: Colors.black),
                           )
                         ],
                       )),
-                  Obx(() {
-                    return TextButton(
-                        onPressed: () async {
-                          controller.isLike.value = !controller.isLike.value;
-                          await controller.changeLike(1);
-                          if (controller.isLike == true) {
-                            likeCountState++;
-                          } else
-                            likeCountState--;
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            controller.isLike.value
-                                ? Icon(Icons.favorite, color: Colors.red)
-                                : Icon(Icons.favorite_outline,
-                                    color: Colors.black),
-                            SizedBox(width: 5),
-                            Text(
-                              "$likeCountState",
-                              style: TextStyle(color: Colors.black),
-                            )
-                          ],
-                        ));
-                  })
+                  TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          widget.likeState = !widget.likeState;
+                        });
+                        print(widget.likeState);
+                        print(likeCountState);
+                        await controller.changeLike(
+                            widget.productDetail.id); // 1 => userId
+                        setState(() {
+                          likeCountState = widget.likeState
+                              ? likeCountState + 1
+                              : likeCountState - 1;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          widget.likeState
+                              ? Icon(Icons.favorite, color: Colors.red)
+                              : Icon(Icons.favorite_outline,
+                                  color: Colors.black),
+                          SizedBox(width: 5),
+                          Text(
+                            "$likeCountState",
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      ))
                 ],
               )),
               Align(
@@ -216,7 +238,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                     _PriceDialog(context, priceController.price.value + 100)
                         .then((value) {
                       if (value == 'OK') {
-                        controller.addPrice(productDetail.id,
+                        controller.addPrice(widget.productDetail.id,
                             priceController.price.value + 100); //id, price
                       }
                     });
@@ -235,7 +257,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                     _PriceDialog(context, priceController.price.value + 1000)
                         .then((value) {
                       if (value == 'OK') {
-                        controller.addPrice(productDetail.id,
+                        controller.addPrice(widget.productDetail.id,
                             priceController.price.value + 1000); //id, price
                       }
                     });
@@ -254,7 +276,7 @@ class PostDetailView extends GetView<InfiniteScrollController> {
                     _PriceDialog(context, priceController.price.value + 10000)
                         .then((value) {
                       if (value == 'OK') {
-                        controller.addPrice(productDetail.id,
+                        controller.addPrice(widget.productDetail.id,
                             priceController.price.value + 10000); //id, price
                       }
                     });

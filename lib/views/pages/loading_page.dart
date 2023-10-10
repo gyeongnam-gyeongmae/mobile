@@ -3,6 +3,8 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart'; // Get 패키지의 모든 기능을 사용하기 위해 Get 패키지를 import 합니다.
 
 import 'package:mobile/app_binding.dart';
+import 'package:mobile/controller/profile_controller.dart';
+import 'package:mobile/controller/profile_image_controller.dart';
 import 'package:mobile/views/pages/main_page.dart';
 import 'package:mobile/views/pages/post_add_page.dart';
 import 'package:mobile/views/pages/chatting/chatting.dart';
@@ -25,12 +27,24 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     super.initState();
-
+    Get.put(ProfileController());
     // 화면이 빌드된 후 3초 후에 LoginPage로 이동
     Future.delayed(const Duration(seconds: 1), () async {
       final prefs = await SharedPreferences.getInstance();
 
-      Get.to(() => LoginPage());
+      // final cookie = prefs.getString("JSESSIONID");
+      final cookie = prefs.setString("JSESSIONID", "SESSION=N2E2NGUwN2MtYTU5Yy00OTA5LTlhMDAtYWE1ODY4ZDI2Mjdi; Path=/; HttpOnly;");
+
+      ProfileController.to.setId(2);
+      ProfileController.to.setNickname("임채성");
+      ProfileController.to.setImageUrl("https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj");
+      ProfileImageController profileImageController = ProfileImageController();
+      profileImageController.getUserProfile();
+      if (cookie != null) {
+        Get.to(() => MainPage());
+      } else {
+        Get.to(() => LoginPage());
+      }
     });
   }
 

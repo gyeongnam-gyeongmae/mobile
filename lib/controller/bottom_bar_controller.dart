@@ -15,17 +15,17 @@ class BottomBarController extends GetxController {
     SseController.to.disconnect();
     switch (index) {
       case 0:
-        Get.to(() => const MainPage());
+        Get.off(() => MainPage());
         break;
       case 1:
-        Get.to(() => PostAddPage());
+        Get.off(() => PostAddPage());
         break;
       case 2:
-        Get.to(() => const Chatting()); //채팅내역으로 바꿔야함
+        Get.off(() => const Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
         //채팅내역으로 바꿔야함
-        Get.to(() => const InfoPage());
+        Get.off(() => InfoPage());
         break;
       default:
         break;

@@ -26,7 +26,9 @@ class PostAddPage extends GetView<AddProductController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
       appBar: const MainAppbar(),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -77,6 +79,9 @@ class PostAddPage extends GetView<AddProductController> {
                           onChanged: (value) {
                             controller.setTitle(value);
                           },
+                          onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
+                              },
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -117,6 +122,9 @@ class PostAddPage extends GetView<AddProductController> {
                           onChanged: (value) {
                             controller.setContent(value);
                           },
+                          onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
+                              },
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -134,8 +142,14 @@ class PostAddPage extends GetView<AddProductController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CustomDatepicker(),
-                          const CustomTimepicker()
+                          InkWell(
+                            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                            child: CustomDatepicker(),
+                          ),
+                          InkWell(
+                            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                            child: CustomTimepicker(),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -167,6 +181,9 @@ class PostAddPage extends GetView<AddProductController> {
                               ),
                               onChanged: (value) {
                                 controller.setPrice(int.parse(value));
+                              },
+                              onSubmitted: (value){
+                                FocusScope.of(context).unfocus();
                               },
                             ),
                           ),
@@ -200,9 +217,9 @@ class PostAddPage extends GetView<AddProductController> {
                     datePickerController.updateDate(null);
                     datePickerController.updateTime(null);
                     controller.reset();
-                    Get.to(() => ProductDetailPage(
+                    Get.off(() => ProductDetailPage(
                         controller: commentScrollcontroller,
-                        productDetail: product));
+                        productDetail: product,isLike: false,), arguments: "addPage");
                   },
                   child: const Text(
                     '판매하기',
@@ -217,6 +234,7 @@ class PostAddPage extends GetView<AddProductController> {
             ],
           )),
       bottomNavigationBar: const MainBottomBar(),
+    )
     );
   }
 }

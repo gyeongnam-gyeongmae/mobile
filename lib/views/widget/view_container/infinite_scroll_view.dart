@@ -35,7 +35,8 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                           Get.put(CommentScrollController(productId: product.id));
                       await commentScrollcontroller.loadData();
                       Get.find<SsePriceController>().setPrice(controller.data[index].now_price);
-                      Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product));
+                      print(controller.data[index].isLike);
+                      Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product,isLike: controller.data[index].isLike));
                     }),
                     child: MainPost(
                       title: controller.data[index].name, 
@@ -46,6 +47,7 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                       comment_cnt: controller.data[index].viewCount,
                       like_cnt: controller.data[index].likeCount,
                       image_url: controller.data[index].image_url,
+                      likeState: controller.data[index].isLike,
                     ),
                   ),
                 );

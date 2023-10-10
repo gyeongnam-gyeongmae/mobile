@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 
 class CommentContainer extends StatefulWidget {
@@ -13,6 +14,7 @@ class CommentContainer extends StatefulWidget {
   final DateTime createdAt;
   final int likeCount;
   bool likeState;
+  final String imageUrl;
   CommentContainer(
       {required this.commentId,
       required this.userId,
@@ -22,6 +24,7 @@ class CommentContainer extends StatefulWidget {
       required this.createdAt,
       required this.likeCount,
       required this.likeState,
+      required this.imageUrl,
       super.key});
   @override
   _CommentContainerState createState() => _CommentContainerState();
@@ -32,11 +35,11 @@ class _CommentContainerState extends State<CommentContainer> {
       Get.find<CommentScrollController>();
   int likeCountState = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    likeCountState = widget.likeCount;
-  }
+      @override
+void initState() {
+  super.initState();
+  likeCountState = widget.likeCount;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +63,15 @@ class _CommentContainerState extends State<CommentContainer> {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 159, 197, 240), // 배경색 설정
-                  maxRadius: 10,
-                  child: Icon(
-                    Icons.person, // 사용할 아이콘 선택
-                    size: 20, // 아이콘 크기 설정
-                    color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
-                  ),
+                 ClipOval(
+                child: Image.network(
+                  widget.imageUrl,
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.cover,
                 ),
+              ),
+              SizedBox(width:6),
                 Text(widget.nickName,
                     style: const TextStyle(
                         fontSize: 17,
@@ -84,7 +87,7 @@ class _CommentContainerState extends State<CommentContainer> {
                 IconButton(
                   onPressed: () {
                     //1대신에 쿠키의 유저 아이디 비교하기
-                    if (widget.userId == 1) {
+                    if (widget.userId == ProfileController.to.getId()) {
                       _editCommentDialog(context).then((value) async {
                         if (value == 'add') {
                           controller.setcommentParentId(widget.commentId,
@@ -92,11 +95,11 @@ class _CommentContainerState extends State<CommentContainer> {
                           controller.textFocus.requestFocus();
                         } else if (value == 'edit') {
                           controller.setEditComment(
-                              widget.content, widget.userId, widget.commentId);
+                              widget.content, widget.commentId);
                           controller.textFocus.requestFocus();
                         } else if (value == 'remove') {
                           await controller.removeComment(
-                              widget.userId, widget.commentId);
+                              widget.commentId);
                           controller.reload();
                         }
                       });
@@ -148,7 +151,7 @@ class _CommentContainerState extends State<CommentContainer> {
                         widget.likeState = !widget.likeState;
                       });
                       await controller.changeLike(
-                          2, widget.commentId); // 1 => userId
+                          widget.commentId); // 1 => userId
                       setState(() {
                         likeCountState = widget.likeState
                             ? likeCountState + 1

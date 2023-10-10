@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/controller/bottom_bar_controller.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
+import 'package:mobile/controller/sse_controller.dart';
 
 //아래 네비게이션 바
 class MainBottomBar extends GetView<BottomBarController> {

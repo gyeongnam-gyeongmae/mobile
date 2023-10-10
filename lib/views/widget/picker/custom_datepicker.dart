@@ -19,11 +19,13 @@ class CustomDatepicker extends GetView<DatePickerController> {
       child: Row(
         children: [
           Container(
-              child: InkWell(onTap: () {
-            showDate(context);
-            FocusScope.of(context).unfocus();
-          }, child: Obx(() {
-            return Text(
+              child: InkWell(
+            onTap: () {
+              showDate(context);
+              FocusScope.of(context).unfocus();
+            },
+            child: Obx(() {
+              return Text(
                 controller.selectedDate.value != null
                     ? controller.selectedDate.value.toString().split(" ")[0]
                     : "end date",

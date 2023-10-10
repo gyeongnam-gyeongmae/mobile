@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/model/add_product_model.dart';
 import 'package:mobile/service/add_product_service.dart';
 
@@ -10,7 +11,7 @@ class AddProductController extends GetxController {
       category: "기타",
       content: "",
       closeTime: DateTime.now(),
-      userId: 2);
+      userId: ProfileController.to.getId());
 
   RxList<XFile?> images = RxList<XFile?>([]);
 

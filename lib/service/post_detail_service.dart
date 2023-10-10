@@ -32,8 +32,8 @@ class ProductDetailService {
     }
   }
 
-  Future<void> changeLike(int userId) async {
-    final response = await http.post(Uri.parse("$baseUrl/$userId/like"),
+  Future<void> changeLike(int postId,int userId) async {
+    final response = await http.post(Uri.parse("$baseUrl/$postId/like"),
         headers: {
           'Content-Type': 'application/json',
         },

@@ -28,7 +28,7 @@ class JoinPageButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(9.0),
             ),
-            backgroundColor: const Color.fromARGB(255, 156, 119, 248),
+            backgroundColor: const Color.fromARGB(255, 59, 146, 252),
           ),
           onPressed: onTap, // onTap 속성 사용
           child: Text(

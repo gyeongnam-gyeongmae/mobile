@@ -66,7 +66,45 @@ class PhonePage extends GetView<JoinController> {
                   padding: 20,
                   text: "인증번호 확인",
                   onTap: () {
-                    controller.getPhoneVerificationRequest();
+                    if (controller.getPhoneVerificationRequest() == false) {
+                      // 인증번호가 틀렸을 때 다이얼로그 출력
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("인증번호 오류"),
+                            content: const Text("인증번호가 틀렸습니다."),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("확인"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // 다이얼로그 닫기
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // 인증번호가 맞을 때 다이얼로그 출력
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("인증번호 확인"),
+                            content: const Text("인증번호가 맞습니다."),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("확인"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // 다이얼로그 닫기
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
                 const SizedBox(

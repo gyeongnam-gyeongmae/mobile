@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/model/product_search_model.dart';
@@ -25,7 +24,7 @@ class SearchAppbar extends GetView<SearchTextfieldController>
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_left,
             size: 54,
             color: Colors.grey,

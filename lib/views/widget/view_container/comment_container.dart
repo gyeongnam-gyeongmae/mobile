@@ -161,12 +161,13 @@ void initState() {
                     child: Row(
                       children: [
                         widget.likeState
-                            ? Icon(Icons.favorite, color: Colors.red)
-                            : Icon(Icons.favorite_outline, color: Colors.black),
-                        SizedBox(width: 5),
+                            ? const Icon(Icons.favorite, color: Colors.red)
+                            : const Icon(Icons.favorite_outline,
+                                color: Colors.black),
+                        const SizedBox(width: 5),
                         Text(
-                          "${likeCountState}",
-                          style: TextStyle(color: Colors.black),
+                          "$likeCountState",
+                          style: const TextStyle(color: Colors.black),
                         )
                       ],
                     ))
@@ -203,14 +204,15 @@ void initState() {
                   onPressed: () {
                     Navigator.pop(context, 'OK');
                   },
-                  child:
-                      Text('대댓글 작성하기', style: TextStyle(color: Colors.black)),
+                  child: const Text('대댓글 작성하기',
+                      style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context, 'CANCEL');
                     },
-                    child: Text('취소', style: TextStyle(color: Colors.black)))
+                    child:
+                        const Text('취소', style: TextStyle(color: Colors.black)))
               ],
             ));
   }

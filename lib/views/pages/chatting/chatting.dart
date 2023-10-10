@@ -84,11 +84,6 @@ class _ChattingState extends State<Chatting> {
             SizedBox(
               width: 240,
             ),
-            Icon(
-              Icons.notifications_none,
-              color: Colors.black,
-              size: 30,
-            ),
           ],
         ),
       ),

@@ -202,7 +202,7 @@ class PostAddPage extends GetView<AddProductController> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9.0), // 라운드 모서리 반경 설정
                     ),
-                    backgroundColor: const Color.fromARGB(255, 156, 119, 248),
+                    backgroundColor: const Color.fromARGB(255, 59, 146, 252),
                   ),
                   onPressed: () async {
                     controller.setCloseTime(datePickerController.getDate());

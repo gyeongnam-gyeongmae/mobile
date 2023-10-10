@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/model/comment_model.dart';
 import 'package:mobile/model/remove_comment_model.dart';
 import 'package:mobile/model/write_comment_model.dart';
@@ -39,7 +40,7 @@ class CommentScrollController extends GetxController{
   Future<void> loadData() async{
     isLoading.value = true;
     try{
-      final items = await commentService.getCommentList(productId);
+      final items = await commentService.getCommentList(productId, ProfileController.to.getId());//userId넣어야함
       // getCommentCount(items);
       getCommentCount(items);
       data.addAll(items);
@@ -69,10 +70,10 @@ class CommentScrollController extends GetxController{
   }
 
   //댓글 쓰기
-  Future<String> writeComment(String content, int id,int userId){
+  Future<String> writeComment(String content, int id){
     return commentService.writeComment(WriteCommentModel(
                             content: content,
-                            userId: userId,
+                            userId: ProfileController.to.getId(),
                             parentCommentId: commentId.value), id
               );
   }
@@ -91,20 +92,20 @@ class CommentScrollController extends GetxController{
                             parentCommentId: commentId.value));
   }
   //댓글 수정을 위한 set
-  void setEditComment(String content,int userId, int commentId){
+  void setEditComment(String content, int commentId){
     editCommentText.value = content;
     this.commentId.value = commentId;
-    this.editUserId.value = userId;
+    this.editUserId.value = ProfileController.to.getId();
     sendMode.value = "edit";
   }
 
-  Future<void> changeLike(int userId,int commentId) async{
-    commentService.changeLike(userId, commentId);
+  Future<void> changeLike(int commentId) async{
+    commentService.changeLike(ProfileController.to.getId(), commentId);
   }
 
   //댓글 삭제
-  Future<String> removeComment(int userId,int commentId){
-    return commentService.removeComment(userId, commentId);
+  Future<String> removeComment(int commentId){
+    return commentService.removeComment(ProfileController.to.getId(), commentId);
   }
 
 }

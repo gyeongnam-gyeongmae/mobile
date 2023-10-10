@@ -83,7 +83,7 @@ class JoinService {
       print("쿠기는$cookies");
       final prefs = await SharedPreferences.getInstance();
       prefs.setString("JSESSIONID", cookies!);
-      Get.to(() => const MainPage());
+      Get.to(() => MainPage());
     } else {
       // 오류 응답 처리
       print('Error: ${response.statusCode}, ${response.reasonPhrase}');

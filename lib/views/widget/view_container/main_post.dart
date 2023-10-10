@@ -10,6 +10,7 @@ class MainPost extends StatelessWidget {
   final int comment_cnt;
   final int like_cnt;
   final String image_url;
+  final bool likeState;
   const MainPost({
     required this.title,
     required this.name,
@@ -19,6 +20,7 @@ class MainPost extends StatelessWidget {
     required this.comment_cnt,
     required this.like_cnt,
     required this.image_url,
+    required this.likeState,
     Key? key,
   }) : super(key: key);
 
@@ -41,22 +43,23 @@ class MainPost extends StatelessWidget {
                             fit: BoxFit.cover)
                         : Image.network('$image_url', fit: BoxFit.cover),
                   ),
-                  if(post_closed == "경매 마감")
+                  if (post_closed == "경매 마감")
                     Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      color: Colors.black.withOpacity(0.7), // 배경색 및 투명도 조절
-                      child: Text(
-                        "판매완료",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        color: Colors.black.withOpacity(0.7), // 배경색 및 투명도 조절
+                        child: Text(
+                          "판매완료",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
               const SizedBox(width: 10), // 가로 여백 추가
@@ -121,8 +124,10 @@ class MainPost extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  const Icon(Icons.favorite,
-                                      color: Colors.black),
+                                  likeState
+                                      ? Icon(Icons.favorite, color: Colors.red)
+                                      : Icon(Icons.favorite_outline,
+                                          color: Colors.black),
                                   const SizedBox(width: 5),
                                   Text(
                                     like_cnt.toString(),

@@ -55,7 +55,7 @@ class SearchAppbar extends GetView<SearchTextfieldController>
                 onSubmitted: (value) async {
                   controller.setContent(value);
                   SseController.to.disconnect();
-                  Get.to(SearchResultPage());
+                  Get.off(SearchResultPage());
                 },
               );
             }))

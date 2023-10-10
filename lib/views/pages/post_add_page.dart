@@ -217,9 +217,9 @@ class PostAddPage extends GetView<AddProductController> {
                     datePickerController.updateDate(null);
                     datePickerController.updateTime(null);
                     controller.reset();
-                    Get.to(() => ProductDetailPage(
+                    Get.off(() => ProductDetailPage(
                         controller: commentScrollcontroller,
-                        productDetail: product), arguments: "addPage");
+                        productDetail: product,isLike: false,), arguments: "addPage");
                   },
                   child: const Text(
                     '판매하기',

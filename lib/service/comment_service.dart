@@ -12,8 +12,8 @@ class CommentService{
 
   CommentService(this.baseUrl);
 
-  Future<List<CommentModel>> getCommentList(int id) async{
-    final response = await http.get(Uri.parse('$baseUrl/$id'));
+  Future<List<CommentModel>> getCommentList(int id,int userId) async{
+    final response = await http.get(Uri.parse('$baseUrl/$id?userId=$userId'));
     print(response.statusCode);
     if(response.statusCode == 200){
       final List<dynamic> data = json.decode(utf8.decode(response.bodyBytes));

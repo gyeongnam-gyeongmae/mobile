@@ -10,6 +10,7 @@ class ProductItem{
   final int price;
   final int now_price;
   final String image_url;
+  final bool isLike;
 
   ProductItem({
     required this.id,
@@ -21,7 +22,8 @@ class ProductItem{
     required this.viewCount,
     required this.price,
     required this.now_price,
-    required this.image_url
+    required this.image_url,
+    required this.isLike
   });
 
   factory ProductItem.fromJson(Map<String, dynamic> json) {
@@ -35,7 +37,8 @@ class ProductItem{
       viewCount: json['view_count'],
       price: json['price'],
       now_price: json['now_price'],
-      image_url: json['image_url'] ?? ''
+      image_url: json['image_url'] ?? '',
+      isLike: json['isLike'] ?? true,
     );
   }
 }

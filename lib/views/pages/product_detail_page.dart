@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mobile/controller/bottom_bar_controller.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/controller/sse_controller.dart';
 import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
@@ -17,10 +19,11 @@ import 'package:sse_channel/sse_channel.dart';
 class ProductDetailPage extends StatefulWidget {
   final ProductDetailModel productDetail;
   final CommentScrollController controller;
+  bool isLike;
   final textEditingController = TextEditingController();
   final SsePriceController priceController = Get.find<SsePriceController>();
   ProductDetailPage(
-      {super.key, required this.controller, required this.productDetail});
+      {super.key, required this.controller, required this.productDetail, required this.isLike});
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -61,7 +64,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           productId: widget.productDetail.id,
         ),
         body: ProductDetailScrollView(
-            controller: widget.controller, productDetail: widget.productDetail),
+            controller: widget.controller, productDetail: widget.productDetail,isLike: widget.isLike,),
         bottomNavigationBar: MainBottomBar(),
         bottomSheet: GetBuilder<CommentScrollController>(builder: (controller) {
           return Container(
@@ -77,10 +80,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             margin: const EdgeInsets.only(right: 13, left: 13),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 15,
                   backgroundImage:
-                      AssetImage('assets/images/kakao.png'), // 이미지 파일의 경로
+                      NetworkImage(ProfileController.to.getImageUrl()), // 이미지 파일의 경로
                 ),
                 const SizedBox(width: 12), // 이미지와 텍스트 입력 칸 사이의 간격 조절
                 Expanded(child: Obx(() {
@@ -103,8 +106,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       await controller.writeComment(
                           // content, productid, userid
                           widget.textEditingController.text,
-                          widget.productDetail.id,
-                          1);
+                          widget.productDetail.id);
                     } else if (controller.sendMode == 'edit') {
                       await controller
                           .editComment(widget.textEditingController.text);

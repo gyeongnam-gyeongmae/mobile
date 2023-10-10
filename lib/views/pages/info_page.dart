@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile/controller/profile_controller.dart';
+import 'package:mobile/controller/profile_image_controller.dart';
 import 'package:mobile/views/pages/my_info_page.dart';
 import 'package:mobile/views/widget/bar/info_tabbar.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
 import 'package:mobile/views/widget/bar/main_bottom_bar.dart';
 
-class InfoPage extends StatelessWidget {
-  const InfoPage({super.key});
+class InfoPage extends GetView<ProfileImageController> {
+  InfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,8 @@ class InfoPage extends StatelessWidget {
           child: Row(
             children: [
               ClipOval(
-                child: Image.asset(
-                  'assets/images/test.png',
+                child: Image.network(
+                  ProfileController.to.getImageUrl(),
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
@@ -28,8 +30,8 @@ class InfoPage extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(left: 20),
-                child: const Text(
-                  '문준호',
+                child: Text(
+                  ProfileController.to.getNickname(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -43,7 +45,7 @@ class InfoPage extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)))),
                   onPressed: () {
-                    Get.to(const MyInfoPage());
+                    Get.to(MyInfoPage());
                   },
                   child: const Text("프로필 수정")),
             ],

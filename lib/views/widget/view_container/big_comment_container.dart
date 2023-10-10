@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/controller/comment_scroll_controller.dart';
+import 'package:mobile/controller/profile_controller.dart';
 
 class BigCommentContainer extends GetView<CommentScrollController> {
   final int commentId;
@@ -9,12 +10,14 @@ class BigCommentContainer extends GetView<CommentScrollController> {
   final String content;
   final String nickName;
   final DateTime createdAt;
+  final String imageUrl;
   const BigCommentContainer(
       {required this.commentId,
       required this.userId,
       required this.content,
       required this.nickName,
       required this.createdAt,
+      required this.imageUrl,
       super.key});
 
   @override
@@ -39,15 +42,15 @@ class BigCommentContainer extends GetView<CommentScrollController> {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 159, 197, 240), // 배경색 설정
-                  maxRadius: 10,
-                  child: Icon(
-                    Icons.person, // 사용할 아이콘 선택
-                    size: 20, // 아이콘 크기 설정
-                    color: Color.fromARGB(255, 8, 8, 8), // 아이콘 색상 설정
-                  ),
+                ClipOval(
+                child: Image.network(
+                  imageUrl,
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.cover,
                 ),
+              ),
+              SizedBox(width: 10,),
                 Text(nickName,
                     style: const TextStyle(
                         fontSize: 15,
@@ -60,16 +63,16 @@ class BigCommentContainer extends GetView<CommentScrollController> {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)),
                 const Spacer(),
-                if (userId == 1)
+                if (userId == ProfileController.to.getId())
                   IconButton(
                     onPressed: () {
                       _editCommentDialog(context).then((value) async {
                         if (value == 'edit') {
-                          controller.setEditComment(content, userId, commentId);
+                          controller.setEditComment(content, commentId);
                           controller.textFocus.requestFocus();
                           controller.reload();
                         } else if (value == 'remove') {
-                          await controller.removeComment(userId, commentId);
+                          await controller.removeComment(commentId);
                           controller.reload();
                         }
                       });

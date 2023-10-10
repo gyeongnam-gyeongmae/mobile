@@ -10,6 +10,7 @@ import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/join_controller.dart';
 import 'package:mobile/controller/map_controller.dart';
 import 'package:mobile/controller/profile_controller.dart';
+import 'package:mobile/controller/profile_image_controller.dart';
 import 'package:mobile/controller/search_textfield_controller.dart';
 import 'package:mobile/controller/sell_product_controller.dart';
 import 'package:mobile/controller/sse_controller.dart';
@@ -45,11 +46,11 @@ class AppBinding extends Bindings {
     final ssePriceController = SsePriceController();
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
-    final ProfileController profileController = ProfileController();
     final SseController sseController = SseController();
+    final ProfileImageController profileImageController = ProfileImageController();
 
+    Get.put(profileImageController);
     Get.put(sseController);
-    Get.put(profileController);
     Get.put(ssePriceController);
     Get.put(commentScrollController);
 

@@ -33,7 +33,7 @@ class _LoadingPageState extends State<LoadingPage> {
       final prefs = await SharedPreferences.getInstance();
 
       // final cookie = prefs.getString("JSESSIONID");
-      final cookie = prefs.setString("JSESSIONID", "SESSION=N2E2NGUwN2MtYTU5Yy00OTA5LTlhMDAtYWE1ODY4ZDI2Mjdi; Path=/; HttpOnly;");
+      final cookie = prefs.setString("JSESSIONID", "SESSION=NTNlZmNlZWYtMWFmMC00ZWZmLWI0OGUtYjE1ZmE2ZDUyYzJm; Path=/; HttpOnly;");
 
       ProfileController.to.setId(2);
       ProfileController.to.setNickname("임채성");

@@ -53,7 +53,7 @@ class InfiniteScrollController extends GetxController {
     try {
       ProductPage item;
       if(mode == "all"){
-        item = await productService.fetchProductItems(currentPage, searchData,2);//userId
+        item = await productService.fetchProductItems(currentPage, searchData,ProfileController.to.getId());//userId
       } else if(mode == "user"){
         item = await productService.fetchUsersellItems(currentPage, searchData);
       } else if(mode == "buy"){
@@ -62,7 +62,7 @@ class InfiniteScrollController extends GetxController {
         item = await productService.fetchUserLikeItems(currentPage);
       }
       else {
-        item = await productService.fetchProductItems(currentPage, searchData,2);//userId
+        item = await productService.fetchProductItems(currentPage, searchData,ProfileController.to.getId());//userId
       }
       
       maxItemLength.value = item.productPageInfo.totalItems;

@@ -15,17 +15,22 @@ class BottomBarController extends GetxController {
     SseController.to.disconnect();
     switch (index) {
       case 0:
-        Get.off(() => MainPage());
+        InfiniteScrollController controller =
+            Get.find<InfiniteScrollController>(tag: "mainPage");
+        controller.setCategory("");
+        controller.reload();
+        update();
+        Get.to(() => const MainPage());
         break;
       case 1:
-        Get.off(() => PostAddPage());
+        Get.to(() => PostAddPage());
         break;
       case 2:
-        Get.off(() => const Chatting()); //채팅내역으로 바꿔야함
+        Get.to(() => const Chatting()); //채팅내역으로 바꿔야함
         break;
       case 3:
         //채팅내역으로 바꿔야함
-        Get.off(() => InfoPage());
+        Get.to(() => InfoPage());
         break;
       default:
         break;

@@ -243,7 +243,7 @@ class _ChattingRomState extends State<ChattingRom> {
                       stompClient.send(
                         destination: '/publish/chat-rooms/$roomId',
                         body: json.encode({
-                          "userId": 1,
+                          "userId": 3,
                           "content": messageText,
                           "messageType": "TALK"
                         }),

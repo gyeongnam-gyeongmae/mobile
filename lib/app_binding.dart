@@ -47,7 +47,8 @@ class AppBinding extends Bindings {
     final JoinController joinController = Get.put(JoinController()); // 컨트롤러 초기화
     final MapController mapController = Get.put(MapController());
     final SseController sseController = SseController();
-    final ProfileImageController profileImageController = ProfileImageController();
+    final ProfileImageController profileImageController =
+        ProfileImageController();
 
     Get.put(profileImageController);
     Get.put(sseController);
@@ -63,5 +64,74 @@ class AppBinding extends Bindings {
     Get.put(searchTextfieldController);
     Get.put(dropdownController);
     Get.put(bottomBarController);
+
+    //infiniteController들
+    Get.put(
+        InfiniteScrollController(
+          searchData: ProductSearchModel(
+            keyword: "",
+            category: "",
+            nick_name: "",
+            closed: "ALL",
+            search_time: true,
+            like: true,
+            search_price: true,
+            basic: true,
+          ),
+          mode: "all",
+        ),
+        tag: "mainPage");
+    Get.put(
+        InfiniteScrollController(
+            searchData: ProductSearchModel(
+                keyword: "",
+                category: "",
+                nick_name: "",
+                closed: dropdownController.sellBool.value,
+                search_time: true,
+                like: dropdownController.popularBool.value,
+                search_price: dropdownController.priceBool.value,
+                basic: false),
+            mode: "all"),
+        tag: "searchPage");
+    Get.put(
+        InfiniteScrollController(
+            searchData: ProductSearchModel(
+                keyword: "",
+                category: "",
+                nick_name: "",
+                closed: "ALL",
+                search_time: true,
+                like: true,
+                search_price: true,
+                basic: false),
+            mode: "user"),
+        tag: "sellAllPage");
+    Get.put(
+        InfiniteScrollController(
+            searchData: ProductSearchModel(
+                keyword: "",
+                category: "",
+                nick_name: "",
+                closed: "ALL",
+                search_time: true,
+                like: true,
+                search_price: true,
+                basic: false),
+            mode: "buy"),
+        tag: "buyPage");
+    Get.put(
+        InfiniteScrollController(
+            searchData: ProductSearchModel(
+                keyword: "",
+                category: "",
+                nick_name: "",
+                closed: "ALL",
+                search_time: true,
+                like: true,
+                search_price: true,
+                basic: false),
+            mode: "like"),
+        tag: "likePage");
   }
 }

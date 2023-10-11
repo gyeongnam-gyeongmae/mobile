@@ -38,6 +38,7 @@ class _ChattingState extends State<Chatting> {
 
     if (message != null) {
       message.forEach((roomId, roomMessages) {
+        print('roomId$roomId');
         ChattingMessage message = roomMessages[roomMessages.length - 1];
         String time = message.updatedAt;
         String messageText = message.content;

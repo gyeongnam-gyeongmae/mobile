@@ -79,6 +79,8 @@ class ChattingService {
 
       return roomMessagesMap;
     } else {
+      print(response.body);
+      print(response.statusCode);
       throw Exception('데이터를 불러오는 데 실패했습니다.');
     }
   }
@@ -115,7 +117,7 @@ class ChattingService {
     if (response.statusCode == 200) {
       final List<ChattingMessageDetail> messages =
           List<ChattingMessageDetail>.from(
-        json.decode(response.body).map((data) {
+        jsonDecode(utf8.decode(response.bodyBytes)).map((data) {
           return ChattingMessageDetail.fromJson(data);
         }),
       );

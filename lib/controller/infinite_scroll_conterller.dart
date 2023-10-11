@@ -52,19 +52,20 @@ class InfiniteScrollController extends GetxController {
 
     try {
       ProductPage item;
-      if(mode == "all"){
-        item = await productService.fetchProductItems(currentPage, searchData,ProfileController.to.getId());//userId
-      } else if(mode == "user"){
+      if (mode == "all") {
+        item = await productService.fetchProductItems(
+            currentPage, searchData, ProfileController.to.getId()); //userId
+      } else if (mode == "user") {
         item = await productService.fetchUsersellItems(currentPage, searchData);
-      } else if(mode == "buy"){
+      } else if (mode == "buy") {
         item = await productService.fetchUserbuyItems(currentPage);
-      } else if(mode == "like"){
+      } else if (mode == "like") {
         item = await productService.fetchUserLikeItems(currentPage);
+      } else {
+        item = await productService.fetchProductItems(
+            currentPage, searchData, ProfileController.to.getId()); //userId
       }
-      else {
-        item = await productService.fetchProductItems(currentPage, searchData,ProfileController.to.getId());//userId
-      }
-      
+
       maxItemLength.value = item.productPageInfo.totalItems;
       currentPage++;
       data.addAll(item.auctionItemFirstViewPage);
@@ -89,7 +90,6 @@ class InfiniteScrollController extends GetxController {
   String changeTime(int index) {
     return productService.changeDatetime(data[index].closedTime);
   }
-  
 
   Future<ProductDetailModel> getProductDetail(int id) async {
     ProductDetailModel productDetailModel =
@@ -101,15 +101,15 @@ class InfiniteScrollController extends GetxController {
     return await productDetailService.removeProduct(id);
   }
 
-  Future<String> addPrice(int id, int price) async{
+  Future<String> addPrice(int id, int price) async {
     return productDetailService.addPrice(id, price);
   }
 
-  Future<void> changeLike(int postId) async{
-    productDetailService.changeLike(postId,ProfileController.to.getId());
+  Future<void> changeLike(int postId) async {
+    productDetailService.changeLike(postId, ProfileController.to.getId());
   }
 
-  void setCategory(String category){
+  void setCategory(String category) {
     searchData.category = category;
   }
 }

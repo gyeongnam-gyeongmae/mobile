@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
 
 class CustomDatepicker extends GetView<DatePickerController> {
-  DateTime fiveMinutesLater = DateTime.now().add(const Duration(minutes: 5));
+  DateTime fiveMinutesLater = DateTime.now().add(const Duration(days: 1));
   DateTime oneMonthLater = DateTime.now().add(const Duration(days: 30));
 
   CustomDatepicker({super.key});
@@ -19,13 +19,11 @@ class CustomDatepicker extends GetView<DatePickerController> {
       child: Row(
         children: [
           Container(
-              child: InkWell(
-            onTap: () {
-              showDate(context);
-              FocusScope.of(context).unfocus();
-            },
-            child: Obx(() {
-              return Text(
+              child: InkWell(onTap: () {
+            showDate(context);
+            FocusScope.of(context).unfocus();
+          }, child: Obx(() {
+            return Text(
                 controller.selectedDate.value != null
                     ? controller.selectedDate.value.toString().split(" ")[0]
                     : "end date",

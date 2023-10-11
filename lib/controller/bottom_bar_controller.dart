@@ -15,11 +15,11 @@ class BottomBarController extends GetxController {
     SseController.to.disconnect();
     switch (index) {
       case 0:
-        InfiniteScrollController controller =
+        InfiniteScrollController scrollController =
             Get.find<InfiniteScrollController>(tag: "mainPage");
-        controller.setCategory("");
-        controller.reload();
-        update();
+        scrollController.setCategory("");
+        scrollController.reload();
+        scrollController.update();
         Get.to(() => const MainPage());
         break;
       case 1:

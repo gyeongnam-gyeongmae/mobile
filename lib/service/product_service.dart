@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:mobile/controller/profile_controller.dart';
 import 'package:mobile/model/add_product_model.dart';
 import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/model/product_search_model.dart';
@@ -21,6 +22,8 @@ class ProductService {
       // final response = await http.get(Uri.parse('$baseUrl?page=$page'));
       final response = await http.get(Uri.parse(
           "$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&basic=${postSearchModel.basic}&page=$page&searcherId=$userId"));
+      print(
+          "$baseUrl?keyword=${postSearchModel.keyword}&category=${postSearchModel.category}&closed=${postSearchModel.closed}&search_time=${postSearchModel.search_time}&like=${postSearchModel.like}&search_price=${postSearchModel.search_price}&basic=${postSearchModel.basic}&page=$page&searcherId=$userId");
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);
@@ -36,7 +39,7 @@ class ProductService {
       int page, ProductSearchModel postSearchModel) async {
     try {
       final response = await http.get(Uri.parse(
-          "${profileUrl}2/auctionItems?closed=${postSearchModel.closed}&page=$page"));
+          "$profileUrl${ProfileController.to.getId()}/auctionItems?closed=${postSearchModel.closed}&page=$page"));
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);
@@ -50,9 +53,8 @@ class ProductService {
 
   Future<ProductPage> fetchUserbuyItems(int page) async {
     try {
-      final response = await http
-          .get(Uri.parse("${profileUrl}2/auctionItems/buy?page=$page"));
-      print("${profileUrl}3/auctionItems/buy?page=$page");
+      final response = await http.get(Uri.parse(
+          "$profileUrl${ProfileController.to.getId()}/auctionItems/buy?page=$page"));
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);
@@ -66,9 +68,8 @@ class ProductService {
 
   Future<ProductPage> fetchUserLikeItems(int page) async {
     try {
-      final response =
-          await http.get(Uri.parse("${profileUrl}liked/2?page=$page"));
-      print("${profileUrl}2/liked?page=$page");
+      final response = await http.get(Uri.parse(
+          "${profileUrl}liked/${ProfileController.to.getId()}?page=$page"));
       if (response.statusCode == 200) {
         final data = json.decode(utf8.decode(response.bodyBytes));
         return ProductPage.fromJson(data);

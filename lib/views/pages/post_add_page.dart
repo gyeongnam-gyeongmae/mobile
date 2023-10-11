@@ -7,6 +7,7 @@ import 'package:mobile/controller/comment_scroll_controller.dart';
 import 'package:mobile/controller/date_picker_controller.dart';
 import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/profile_controller.dart';
+import 'package:mobile/controller/sse_price_controller.dart';
 import 'package:mobile/model/product_detail_model.dart';
 import 'package:mobile/views/pages/product_detail_page.dart';
 import 'package:mobile/views/widget/bar/main_appbar.dart';
@@ -227,6 +228,7 @@ class PostAddPage extends GetView<AddProductController> {
                         CommentScrollController commentScrollcontroller =
                             Get.put(
                                 CommentScrollController(productId: product.id));
+                        Get.find<SsePriceController>().setPrice(product.price);
                         await commentScrollcontroller.loadData();
                         datePickerController.updateDate(null);
                         datePickerController.updateTime(null);

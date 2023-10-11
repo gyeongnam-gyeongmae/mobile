@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:mobile/controller/comment_scroll_controller.dart";
@@ -29,21 +28,26 @@ class InfiniteScrollView extends GetView<InfiniteScrollController> {
                   elevation: 2,
                   child: InkWell(
                     onTap: (() async {
-                      final ProductDetailModel product = await controller.getProductDetail(controller.data[index].id);
+                      final ProductDetailModel product = await controller
+                          .getProductDetail(controller.data[index].id);
                       Get.delete<CommentScrollController>();
-                      CommentScrollController commentScrollcontroller =
-                          Get.put(CommentScrollController(productId: product.id));
+                      CommentScrollController commentScrollcontroller = Get.put(
+                          CommentScrollController(productId: product.id));
                       await commentScrollcontroller.loadData();
-                      Get.find<SsePriceController>().setPrice(controller.data[index].now_price);
+                      Get.find<SsePriceController>()
+                          .setPrice(controller.data[index].now_price);
                       print(controller.data[index].isLike);
-                      Get.to(()=>ProductDetailPage(controller: commentScrollcontroller,productDetail: product,isLike: controller.data[index].isLike));
+                      Get.to(() => ProductDetailPage(
+                          controller: commentScrollcontroller,
+                          productDetail: product,
+                          isLike: controller.data[index].isLike));
                     }),
                     child: MainPost(
-                      title: controller.data[index].name, 
-                      name: controller.data[index].name,//작성자 이름대체
+                      title: controller.data[index].name,
+                      name: controller.data[index].nickname, //작성자 이름대체
                       price: controller.data[index].price,
                       post_closed: controller.changeTime(index),
-                      start_price: controller.data[index].price,//현재가,시작가 필요
+                      start_price: controller.data[index].price, //현재가,시작가 필요
                       comment_cnt: controller.data[index].viewCount,
                       like_cnt: controller.data[index].likeCount,
                       image_url: controller.data[index].image_url,

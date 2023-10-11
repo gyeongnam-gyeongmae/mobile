@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile/controller/infinite_scroll_conterller.dart';
 import 'package:mobile/controller/tabbar_controller.dart';
 import 'package:mobile/views/widget/view_container/like_product_view.dart';
 import 'package:mobile/views/widget/view_container/sell_product_view.dart';
@@ -22,6 +23,15 @@ class InfoTabbar extends GetView<TabbarController> {
             labelColor: Colors.black,
             controller: controller.tabController,
             tabs: controller.myTabs,
+            onTap: (index) {
+              if (index == 0) {
+                Get.find<InfiniteScrollController>(tag: "sellAllPage").reload();
+              } else if (index == 1) {
+                Get.find<InfiniteScrollController>(tag: "buyPage").reload();
+              } else if (index == 2) {
+                Get.find<InfiniteScrollController>(tag: "likePage").reload();
+              }
+            },
           ),
         ),
         SizedBox(
